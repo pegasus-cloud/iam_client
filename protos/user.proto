@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package protos;
+
+message UserInfo {
+  string ID = 1;
+  string DisplayName = 2;
+  string PasswordHash = 3;
+  string Description = 4;
+  string Extra = 5;
+  string CreatedAt = 6;
+  string UpdatedAt = 7;
+}
+
+message GetUserInput {
+  string ID = 1;
+}
+
+message GroupID {
+  string ID = 1;
+}
+
+message GetUserByGroupOutput{
+  map<string,string> Data = 1;
+}

@@ -1,0 +1,24 @@
+syntax= "proto3";
+
+import "user.proto";
+import "group.proto";
+import "membership.proto";
+
+package protos;
+
+service UserCURDController {
+  rpc CreateUser(UserInfo) returns (Empty){}
+  rpc GetUser(GetUserInput) returns (UserInfo){}
+  rpc GetUserByGroup(GroupID) returns (GetUserByGroupOutput){}
+}
+
+service GroupCURDController {
+  rpc CreateGroup(CreateGroupInput) returns (Empty){}
+}
+
+service MembershipCURDController {
+  rpc CreateMembership(CreateMembershipInput) returns (Empty){}
+}
+
+message Empty {
+}
