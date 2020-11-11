@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package protos;
+
+message CreateGroupInput {
+  string ID = 1;
+  string DisplayName = 2;
+  string Description = 4;
+  string Extra = 5;
+  string CreatedAt = 6;
+  string UpdatedAt = 7;
+}
+

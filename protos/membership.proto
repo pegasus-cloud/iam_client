@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package protos;
+
+message CreateMembershipInput {
+  string ID = 1;
+  string GroupID = 2;
+  string UserID = 4;
+  string GlobalPermissionID = 5;
+  string UserPermissionID = 6;
+  bool Frozen = 7;
+  string Quota = 8;
+}
