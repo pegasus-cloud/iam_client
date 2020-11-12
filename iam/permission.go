@@ -38,8 +38,6 @@ type ActionEntry struct {
 	Action        string
 }
 
-func (a *actionEntries) SetNoRouterName()
-
 func (a *actionEntries) AddAction(name, action string, isAWSAction, administorator bool) {
 	if v, ok := a.entries[name]; ok {
 		panic(fmt.Sprintf("Duplicate Action Entry: %+v", v))
