@@ -73,7 +73,7 @@ func (a *actionEntries) PUT(rg *gin.RouterGroup, relativePath string,
 func (a *actionEntries) AddActionWithRouterGroup(rg *gin.RouterGroup, httpMethod, relativePath string,
 	handler gin.HandlerFunc, action string, administorator bool) {
 
-	name := fmt.Sprintf("%s:%s/%s", httpMethod, rg.BasePath(), strings.TrimPrefix(relativePath, "/"))
+	name := fmt.Sprintf("%s:%s/%s", httpMethod, rg.BasePath(), strings.TrimLeft(relativePath, "/"))
 	a.AddAction(name, action, true, administorator)
 
 	rg.Handle(httpMethod, relativePath, handler)
