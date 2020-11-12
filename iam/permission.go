@@ -27,8 +27,7 @@ func init() {
 type GinIRouter func(relativePath string, handlers ...gin.HandlerFunc) gin.IRoutes
 
 type actionEntries struct {
-	entries          map[string]*ActionEntry
-	noRouteHandleKey string
+	entries map[string]*ActionEntry
 }
 
 //ActionEntry ...
