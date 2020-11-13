@@ -9,8 +9,8 @@ import (
 )
 
 var (
-	//actions 每個RESTful APIs的動作
-	actions *actionEntries
+	//Actions 每個RESTful APIs的動作
+	Actions *actionEntries
 )
 
 const (
@@ -18,7 +18,7 @@ const (
 )
 
 func init() {
-	actions = &actionEntries{
+	Actions = &actionEntries{
 		entries: make(map[string]*ActionEntry),
 	}
 }
@@ -53,7 +53,7 @@ func (a *actionEntries) AddAction(name, action string, isAWSAction, administorat
 //GET ...
 func GET(rg *gin.RouterGroup, relativePath string, handler gin.HandlerFunc,
 	action string, administorator bool) {
-	actions.GET(rg, relativePath, handler, action, administorator)
+	Actions.GET(rg, relativePath, handler, action, administorator)
 }
 
 func (a *actionEntries) GET(rg *gin.RouterGroup, relativePath string,
@@ -64,7 +64,7 @@ func (a *actionEntries) GET(rg *gin.RouterGroup, relativePath string,
 //POST ...
 func POST(rg *gin.RouterGroup, relativePath string, handler gin.HandlerFunc,
 	action string, administorator bool) {
-	actions.POST(rg, relativePath, handler, action, administorator)
+	Actions.POST(rg, relativePath, handler, action, administorator)
 }
 
 func (a *actionEntries) POST(rg *gin.RouterGroup, relativePath string,
@@ -75,7 +75,7 @@ func (a *actionEntries) POST(rg *gin.RouterGroup, relativePath string,
 //DELETE ...
 func DELETE(rg *gin.RouterGroup, relativePath string, handler gin.HandlerFunc,
 	action string, administorator bool) {
-	actions.DELETE(rg, relativePath, handler, action, administorator)
+	Actions.DELETE(rg, relativePath, handler, action, administorator)
 }
 
 func (a *actionEntries) DELETE(rg *gin.RouterGroup, relativePath string,
@@ -86,7 +86,7 @@ func (a *actionEntries) DELETE(rg *gin.RouterGroup, relativePath string,
 //PUT ..
 func PUT(rg *gin.RouterGroup, relativePath string, handler gin.HandlerFunc,
 	action string, administorator bool) {
-	actions.PUT(rg, relativePath, handler, action, administorator)
+	Actions.PUT(rg, relativePath, handler, action, administorator)
 }
 
 func (a *actionEntries) PUT(rg *gin.RouterGroup, relativePath string,
@@ -97,7 +97,7 @@ func (a *actionEntries) PUT(rg *gin.RouterGroup, relativePath string,
 //OPTION ..
 func OPTION(rg *gin.RouterGroup, relativePath string, handler gin.HandlerFunc,
 	action string, administorator bool) {
-	actions.OPTION(rg, relativePath, handler, action, administorator)
+	Actions.OPTION(rg, relativePath, handler, action, administorator)
 }
 
 func (a *actionEntries) OPTION(rg *gin.RouterGroup, relativePath string,
@@ -108,7 +108,7 @@ func (a *actionEntries) OPTION(rg *gin.RouterGroup, relativePath string,
 //HEAD ...
 func HEAD(rg *gin.RouterGroup, relativePath string, handler gin.HandlerFunc,
 	action string, administorator bool) {
-	actions.HEAD(rg, relativePath, handler, action, administorator)
+	Actions.HEAD(rg, relativePath, handler, action, administorator)
 }
 
 func (a *actionEntries) HEAD(rg *gin.RouterGroup, relativePath string,
@@ -119,7 +119,7 @@ func (a *actionEntries) HEAD(rg *gin.RouterGroup, relativePath string,
 //PATCH ...
 func PATCH(rg *gin.RouterGroup, relativePath string, handler gin.HandlerFunc,
 	action string, administorator bool) {
-	actions.PATCH(rg, relativePath, handler, action, administorator)
+	Actions.PATCH(rg, relativePath, handler, action, administorator)
 }
 
 func (a *actionEntries) PATCH(rg *gin.RouterGroup, relativePath string,
