@@ -1,6 +1,7 @@
 package iam
 
 import (
+	"github.com/pegasus-cloud/iam_client/utility"
 	"google.golang.org/grpc"
 )
 
@@ -12,6 +13,7 @@ func Init(provider PoolProvider) {
 		count:   len(provider.Hosts) * provider.ConnPerHost,
 		clients: make(chan client, len(provider.Hosts)*provider.ConnPerHost),
 	}
+	utility.RouteResponseType = provider.RouteRepsonseType
 	for i := 0; i < p.count; i++ {
 		c, _ := grpc.Dial(provider.Hosts[i%len(provider.Hosts)], grpc.WithInsecure(), grpc.WithBlock())
 		p.clients <- client{
