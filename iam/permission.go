@@ -9,8 +9,8 @@ import (
 )
 
 var (
-	//Actions 每個RESTful APIs的動作
-	Actions *actionEntries
+	//actions 每個RESTful APIs的動作
+	actions *actionEntries
 )
 
 const (
@@ -18,7 +18,7 @@ const (
 )
 
 func init() {
-	Actions = &actionEntries{
+	actions = &actionEntries{
 		entries: make(map[string]*ActionEntry),
 	}
 }
@@ -50,9 +50,21 @@ func (a *actionEntries) AddAction(name, action string, isAWSAction, administorat
 	}
 }
 
+//GET ...
+func GET(rg *gin.RouterGroup, relativePath string, handler gin.HandlerFunc,
+	action string, administorator bool) {
+	actions.GET(rg, relativePath, handler, action, administorator)
+}
+
 func (a *actionEntries) GET(rg *gin.RouterGroup, relativePath string,
 	handler gin.HandlerFunc, action string, administorator bool) {
 	a.AddActionWithRouterGroup(rg, http.MethodGet, relativePath, handler, action, administorator)
+}
+
+//POST ...
+func POST(rg *gin.RouterGroup, relativePath string, handler gin.HandlerFunc,
+	action string, administorator bool) {
+	actions.POST(rg, relativePath, handler, action, administorator)
 }
 
 func (a *actionEntries) POST(rg *gin.RouterGroup, relativePath string,
@@ -60,14 +72,59 @@ func (a *actionEntries) POST(rg *gin.RouterGroup, relativePath string,
 	a.AddActionWithRouterGroup(rg, http.MethodPost, relativePath, handler, action, administorator)
 }
 
+//DELETE ...
+func DELETE(rg *gin.RouterGroup, relativePath string, handler gin.HandlerFunc,
+	action string, administorator bool) {
+	actions.DELETE(rg, relativePath, handler, action, administorator)
+}
+
 func (a *actionEntries) DELETE(rg *gin.RouterGroup, relativePath string,
 	handler gin.HandlerFunc, action string, administorator bool) {
 	a.AddActionWithRouterGroup(rg, http.MethodDelete, relativePath, handler, action, administorator)
 }
 
+//PUT ..
+func PUT(rg *gin.RouterGroup, relativePath string, handler gin.HandlerFunc,
+	action string, administorator bool) {
+	actions.PUT(rg, relativePath, handler, action, administorator)
+}
+
 func (a *actionEntries) PUT(rg *gin.RouterGroup, relativePath string,
 	handler gin.HandlerFunc, action string, administorator bool) {
 	a.AddActionWithRouterGroup(rg, http.MethodPut, relativePath, handler, action, administorator)
+}
+
+//OPTION ..
+func OPTION(rg *gin.RouterGroup, relativePath string, handler gin.HandlerFunc,
+	action string, administorator bool) {
+	actions.OPTION(rg, relativePath, handler, action, administorator)
+}
+
+func (a *actionEntries) OPTION(rg *gin.RouterGroup, relativePath string,
+	handler gin.HandlerFunc, action string, administorator bool) {
+	a.AddActionWithRouterGroup(rg, http.MethodOptions, relativePath, handler, action, administorator)
+}
+
+//HEAD ...
+func HEAD(rg *gin.RouterGroup, relativePath string, handler gin.HandlerFunc,
+	action string, administorator bool) {
+	actions.HEAD(rg, relativePath, handler, action, administorator)
+}
+
+func (a *actionEntries) HEAD(rg *gin.RouterGroup, relativePath string,
+	handler gin.HandlerFunc, action string, administorator bool) {
+	a.AddActionWithRouterGroup(rg, http.MethodHead, relativePath, handler, action, administorator)
+}
+
+//PATCH ...
+func PATCH(rg *gin.RouterGroup, relativePath string, handler gin.HandlerFunc,
+	action string, administorator bool) {
+	actions.PATCH(rg, relativePath, handler, action, administorator)
+}
+
+func (a *actionEntries) PATCH(rg *gin.RouterGroup, relativePath string,
+	handler gin.HandlerFunc, action string, administorator bool) {
+	a.AddActionWithRouterGroup(rg, http.MethodPatch, relativePath, handler, action, administorator)
 }
 
 func (a *actionEntries) AddActionWithRouterGroup(rg *gin.RouterGroup, httpMethod, relativePath string,
