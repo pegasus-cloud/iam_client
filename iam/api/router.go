@@ -9,14 +9,25 @@ import (
 func EnableAdminIAMRouter(rg *gin.RouterGroup) {
 	user := rg.Group("user")
 	{
-		iam.GET(user, "", listUsers, "admin:ListUser", true)
 		iam.POST(user, "", createUser, "admin:CreateUser", true)
-		spUser := user.Group(":user-id") //TODO: Need check user exist
+		iam.GET(user, "", listUsers, "admin:ListUser", true)
+		spUser := user.Group(":user-id") // TODO: Need to check that the user has been created
 		{
 			iam.GET(spUser, "", getUser, "admin:GetUser", true)
 			iam.PUT(spUser, "", updateUser, "admin:UpdateUser", true)
 			iam.PUT(spUser, "password", updatePassword, "admin:UpdatePassword", true)
 			iam.DELETE(spUser, "", deleteUser, "admin:DeleteUser", true)
+		}
+	}
+	group := rg.Group("group")
+	{
+		iam.POST(group, "", createGroup, "admin:CreateGroup", true)
+		iam.GET(group, "", listGroups, "admin:ListGroups", true)
+		spGroup := group.Group(":group-id") // TODO: Need to check that the group has been created
+		{
+			iam.GET(spGroup, "", getGroup, "admin:GetGroup", true)
+			iam.PUT(spGroup, "", updateGroup, "admin:UpdateGroup", true)
+			iam.DELETE(spGroup, "", deleteGroup, "admin:DeleteGroup", true)
 		}
 	}
 }

@@ -10,14 +10,14 @@ import (
 )
 
 type (
-	listUserOutput struct {
-		Users []user `json:"users"`
-		Total int    `json:"total"`
+	listGroupOutput struct {
+		Groups []group `json:"groups"`
+		Total  int     `json:"total"`
 	}
 )
 
-func listUsers(c *gin.Context) {
-	listUserOutput := &listUserOutput{}
+func listGroups(c *gin.Context) {
+	listGroupOutput := &listGroupOutput{}
 
 	pagination := &pagination{}
 	if err := c.ShouldBindWith(pagination, binding.Query); err != nil {
@@ -27,7 +27,7 @@ func listUsers(c *gin.Context) {
 		return
 	}
 
-	users, err := iam.ListUsers(pagination.Limit, pagination.Offset)
+	groups, err := iam.ListGroups(pagination.Limit, pagination.Offset)
 	if err != nil {
 		utility.ResponseWithType(c, http.StatusInternalServerError, &utility.ErrResponse{
 			Message: err.Error(),
@@ -35,18 +35,18 @@ func listUsers(c *gin.Context) {
 		return
 	}
 
-	for _, userInfo := range users.Data {
-		listUserOutput.Users = append(listUserOutput.Users, user{
-			UserID:      userInfo.ID,
-			DisplayName: userInfo.DisplayName,
-			Description: userInfo.Description,
-			Extra:       userInfo.Extra,
-			CreatedAt:   userInfo.CreatedAt,
-			UpdatedAt:   userInfo.UpdatedAt,
+	for _, groupInfo := range groups.Data {
+		listGroupOutput.Groups = append(listGroupOutput.Groups, group{
+			GroupID:     groupInfo.ID,
+			DisplayName: groupInfo.DisplayName,
+			Description: groupInfo.Description,
+			Extra:       groupInfo.Extra,
+			CreatedAt:   groupInfo.CreatedAt,
+			UpdatedAt:   groupInfo.UpdatedAt,
 		})
 	}
 
-	total, err := iam.CountUser()
+	total, err := iam.CountGroup()
 	if err != nil {
 		utility.ResponseWithType(c, http.StatusInternalServerError, &utility.ErrResponse{
 			Message: err.Error(),
@@ -54,6 +54,6 @@ func listUsers(c *gin.Context) {
 		return
 	}
 
-	listUserOutput.Total = int(total.Data)
-	utility.ResponseWithType(c, http.StatusOK, listUserOutput)
+	listGroupOutput.Total = int(total.Data)
+	utility.ResponseWithType(c, http.StatusOK, listGroupOutput)
 }

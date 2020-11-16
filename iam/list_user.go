@@ -8,7 +8,7 @@ import (
 	"google.golang.org/grpc"
 )
 
-func listUser(c grpc.ClientConnInterface, limit, offset int) (output *protos.UserInfos, err error) {
+func listUsers(c grpc.ClientConnInterface, limit, offset int) (output *protos.UserInfos, err error) {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 	defer cancel()
 	users, err := protos.NewUserCURDControllerClient(c).ListUser(ctx, &protos.LimitOffset{
@@ -21,12 +21,12 @@ func listUser(c grpc.ClientConnInterface, limit, offset int) (output *protos.Use
 	return users, nil
 }
 
-// ListUser ...
-func ListUser(limit, offset int) (output *protos.UserInfos, err error) {
-	return listUser(use().conn, limit, offset)
+// ListUsers ...
+func ListUsers(limit, offset int) (output *protos.UserInfos, err error) {
+	return listUsers(use().conn, limit, offset)
 }
 
-// ListUser ...
-func (cp *ConnProvider) ListUser(limit, offset int) (output *protos.UserInfos, err error) {
-	return listUser(cp.init().conn, limit, offset)
+// ListUsers ...
+func (cp *ConnProvider) ListUsers(limit, offset int) (output *protos.UserInfos, err error) {
+	return listUsers(cp.init().conn, limit, offset)
 }
