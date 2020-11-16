@@ -34,20 +34,35 @@ func (cp *ConnProvider) GetUser(userID string) (output *protos.UserInfo, err err
 	return getUser(cp.init().conn, userID)
 }
 
-// GetUserMap ...
-func GetUserMap(userID string) (output map[string]string, err error) {
-	user, err := getUser(use().conn, userID)
+func getUserMap(c grpc.ClientConnInterface, userID string) (output map[string]string, err error) {
+	user, err := getUser(c, userID)
 	if err != nil {
 		return nil, err
 	}
-	return convertToMap(user), nil
+
+	var users []*protos.UserInfo
+	users = append(users, user)
+	userHandler := userHandler{
+		users: users,
+	}
+
+	return userHandler.pbToMap(), nil
+}
+
+// GetUserMap ...
+func GetUserMap(userID string) (output map[string]string, err error) {
+	user, err := getUserMap(use().conn, userID)
+	if err != nil {
+		return nil, err
+	}
+	return user, nil
 }
 
 // GetUserMap ...
 func (cp *ConnProvider) GetUserMap(userID string) (output map[string]string, err error) {
-	user, err := getUser(cp.init().conn, userID)
+	user, err := getUserMap(cp.init().conn, userID)
 	if err != nil {
 		return nil, err
 	}
-	return convertToMap(user), nil
+	return user, nil
 }

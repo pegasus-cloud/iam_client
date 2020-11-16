@@ -2,6 +2,7 @@ package iam
 
 import (
 	"fmt"
+	"reflect"
 	"sync"
 
 	"github.com/pegasus-cloud/iam_client/protos"
@@ -43,13 +44,36 @@ func (cp *ConnProvider) init() (c client) {
 	return c
 }
 
-func convertToMap(input *protos.UserInfo) (output map[string]string) {
+type (
+	userHandler struct {
+		users []*protos.UserInfo
+	}
+)
+
+func (uh *userHandler) pbToMap() (output map[string]string) {
 	output = make(map[string]string)
-	output[fmt.Sprintf("%s.ID", input.ID)] = input.ID
-	output[fmt.Sprintf("%s.DisplayName", input.ID)] = input.DisplayName
-	output[fmt.Sprintf("%s.Description", input.ID)] = input.Description
-	output[fmt.Sprintf("%s.Extra", input.ID)] = input.Extra
-	output[fmt.Sprintf("%s.CreatedAt", input.ID)] = input.CreatedAt
-	output[fmt.Sprintf("%s.UpdatedAt", input.ID)] = input.UpdatedAt
+	for _, user := range uh.users {
+		e := reflect.ValueOf(user).Elem()
+		for i := 0; i < e.NumField(); i++ {
+			output[fmt.Sprintf("%s.%s", user.ID, e.Type().Field(i).Name)] = e.Field(i).Interface().(string)
+		}
+	}
+	return output
+}
+
+type (
+	groupHandler struct {
+		groups []*protos.GroupInfo
+	}
+)
+
+func (gh *groupHandler) pbToMap() (output map[string]string) {
+	output = make(map[string]string)
+	for _, group := range gh.groups {
+		e := reflect.ValueOf(group).Elem()
+		for i := 0; i < e.NumField(); i++ {
+			output[fmt.Sprintf("%s.%s", group.ID, e.Type().Field(i).Name)] = e.Field(i).Interface().(string)
+		}
+	}
 	return output
 }

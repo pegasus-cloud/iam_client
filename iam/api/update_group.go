@@ -15,14 +15,14 @@ import (
 )
 
 type (
-	updateUserInput struct {
+	updateGroupInput struct {
 		DisplayName *string `json:"displayName" binding:"omitempty,min=1,max=255"`
 		Description *string `json:"description"`
 		Extra       *string `json:"extra"`
 	}
 )
 
-func (uui *updateUserInput) convertToMap() (output map[string]*any.Any) {
+func (uui *updateGroupInput) convertToMap() (output map[string]*any.Any) {
 	output = make(map[string]*anypb.Any)
 	e := reflect.ValueOf(uui).Elem()
 
@@ -35,22 +35,22 @@ func (uui *updateUserInput) convertToMap() (output map[string]*any.Any) {
 	return output
 }
 
-func updateUser(c *gin.Context) {
-	updateUserInput := &updateUserInput{}
+func updateGroup(c *gin.Context) {
+	updateGroupInput := &updateGroupInput{}
 
-	if err := c.ShouldBindWith(updateUserInput, binding.JSON); err != nil {
+	if err := c.ShouldBindWith(updateGroupInput, binding.JSON); err != nil {
 		utility.ResponseWithType(c, http.StatusBadRequest, &utility.ErrResponse{
 			Message: err.Error(),
 		})
 		return
 	}
 
-	updateUserInputMap := make(map[string]*any.Any)
-	updateUserInputMap = updateUserInput.convertToMap()
+	updateGroupInputMap := make(map[string]*any.Any)
+	updateGroupInputMap = updateGroupInput.convertToMap()
 
-	if err := iam.UpdateUser(&protos.UpdateInput{
-		ID:   c.Param(userIDParams),
-		Data: updateUserInputMap,
+	if err := iam.UpdateGroup(&protos.UpdateInput{
+		ID:   c.Param(groupIDParams),
+		Data: updateGroupInputMap,
 	}); err != nil {
 		utility.ResponseWithType(c, http.StatusInternalServerError, &utility.ErrResponse{
 			Message: err.Error(),
@@ -58,19 +58,19 @@ func updateUser(c *gin.Context) {
 		return
 	}
 
-	getUserOutput, err := iam.GetUser(c.Param(userIDParams))
+	getGroupOutput, err := iam.GetGroup(c.Param(groupIDParams))
 	if err != nil {
 		utility.ResponseWithType(c, http.StatusInternalServerError, &utility.ErrResponse{
 			Message: err.Error(),
 		})
 	}
 
-	utility.ResponseWithType(c, http.StatusOK, user{
-		UserID:      getUserOutput.ID,
-		DisplayName: getUserOutput.DisplayName,
-		Description: getUserOutput.Description,
-		Extra:       getUserOutput.Extra,
-		CreatedAt:   getUserOutput.CreatedAt,
-		UpdatedAt:   getUserOutput.UpdatedAt,
+	utility.ResponseWithType(c, http.StatusOK, group{
+		GroupID:     getGroupOutput.ID,
+		DisplayName: getGroupOutput.DisplayName,
+		Description: getGroupOutput.Description,
+		Extra:       getGroupOutput.Extra,
+		CreatedAt:   getGroupOutput.CreatedAt,
+		UpdatedAt:   getGroupOutput.UpdatedAt,
 	})
 }

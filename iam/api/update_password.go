@@ -50,5 +50,5 @@ func updatePassword(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, nil)
+	utility.ResponseWithType(c, http.StatusOK, nil)
 }

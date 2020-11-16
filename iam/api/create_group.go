@@ -10,30 +10,30 @@ import (
 	"github.com/pegasus-cloud/iam_client/utility"
 )
 
-func createUser(c *gin.Context) {
-	userInfo := &user{}
-	if err := c.ShouldBindWith(userInfo, binding.JSON); err != nil {
+func createGroup(c *gin.Context) {
+	groupInfo := &group{}
+	if err := c.ShouldBindWith(groupInfo, binding.JSON); err != nil {
 		utility.ResponseWithType(c, http.StatusBadRequest, &utility.ErrResponse{
 			Message: err.Error(),
 		})
 		return
 	}
-	if userInfo.Force {
-		if output, err := iam.GetUser(userInfo.UserID); err != nil {
+	if groupInfo.Force {
+		if output, err := iam.GetGroup(groupInfo.GroupID); err != nil {
 			utility.ResponseWithType(c, http.StatusInternalServerError, &utility.ErrResponse{
 				Message: databaseErrMsg,
 			})
 			return
 		} else if output.ID != "" {
 			utility.ResponseWithType(c, http.StatusBadRequest, &utility.ErrResponse{
-				Message: userExistErrMsg,
+				Message: groupExistErrMsg,
 			})
 			return
 		}
 	} else {
 		for true {
-			userInfo.UserID = utility.GetRandNumeric(16)
-			if output, err := iam.GetUser(userInfo.UserID); err != nil {
+			groupInfo.GroupID = utility.GetRandNumeric(16)
+			if output, err := iam.GetGroup(groupInfo.GroupID); err != nil {
 				utility.ResponseWithType(c, http.StatusInternalServerError, &utility.ErrResponse{
 					Message: databaseErrMsg,
 				})
@@ -43,31 +43,30 @@ func createUser(c *gin.Context) {
 			}
 		}
 	}
-	if err := iam.CreateUser(&protos.UserInfo{
-		ID:           userInfo.UserID,
-		DisplayName:  userInfo.DisplayName,
-		PasswordHash: userInfo.Password,
-		Description:  userInfo.Description,
-		Extra:        userInfo.Extra,
+	if err := iam.CreateGroup(&protos.GroupInfo{
+		ID:          groupInfo.GroupID,
+		DisplayName: groupInfo.DisplayName,
+		Description: groupInfo.Description,
+		Extra:       groupInfo.Extra,
 	}); err != nil {
 		utility.ResponseWithType(c, http.StatusInternalServerError, &utility.ErrResponse{
 			Message: err.Error(),
 		})
 		return
 	}
-	getUserOutput, err := iam.GetUser(userInfo.UserID)
+	getGroupOutput, err := iam.GetGroup(groupInfo.GroupID)
 	if err != nil {
 		utility.ResponseWithType(c, http.StatusInternalServerError, &utility.ErrResponse{
 			Message: err.Error(),
 		})
 		return
 	}
-	utility.ResponseWithType(c, http.StatusCreated, user{
-		UserID:      getUserOutput.ID,
-		DisplayName: getUserOutput.DisplayName,
-		Description: getUserOutput.Description,
-		Extra:       getUserOutput.Extra,
-		CreatedAt:   getUserOutput.CreatedAt,
-		UpdatedAt:   getUserOutput.UpdatedAt,
+	utility.ResponseWithType(c, http.StatusCreated, group{
+		GroupID:     getGroupOutput.ID,
+		DisplayName: getGroupOutput.DisplayName,
+		Description: getGroupOutput.Description,
+		Extra:       getGroupOutput.Extra,
+		CreatedAt:   getGroupOutput.CreatedAt,
+		UpdatedAt:   getGroupOutput.UpdatedAt,
 	})
 }
