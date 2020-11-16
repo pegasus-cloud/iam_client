@@ -2,6 +2,7 @@ syntax = "proto3";
 
 package protos;
 
+
 message UserInfo {
   string ID = 1;
   string DisplayName = 2;
@@ -12,11 +13,11 @@ message UserInfo {
   string UpdatedAt = 7;
 }
 
-message GetUserInput {
-  string ID = 1;
+message UserInfos {
+  repeated UserInfo Data = 1;
 }
 
-message GroupID {
+message UserID {
   string ID = 1;
 }
 
