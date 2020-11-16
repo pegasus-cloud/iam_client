@@ -9,7 +9,8 @@ import (
 )
 
 func createUser(c grpc.ClientConnInterface, input *protos.UserInfo) (err error) {
-	ctx, _ := context.WithTimeout(context.Background(), time.Second)
+	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
+	defer cancel()
 	_, err = protos.NewUserCURDControllerClient(c).CreateUser(ctx, input)
 	return err
 }

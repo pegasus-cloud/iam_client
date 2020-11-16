@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package protos;
 
-message CreateMembershipInput {
+message MembershipInfo {
   string ID = 1;
   string GroupID = 2;
   string UserID = 4;

@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package protos;
 
-message CreateGroupInput {
+message GroupInfo {
   string ID = 1;
   string DisplayName = 2;
   string Description = 4;
@@ -11,3 +11,6 @@ message CreateGroupInput {
   string UpdatedAt = 7;
 }
 
+message GroupInfos {
+  repeated GroupInfo Data = 1;
+}

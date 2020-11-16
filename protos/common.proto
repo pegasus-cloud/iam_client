@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package protos;
+import "google/protobuf/any.proto";
+message GroupID {
+  string ID = 1;
+}
+
+message GString{
+ optional string Val =1;
+}
+
+message GBoolean{
+ optional bool Val =1;
+}
+
+message LimitOffset{
+  int32 Limit = 1;
+  int32 Offset = 2;
+}
+
+message CountOutput {
+  int64 Data = 1;
+}
+
+message UpdateInput{
+  string ID = 1;
+  map<string,google.protobuf.Any> Data = 2;
+}

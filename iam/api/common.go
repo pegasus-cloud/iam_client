@@ -3,9 +3,12 @@ package api
 import "encoding/xml"
 
 const (
-	databaseError                 = "The database errors occurred."
-	userExistError                = "The UserID is already exist."
+	databaseErrMsg                = "The database errors occurred."
+	userExistErrMsg               = "The UserID is already exist."
 	unKnownUserNameOrBadPwdErrMsg = "Unknown username or bad password"
+	recordNotFoundErrMsg          = "record not found"
+
+	userIDParams = "user-id"
 )
 
 type (

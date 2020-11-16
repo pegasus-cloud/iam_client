@@ -3,22 +3,29 @@ syntax= "proto3";
 import "user.proto";
 import "group.proto";
 import "membership.proto";
-
+import "google/protobuf/empty.proto";
+import "common.proto";
 package protos;
 
 service UserCURDController {
-  rpc CreateUser(UserInfo) returns (Empty){}
-  rpc GetUser(GetUserInput) returns (UserInfo){}
+  rpc CreateUser(UserInfo) returns (google.protobuf.Empty){}
+  rpc GetUser(UserID) returns (UserInfo){}
   rpc GetUserByGroup(GroupID) returns (GetUserByGroupOutput){}
+  rpc ListUser(LimitOffset) returns (UserInfos){}
+  rpc DeleteUser(UserID) returns (google.protobuf.Empty){}
+  rpc UpdateUser(UpdateInput) returns (google.protobuf.Empty){}
+  rpc CountUser(google.protobuf.Empty) returns (CountOutput){}
 }
 
 service GroupCURDController {
-  rpc CreateGroup(CreateGroupInput) returns (Empty){}
+  rpc CreateGroup(GroupInfo) returns (google.protobuf.Empty){}
+  rpc DeleteGroup(GroupID) returns (google.protobuf.Empty){}
+  rpc GetGroup(GroupID) returns (GroupInfo){}
+  rpc CountGroup(google.protobuf.Empty) returns (CountOutput){}
+  rpc ListGroup(LimitOffset) returns (GroupInfos){}
+  rpc UpdateGroup(UpdateInput) returns (google.protobuf.Empty){}
 }
 
 service MembershipCURDController {
-  rpc CreateMembership(CreateMembershipInput) returns (Empty){}
-}
-
-message Empty {
+  rpc CreateMembership(MembershipInfo) returns (google.protobuf.Empty){}
 }

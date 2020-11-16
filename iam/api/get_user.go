@@ -9,16 +9,16 @@ import (
 )
 
 func getUser(c *gin.Context) {
-	getUserOutput, err := iam.GetUser(c.Param("user-id"))
+	getUserOutput, err := iam.GetUser(c.Param(userIDParams))
 	if err != nil {
-		if err.Error() == "record not found" {
+		if err.Error() == recordNotFoundErrMsg {
 			utility.ResponseWithType(c, http.StatusBadRequest, &utility.ErrResponse{
 				Message: unKnownUserNameOrBadPwdErrMsg,
 			})
 			return
 		}
 		utility.ResponseWithType(c, http.StatusInternalServerError, &utility.ErrResponse{
-			Message: databaseError,
+			Message: databaseErrMsg,
 		})
 		return
 	}

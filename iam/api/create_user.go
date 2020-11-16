@@ -21,12 +21,12 @@ func createUser(c *gin.Context) {
 	if user.Force {
 		if output, err := iam.GetUser(user.UserID); err != nil {
 			utility.ResponseWithType(c, http.StatusInternalServerError, &utility.ErrResponse{
-				Message: databaseError,
+				Message: databaseErrMsg,
 			})
 			return
 		} else if output.ID != "" {
 			utility.ResponseWithType(c, http.StatusBadRequest, &utility.ErrResponse{
-				Message: userExistError,
+				Message: userExistErrMsg,
 			})
 			return
 		}
@@ -35,7 +35,7 @@ func createUser(c *gin.Context) {
 			user.UserID = utility.GetRandNumeric(16)
 			if output, err := iam.GetUser(user.UserID); err != nil {
 				utility.ResponseWithType(c, http.StatusInternalServerError, &utility.ErrResponse{
-					Message: databaseError,
+					Message: databaseErrMsg,
 				})
 				return
 			} else if output.ID == "" {

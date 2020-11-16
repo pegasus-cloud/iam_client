@@ -9,13 +9,13 @@ package protos
 import (
 	context "context"
 	proto "github.com/golang/protobuf/proto"
+	empty "github.com/golang/protobuf/ptypes/empty"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
-	sync "sync"
 )
 
 const (
@@ -29,44 +29,6 @@ const (
 // of the legacy proto package is being used.
 const _ = proto.ProtoPackageIsVersion4
 
-type Empty struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-}
-
-func (x *Empty) Reset() {
-	*x = Empty{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_services_proto_msgTypes[0]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *Empty) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*Empty) ProtoMessage() {}
-
-func (x *Empty) ProtoReflect() protoreflect.Message {
-	mi := &file_services_proto_msgTypes[0]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use Empty.ProtoReflect.Descriptor instead.
-func (*Empty) Descriptor() ([]byte, []int) {
-	return file_services_proto_rawDescGZIP(), []int{0}
-}
-
 var File_services_proto protoreflect.FileDescriptor
 
 var file_services_proto_rawDesc = []byte{
@@ -74,71 +36,116 @@ var file_services_proto_rawDesc = []byte{
 	0x12, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x73, 0x1a, 0x0a, 0x75, 0x73, 0x65, 0x72, 0x2e, 0x70,
 	0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x0b, 0x67, 0x72, 0x6f, 0x75, 0x70, 0x2e, 0x70, 0x72, 0x6f, 0x74,
 	0x6f, 0x1a, 0x10, 0x6d, 0x65, 0x6d, 0x62, 0x65, 0x72, 0x73, 0x68, 0x69, 0x70, 0x2e, 0x70, 0x72,
-	0x6f, 0x74, 0x6f, 0x22, 0x07, 0x0a, 0x05, 0x45, 0x6d, 0x70, 0x74, 0x79, 0x32, 0xbd, 0x01, 0x0a,
-	0x12, 0x55, 0x73, 0x65, 0x72, 0x43, 0x55, 0x52, 0x44, 0x43, 0x6f, 0x6e, 0x74, 0x72, 0x6f, 0x6c,
-	0x6c, 0x65, 0x72, 0x12, 0x2f, 0x0a, 0x0a, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x55, 0x73, 0x65,
-	0x72, 0x12, 0x10, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x73, 0x2e, 0x55, 0x73, 0x65, 0x72, 0x49,
-	0x6e, 0x66, 0x6f, 0x1a, 0x0d, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x73, 0x2e, 0x45, 0x6d, 0x70,
-	0x74, 0x79, 0x22, 0x00, 0x12, 0x33, 0x0a, 0x07, 0x47, 0x65, 0x74, 0x55, 0x73, 0x65, 0x72, 0x12,
-	0x14, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x73, 0x2e, 0x47, 0x65, 0x74, 0x55, 0x73, 0x65, 0x72,
-	0x49, 0x6e, 0x70, 0x75, 0x74, 0x1a, 0x10, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x73, 0x2e, 0x55,
-	0x73, 0x65, 0x72, 0x49, 0x6e, 0x66, 0x6f, 0x22, 0x00, 0x12, 0x41, 0x0a, 0x0e, 0x47, 0x65, 0x74,
-	0x55, 0x73, 0x65, 0x72, 0x42, 0x79, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x12, 0x0f, 0x2e, 0x70, 0x72,
-	0x6f, 0x74, 0x6f, 0x73, 0x2e, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x49, 0x44, 0x1a, 0x1c, 0x2e, 0x70,
-	0x72, 0x6f, 0x74, 0x6f, 0x73, 0x2e, 0x47, 0x65, 0x74, 0x55, 0x73, 0x65, 0x72, 0x42, 0x79, 0x47,
-	0x72, 0x6f, 0x75, 0x70, 0x4f, 0x75, 0x74, 0x70, 0x75, 0x74, 0x22, 0x00, 0x32, 0x4f, 0x0a, 0x13,
-	0x47, 0x72, 0x6f, 0x75, 0x70, 0x43, 0x55, 0x52, 0x44, 0x43, 0x6f, 0x6e, 0x74, 0x72, 0x6f, 0x6c,
-	0x6c, 0x65, 0x72, 0x12, 0x38, 0x0a, 0x0b, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x47, 0x72, 0x6f,
-	0x75, 0x70, 0x12, 0x18, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x73, 0x2e, 0x43, 0x72, 0x65, 0x61,
-	0x74, 0x65, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x49, 0x6e, 0x70, 0x75, 0x74, 0x1a, 0x0d, 0x2e, 0x70,
-	0x72, 0x6f, 0x74, 0x6f, 0x73, 0x2e, 0x45, 0x6d, 0x70, 0x74, 0x79, 0x22, 0x00, 0x32, 0x5e, 0x0a,
-	0x18, 0x4d, 0x65, 0x6d, 0x62, 0x65, 0x72, 0x73, 0x68, 0x69, 0x70, 0x43, 0x55, 0x52, 0x44, 0x43,
-	0x6f, 0x6e, 0x74, 0x72, 0x6f, 0x6c, 0x6c, 0x65, 0x72, 0x12, 0x42, 0x0a, 0x10, 0x43, 0x72, 0x65,
-	0x61, 0x74, 0x65, 0x4d, 0x65, 0x6d, 0x62, 0x65, 0x72, 0x73, 0x68, 0x69, 0x70, 0x12, 0x1d, 0x2e,
-	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x73, 0x2e, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x4d, 0x65, 0x6d,
-	0x62, 0x65, 0x72, 0x73, 0x68, 0x69, 0x70, 0x49, 0x6e, 0x70, 0x75, 0x74, 0x1a, 0x0d, 0x2e, 0x70,
-	0x72, 0x6f, 0x74, 0x6f, 0x73, 0x2e, 0x45, 0x6d, 0x70, 0x74, 0x79, 0x22, 0x00, 0x62, 0x06, 0x70,
+	0x6f, 0x74, 0x6f, 0x1a, 0x1b, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2f, 0x70, 0x72, 0x6f, 0x74,
+	0x6f, 0x62, 0x75, 0x66, 0x2f, 0x65, 0x6d, 0x70, 0x74, 0x79, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f,
+	0x1a, 0x0c, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x32, 0xa7,
+	0x03, 0x0a, 0x12, 0x55, 0x73, 0x65, 0x72, 0x43, 0x55, 0x52, 0x44, 0x43, 0x6f, 0x6e, 0x74, 0x72,
+	0x6f, 0x6c, 0x6c, 0x65, 0x72, 0x12, 0x38, 0x0a, 0x0a, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x55,
+	0x73, 0x65, 0x72, 0x12, 0x10, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x73, 0x2e, 0x55, 0x73, 0x65,
+	0x72, 0x49, 0x6e, 0x66, 0x6f, 0x1a, 0x16, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70,
+	0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x45, 0x6d, 0x70, 0x74, 0x79, 0x22, 0x00, 0x12,
+	0x2d, 0x0a, 0x07, 0x47, 0x65, 0x74, 0x55, 0x73, 0x65, 0x72, 0x12, 0x0e, 0x2e, 0x70, 0x72, 0x6f,
+	0x74, 0x6f, 0x73, 0x2e, 0x55, 0x73, 0x65, 0x72, 0x49, 0x44, 0x1a, 0x10, 0x2e, 0x70, 0x72, 0x6f,
+	0x74, 0x6f, 0x73, 0x2e, 0x55, 0x73, 0x65, 0x72, 0x49, 0x6e, 0x66, 0x6f, 0x22, 0x00, 0x12, 0x41,
+	0x0a, 0x0e, 0x47, 0x65, 0x74, 0x55, 0x73, 0x65, 0x72, 0x42, 0x79, 0x47, 0x72, 0x6f, 0x75, 0x70,
+	0x12, 0x0f, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x73, 0x2e, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x49,
+	0x44, 0x1a, 0x1c, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x73, 0x2e, 0x47, 0x65, 0x74, 0x55, 0x73,
+	0x65, 0x72, 0x42, 0x79, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x4f, 0x75, 0x74, 0x70, 0x75, 0x74, 0x22,
+	0x00, 0x12, 0x34, 0x0a, 0x08, 0x4c, 0x69, 0x73, 0x74, 0x55, 0x73, 0x65, 0x72, 0x12, 0x13, 0x2e,
+	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x73, 0x2e, 0x4c, 0x69, 0x6d, 0x69, 0x74, 0x4f, 0x66, 0x66, 0x73,
+	0x65, 0x74, 0x1a, 0x11, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x73, 0x2e, 0x55, 0x73, 0x65, 0x72,
+	0x49, 0x6e, 0x66, 0x6f, 0x73, 0x22, 0x00, 0x12, 0x36, 0x0a, 0x0a, 0x44, 0x65, 0x6c, 0x65, 0x74,
+	0x65, 0x55, 0x73, 0x65, 0x72, 0x12, 0x0e, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x73, 0x2e, 0x55,
+	0x73, 0x65, 0x72, 0x49, 0x44, 0x1a, 0x16, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70,
+	0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x45, 0x6d, 0x70, 0x74, 0x79, 0x22, 0x00, 0x12,
+	0x3b, 0x0a, 0x0a, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x55, 0x73, 0x65, 0x72, 0x12, 0x13, 0x2e,
+	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x73, 0x2e, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x49, 0x6e, 0x70,
+	0x75, 0x74, 0x1a, 0x16, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74,
+	0x6f, 0x62, 0x75, 0x66, 0x2e, 0x45, 0x6d, 0x70, 0x74, 0x79, 0x22, 0x00, 0x12, 0x3a, 0x0a, 0x09,
+	0x43, 0x6f, 0x75, 0x6e, 0x74, 0x55, 0x73, 0x65, 0x72, 0x12, 0x16, 0x2e, 0x67, 0x6f, 0x6f, 0x67,
+	0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x45, 0x6d, 0x70, 0x74,
+	0x79, 0x1a, 0x13, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x73, 0x2e, 0x43, 0x6f, 0x75, 0x6e, 0x74,
+	0x4f, 0x75, 0x74, 0x70, 0x75, 0x74, 0x22, 0x00, 0x32, 0xf0, 0x02, 0x0a, 0x13, 0x47, 0x72, 0x6f,
+	0x75, 0x70, 0x43, 0x55, 0x52, 0x44, 0x43, 0x6f, 0x6e, 0x74, 0x72, 0x6f, 0x6c, 0x6c, 0x65, 0x72,
+	0x12, 0x3a, 0x0a, 0x0b, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x12,
+	0x11, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x73, 0x2e, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x49, 0x6e,
+	0x66, 0x6f, 0x1a, 0x16, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74,
+	0x6f, 0x62, 0x75, 0x66, 0x2e, 0x45, 0x6d, 0x70, 0x74, 0x79, 0x22, 0x00, 0x12, 0x38, 0x0a, 0x0b,
+	0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x12, 0x0f, 0x2e, 0x70, 0x72,
+	0x6f, 0x74, 0x6f, 0x73, 0x2e, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x49, 0x44, 0x1a, 0x16, 0x2e, 0x67,
+	0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x45,
+	0x6d, 0x70, 0x74, 0x79, 0x22, 0x00, 0x12, 0x30, 0x0a, 0x08, 0x47, 0x65, 0x74, 0x47, 0x72, 0x6f,
+	0x75, 0x70, 0x12, 0x0f, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x73, 0x2e, 0x47, 0x72, 0x6f, 0x75,
+	0x70, 0x49, 0x44, 0x1a, 0x11, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x73, 0x2e, 0x47, 0x72, 0x6f,
+	0x75, 0x70, 0x49, 0x6e, 0x66, 0x6f, 0x22, 0x00, 0x12, 0x3b, 0x0a, 0x0a, 0x43, 0x6f, 0x75, 0x6e,
+	0x74, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x12, 0x16, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e,
+	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x45, 0x6d, 0x70, 0x74, 0x79, 0x1a, 0x13,
+	0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x73, 0x2e, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x4f, 0x75, 0x74,
+	0x70, 0x75, 0x74, 0x22, 0x00, 0x12, 0x36, 0x0a, 0x09, 0x4c, 0x69, 0x73, 0x74, 0x47, 0x72, 0x6f,
+	0x75, 0x70, 0x12, 0x13, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x73, 0x2e, 0x4c, 0x69, 0x6d, 0x69,
+	0x74, 0x4f, 0x66, 0x66, 0x73, 0x65, 0x74, 0x1a, 0x12, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x73,
+	0x2e, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x49, 0x6e, 0x66, 0x6f, 0x73, 0x22, 0x00, 0x12, 0x3c, 0x0a,
+	0x0b, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x12, 0x13, 0x2e, 0x70,
+	0x72, 0x6f, 0x74, 0x6f, 0x73, 0x2e, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x49, 0x6e, 0x70, 0x75,
+	0x74, 0x1a, 0x16, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f,
+	0x62, 0x75, 0x66, 0x2e, 0x45, 0x6d, 0x70, 0x74, 0x79, 0x22, 0x00, 0x32, 0x60, 0x0a, 0x18, 0x4d,
+	0x65, 0x6d, 0x62, 0x65, 0x72, 0x73, 0x68, 0x69, 0x70, 0x43, 0x55, 0x52, 0x44, 0x43, 0x6f, 0x6e,
+	0x74, 0x72, 0x6f, 0x6c, 0x6c, 0x65, 0x72, 0x12, 0x44, 0x0a, 0x10, 0x43, 0x72, 0x65, 0x61, 0x74,
+	0x65, 0x4d, 0x65, 0x6d, 0x62, 0x65, 0x72, 0x73, 0x68, 0x69, 0x70, 0x12, 0x16, 0x2e, 0x70, 0x72,
+	0x6f, 0x74, 0x6f, 0x73, 0x2e, 0x4d, 0x65, 0x6d, 0x62, 0x65, 0x72, 0x73, 0x68, 0x69, 0x70, 0x49,
+	0x6e, 0x66, 0x6f, 0x1a, 0x16, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f,
+	0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x45, 0x6d, 0x70, 0x74, 0x79, 0x22, 0x00, 0x62, 0x06, 0x70,
 	0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
-var (
-	file_services_proto_rawDescOnce sync.Once
-	file_services_proto_rawDescData = file_services_proto_rawDesc
-)
-
-func file_services_proto_rawDescGZIP() []byte {
-	file_services_proto_rawDescOnce.Do(func() {
-		file_services_proto_rawDescData = protoimpl.X.CompressGZIP(file_services_proto_rawDescData)
-	})
-	return file_services_proto_rawDescData
-}
-
-var file_services_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
 var file_services_proto_goTypes = []interface{}{
-	(*Empty)(nil),                 // 0: protos.Empty
-	(*UserInfo)(nil),              // 1: protos.UserInfo
-	(*GetUserInput)(nil),          // 2: protos.GetUserInput
-	(*GroupID)(nil),               // 3: protos.GroupID
-	(*CreateGroupInput)(nil),      // 4: protos.CreateGroupInput
-	(*CreateMembershipInput)(nil), // 5: protos.CreateMembershipInput
-	(*GetUserByGroupOutput)(nil),  // 6: protos.GetUserByGroupOutput
+	(*UserInfo)(nil),             // 0: protos.UserInfo
+	(*UserID)(nil),               // 1: protos.UserID
+	(*GroupID)(nil),              // 2: protos.GroupID
+	(*LimitOffset)(nil),          // 3: protos.LimitOffset
+	(*UpdateInput)(nil),          // 4: protos.UpdateInput
+	(*empty.Empty)(nil),          // 5: google.protobuf.Empty
+	(*GroupInfo)(nil),            // 6: protos.GroupInfo
+	(*MembershipInfo)(nil),       // 7: protos.MembershipInfo
+	(*GetUserByGroupOutput)(nil), // 8: protos.GetUserByGroupOutput
+	(*UserInfos)(nil),            // 9: protos.UserInfos
+	(*CountOutput)(nil),          // 10: protos.CountOutput
+	(*GroupInfos)(nil),           // 11: protos.GroupInfos
 }
 var file_services_proto_depIdxs = []int32{
-	1, // 0: protos.UserCURDController.CreateUser:input_type -> protos.UserInfo
-	2, // 1: protos.UserCURDController.GetUser:input_type -> protos.GetUserInput
-	3, // 2: protos.UserCURDController.GetUserByGroup:input_type -> protos.GroupID
-	4, // 3: protos.GroupCURDController.CreateGroup:input_type -> protos.CreateGroupInput
-	5, // 4: protos.MembershipCURDController.CreateMembership:input_type -> protos.CreateMembershipInput
-	0, // 5: protos.UserCURDController.CreateUser:output_type -> protos.Empty
-	1, // 6: protos.UserCURDController.GetUser:output_type -> protos.UserInfo
-	6, // 7: protos.UserCURDController.GetUserByGroup:output_type -> protos.GetUserByGroupOutput
-	0, // 8: protos.GroupCURDController.CreateGroup:output_type -> protos.Empty
-	0, // 9: protos.MembershipCURDController.CreateMembership:output_type -> protos.Empty
-	5, // [5:10] is the sub-list for method output_type
-	0, // [0:5] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	0,  // 0: protos.UserCURDController.CreateUser:input_type -> protos.UserInfo
+	1,  // 1: protos.UserCURDController.GetUser:input_type -> protos.UserID
+	2,  // 2: protos.UserCURDController.GetUserByGroup:input_type -> protos.GroupID
+	3,  // 3: protos.UserCURDController.ListUser:input_type -> protos.LimitOffset
+	1,  // 4: protos.UserCURDController.DeleteUser:input_type -> protos.UserID
+	4,  // 5: protos.UserCURDController.UpdateUser:input_type -> protos.UpdateInput
+	5,  // 6: protos.UserCURDController.CountUser:input_type -> google.protobuf.Empty
+	6,  // 7: protos.GroupCURDController.CreateGroup:input_type -> protos.GroupInfo
+	2,  // 8: protos.GroupCURDController.DeleteGroup:input_type -> protos.GroupID
+	2,  // 9: protos.GroupCURDController.GetGroup:input_type -> protos.GroupID
+	5,  // 10: protos.GroupCURDController.CountGroup:input_type -> google.protobuf.Empty
+	3,  // 11: protos.GroupCURDController.ListGroup:input_type -> protos.LimitOffset
+	4,  // 12: protos.GroupCURDController.UpdateGroup:input_type -> protos.UpdateInput
+	7,  // 13: protos.MembershipCURDController.CreateMembership:input_type -> protos.MembershipInfo
+	5,  // 14: protos.UserCURDController.CreateUser:output_type -> google.protobuf.Empty
+	0,  // 15: protos.UserCURDController.GetUser:output_type -> protos.UserInfo
+	8,  // 16: protos.UserCURDController.GetUserByGroup:output_type -> protos.GetUserByGroupOutput
+	9,  // 17: protos.UserCURDController.ListUser:output_type -> protos.UserInfos
+	5,  // 18: protos.UserCURDController.DeleteUser:output_type -> google.protobuf.Empty
+	5,  // 19: protos.UserCURDController.UpdateUser:output_type -> google.protobuf.Empty
+	10, // 20: protos.UserCURDController.CountUser:output_type -> protos.CountOutput
+	5,  // 21: protos.GroupCURDController.CreateGroup:output_type -> google.protobuf.Empty
+	5,  // 22: protos.GroupCURDController.DeleteGroup:output_type -> google.protobuf.Empty
+	6,  // 23: protos.GroupCURDController.GetGroup:output_type -> protos.GroupInfo
+	10, // 24: protos.GroupCURDController.CountGroup:output_type -> protos.CountOutput
+	11, // 25: protos.GroupCURDController.ListGroup:output_type -> protos.GroupInfos
+	5,  // 26: protos.GroupCURDController.UpdateGroup:output_type -> google.protobuf.Empty
+	5,  // 27: protos.MembershipCURDController.CreateMembership:output_type -> google.protobuf.Empty
+	14, // [14:28] is the sub-list for method output_type
+	0,  // [0:14] is the sub-list for method input_type
+	0,  // [0:0] is the sub-list for extension type_name
+	0,  // [0:0] is the sub-list for extension extendee
+	0,  // [0:0] is the sub-list for field type_name
 }
 
 func init() { file_services_proto_init() }
@@ -149,33 +156,19 @@ func file_services_proto_init() {
 	file_user_proto_init()
 	file_group_proto_init()
 	file_membership_proto_init()
-	if !protoimpl.UnsafeEnabled {
-		file_services_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*Empty); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-	}
+	file_common_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_services_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   1,
+			NumMessages:   0,
 			NumExtensions: 0,
 			NumServices:   3,
 		},
 		GoTypes:           file_services_proto_goTypes,
 		DependencyIndexes: file_services_proto_depIdxs,
-		MessageInfos:      file_services_proto_msgTypes,
 	}.Build()
 	File_services_proto = out.File
 	file_services_proto_rawDesc = nil
@@ -195,9 +188,13 @@ const _ = grpc.SupportPackageIsVersion6
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type UserCURDControllerClient interface {
-	CreateUser(ctx context.Context, in *UserInfo, opts ...grpc.CallOption) (*Empty, error)
-	GetUser(ctx context.Context, in *GetUserInput, opts ...grpc.CallOption) (*UserInfo, error)
+	CreateUser(ctx context.Context, in *UserInfo, opts ...grpc.CallOption) (*empty.Empty, error)
+	GetUser(ctx context.Context, in *UserID, opts ...grpc.CallOption) (*UserInfo, error)
 	GetUserByGroup(ctx context.Context, in *GroupID, opts ...grpc.CallOption) (*GetUserByGroupOutput, error)
+	ListUser(ctx context.Context, in *LimitOffset, opts ...grpc.CallOption) (*UserInfos, error)
+	DeleteUser(ctx context.Context, in *UserID, opts ...grpc.CallOption) (*empty.Empty, error)
+	UpdateUser(ctx context.Context, in *UpdateInput, opts ...grpc.CallOption) (*empty.Empty, error)
+	CountUser(ctx context.Context, in *empty.Empty, opts ...grpc.CallOption) (*CountOutput, error)
 }
 
 type userCURDControllerClient struct {
@@ -208,8 +205,8 @@ func NewUserCURDControllerClient(cc grpc.ClientConnInterface) UserCURDController
 	return &userCURDControllerClient{cc}
 }
 
-func (c *userCURDControllerClient) CreateUser(ctx context.Context, in *UserInfo, opts ...grpc.CallOption) (*Empty, error) {
-	out := new(Empty)
+func (c *userCURDControllerClient) CreateUser(ctx context.Context, in *UserInfo, opts ...grpc.CallOption) (*empty.Empty, error) {
+	out := new(empty.Empty)
 	err := c.cc.Invoke(ctx, "/protos.UserCURDController/CreateUser", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -217,7 +214,7 @@ func (c *userCURDControllerClient) CreateUser(ctx context.Context, in *UserInfo,
 	return out, nil
 }
 
-func (c *userCURDControllerClient) GetUser(ctx context.Context, in *GetUserInput, opts ...grpc.CallOption) (*UserInfo, error) {
+func (c *userCURDControllerClient) GetUser(ctx context.Context, in *UserID, opts ...grpc.CallOption) (*UserInfo, error) {
 	out := new(UserInfo)
 	err := c.cc.Invoke(ctx, "/protos.UserCURDController/GetUser", in, out, opts...)
 	if err != nil {
@@ -235,25 +232,77 @@ func (c *userCURDControllerClient) GetUserByGroup(ctx context.Context, in *Group
 	return out, nil
 }
 
+func (c *userCURDControllerClient) ListUser(ctx context.Context, in *LimitOffset, opts ...grpc.CallOption) (*UserInfos, error) {
+	out := new(UserInfos)
+	err := c.cc.Invoke(ctx, "/protos.UserCURDController/ListUser", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userCURDControllerClient) DeleteUser(ctx context.Context, in *UserID, opts ...grpc.CallOption) (*empty.Empty, error) {
+	out := new(empty.Empty)
+	err := c.cc.Invoke(ctx, "/protos.UserCURDController/DeleteUser", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userCURDControllerClient) UpdateUser(ctx context.Context, in *UpdateInput, opts ...grpc.CallOption) (*empty.Empty, error) {
+	out := new(empty.Empty)
+	err := c.cc.Invoke(ctx, "/protos.UserCURDController/UpdateUser", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userCURDControllerClient) CountUser(ctx context.Context, in *empty.Empty, opts ...grpc.CallOption) (*CountOutput, error) {
+	out := new(CountOutput)
+	err := c.cc.Invoke(ctx, "/protos.UserCURDController/CountUser", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // UserCURDControllerServer is the server API for UserCURDController service.
 type UserCURDControllerServer interface {
-	CreateUser(context.Context, *UserInfo) (*Empty, error)
-	GetUser(context.Context, *GetUserInput) (*UserInfo, error)
+	CreateUser(context.Context, *UserInfo) (*empty.Empty, error)
+	GetUser(context.Context, *UserID) (*UserInfo, error)
 	GetUserByGroup(context.Context, *GroupID) (*GetUserByGroupOutput, error)
+	ListUser(context.Context, *LimitOffset) (*UserInfos, error)
+	DeleteUser(context.Context, *UserID) (*empty.Empty, error)
+	UpdateUser(context.Context, *UpdateInput) (*empty.Empty, error)
+	CountUser(context.Context, *empty.Empty) (*CountOutput, error)
 }
 
 // UnimplementedUserCURDControllerServer can be embedded to have forward compatible implementations.
 type UnimplementedUserCURDControllerServer struct {
 }
 
-func (*UnimplementedUserCURDControllerServer) CreateUser(context.Context, *UserInfo) (*Empty, error) {
+func (*UnimplementedUserCURDControllerServer) CreateUser(context.Context, *UserInfo) (*empty.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateUser not implemented")
 }
-func (*UnimplementedUserCURDControllerServer) GetUser(context.Context, *GetUserInput) (*UserInfo, error) {
+func (*UnimplementedUserCURDControllerServer) GetUser(context.Context, *UserID) (*UserInfo, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUser not implemented")
 }
 func (*UnimplementedUserCURDControllerServer) GetUserByGroup(context.Context, *GroupID) (*GetUserByGroupOutput, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUserByGroup not implemented")
+}
+func (*UnimplementedUserCURDControllerServer) ListUser(context.Context, *LimitOffset) (*UserInfos, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListUser not implemented")
+}
+func (*UnimplementedUserCURDControllerServer) DeleteUser(context.Context, *UserID) (*empty.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteUser not implemented")
+}
+func (*UnimplementedUserCURDControllerServer) UpdateUser(context.Context, *UpdateInput) (*empty.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateUser not implemented")
+}
+func (*UnimplementedUserCURDControllerServer) CountUser(context.Context, *empty.Empty) (*CountOutput, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CountUser not implemented")
 }
 
 func RegisterUserCURDControllerServer(s *grpc.Server, srv UserCURDControllerServer) {
@@ -279,7 +328,7 @@ func _UserCURDController_CreateUser_Handler(srv interface{}, ctx context.Context
 }
 
 func _UserCURDController_GetUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetUserInput)
+	in := new(UserID)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -291,7 +340,7 @@ func _UserCURDController_GetUser_Handler(srv interface{}, ctx context.Context, d
 		FullMethod: "/protos.UserCURDController/GetUser",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserCURDControllerServer).GetUser(ctx, req.(*GetUserInput))
+		return srv.(UserCURDControllerServer).GetUser(ctx, req.(*UserID))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -314,6 +363,78 @@ func _UserCURDController_GetUserByGroup_Handler(srv interface{}, ctx context.Con
 	return interceptor(ctx, in, info, handler)
 }
 
+func _UserCURDController_ListUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(LimitOffset)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserCURDControllerServer).ListUser(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/protos.UserCURDController/ListUser",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserCURDControllerServer).ListUser(ctx, req.(*LimitOffset))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserCURDController_DeleteUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UserID)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserCURDControllerServer).DeleteUser(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/protos.UserCURDController/DeleteUser",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserCURDControllerServer).DeleteUser(ctx, req.(*UserID))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserCURDController_UpdateUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateInput)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserCURDControllerServer).UpdateUser(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/protos.UserCURDController/UpdateUser",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserCURDControllerServer).UpdateUser(ctx, req.(*UpdateInput))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserCURDController_CountUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(empty.Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserCURDControllerServer).CountUser(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/protos.UserCURDController/CountUser",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserCURDControllerServer).CountUser(ctx, req.(*empty.Empty))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _UserCURDController_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "protos.UserCURDController",
 	HandlerType: (*UserCURDControllerServer)(nil),
@@ -330,6 +451,22 @@ var _UserCURDController_serviceDesc = grpc.ServiceDesc{
 			MethodName: "GetUserByGroup",
 			Handler:    _UserCURDController_GetUserByGroup_Handler,
 		},
+		{
+			MethodName: "ListUser",
+			Handler:    _UserCURDController_ListUser_Handler,
+		},
+		{
+			MethodName: "DeleteUser",
+			Handler:    _UserCURDController_DeleteUser_Handler,
+		},
+		{
+			MethodName: "UpdateUser",
+			Handler:    _UserCURDController_UpdateUser_Handler,
+		},
+		{
+			MethodName: "CountUser",
+			Handler:    _UserCURDController_CountUser_Handler,
+		},
 	},
 	Streams:  []grpc.StreamDesc{},
 	Metadata: "services.proto",
@@ -339,7 +476,12 @@ var _UserCURDController_serviceDesc = grpc.ServiceDesc{
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type GroupCURDControllerClient interface {
-	CreateGroup(ctx context.Context, in *CreateGroupInput, opts ...grpc.CallOption) (*Empty, error)
+	CreateGroup(ctx context.Context, in *GroupInfo, opts ...grpc.CallOption) (*empty.Empty, error)
+	DeleteGroup(ctx context.Context, in *GroupID, opts ...grpc.CallOption) (*empty.Empty, error)
+	GetGroup(ctx context.Context, in *GroupID, opts ...grpc.CallOption) (*GroupInfo, error)
+	CountGroup(ctx context.Context, in *empty.Empty, opts ...grpc.CallOption) (*CountOutput, error)
+	ListGroup(ctx context.Context, in *LimitOffset, opts ...grpc.CallOption) (*GroupInfos, error)
+	UpdateGroup(ctx context.Context, in *UpdateInput, opts ...grpc.CallOption) (*empty.Empty, error)
 }
 
 type groupCURDControllerClient struct {
@@ -350,9 +492,54 @@ func NewGroupCURDControllerClient(cc grpc.ClientConnInterface) GroupCURDControll
 	return &groupCURDControllerClient{cc}
 }
 
-func (c *groupCURDControllerClient) CreateGroup(ctx context.Context, in *CreateGroupInput, opts ...grpc.CallOption) (*Empty, error) {
-	out := new(Empty)
+func (c *groupCURDControllerClient) CreateGroup(ctx context.Context, in *GroupInfo, opts ...grpc.CallOption) (*empty.Empty, error) {
+	out := new(empty.Empty)
 	err := c.cc.Invoke(ctx, "/protos.GroupCURDController/CreateGroup", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *groupCURDControllerClient) DeleteGroup(ctx context.Context, in *GroupID, opts ...grpc.CallOption) (*empty.Empty, error) {
+	out := new(empty.Empty)
+	err := c.cc.Invoke(ctx, "/protos.GroupCURDController/DeleteGroup", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *groupCURDControllerClient) GetGroup(ctx context.Context, in *GroupID, opts ...grpc.CallOption) (*GroupInfo, error) {
+	out := new(GroupInfo)
+	err := c.cc.Invoke(ctx, "/protos.GroupCURDController/GetGroup", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *groupCURDControllerClient) CountGroup(ctx context.Context, in *empty.Empty, opts ...grpc.CallOption) (*CountOutput, error) {
+	out := new(CountOutput)
+	err := c.cc.Invoke(ctx, "/protos.GroupCURDController/CountGroup", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *groupCURDControllerClient) ListGroup(ctx context.Context, in *LimitOffset, opts ...grpc.CallOption) (*GroupInfos, error) {
+	out := new(GroupInfos)
+	err := c.cc.Invoke(ctx, "/protos.GroupCURDController/ListGroup", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *groupCURDControllerClient) UpdateGroup(ctx context.Context, in *UpdateInput, opts ...grpc.CallOption) (*empty.Empty, error) {
+	out := new(empty.Empty)
+	err := c.cc.Invoke(ctx, "/protos.GroupCURDController/UpdateGroup", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -361,15 +548,35 @@ func (c *groupCURDControllerClient) CreateGroup(ctx context.Context, in *CreateG
 
 // GroupCURDControllerServer is the server API for GroupCURDController service.
 type GroupCURDControllerServer interface {
-	CreateGroup(context.Context, *CreateGroupInput) (*Empty, error)
+	CreateGroup(context.Context, *GroupInfo) (*empty.Empty, error)
+	DeleteGroup(context.Context, *GroupID) (*empty.Empty, error)
+	GetGroup(context.Context, *GroupID) (*GroupInfo, error)
+	CountGroup(context.Context, *empty.Empty) (*CountOutput, error)
+	ListGroup(context.Context, *LimitOffset) (*GroupInfos, error)
+	UpdateGroup(context.Context, *UpdateInput) (*empty.Empty, error)
 }
 
 // UnimplementedGroupCURDControllerServer can be embedded to have forward compatible implementations.
 type UnimplementedGroupCURDControllerServer struct {
 }
 
-func (*UnimplementedGroupCURDControllerServer) CreateGroup(context.Context, *CreateGroupInput) (*Empty, error) {
+func (*UnimplementedGroupCURDControllerServer) CreateGroup(context.Context, *GroupInfo) (*empty.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateGroup not implemented")
+}
+func (*UnimplementedGroupCURDControllerServer) DeleteGroup(context.Context, *GroupID) (*empty.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteGroup not implemented")
+}
+func (*UnimplementedGroupCURDControllerServer) GetGroup(context.Context, *GroupID) (*GroupInfo, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetGroup not implemented")
+}
+func (*UnimplementedGroupCURDControllerServer) CountGroup(context.Context, *empty.Empty) (*CountOutput, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CountGroup not implemented")
+}
+func (*UnimplementedGroupCURDControllerServer) ListGroup(context.Context, *LimitOffset) (*GroupInfos, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListGroup not implemented")
+}
+func (*UnimplementedGroupCURDControllerServer) UpdateGroup(context.Context, *UpdateInput) (*empty.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateGroup not implemented")
 }
 
 func RegisterGroupCURDControllerServer(s *grpc.Server, srv GroupCURDControllerServer) {
@@ -377,7 +584,7 @@ func RegisterGroupCURDControllerServer(s *grpc.Server, srv GroupCURDControllerSe
 }
 
 func _GroupCURDController_CreateGroup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CreateGroupInput)
+	in := new(GroupInfo)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -389,7 +596,97 @@ func _GroupCURDController_CreateGroup_Handler(srv interface{}, ctx context.Conte
 		FullMethod: "/protos.GroupCURDController/CreateGroup",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(GroupCURDControllerServer).CreateGroup(ctx, req.(*CreateGroupInput))
+		return srv.(GroupCURDControllerServer).CreateGroup(ctx, req.(*GroupInfo))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _GroupCURDController_DeleteGroup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GroupID)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GroupCURDControllerServer).DeleteGroup(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/protos.GroupCURDController/DeleteGroup",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GroupCURDControllerServer).DeleteGroup(ctx, req.(*GroupID))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _GroupCURDController_GetGroup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GroupID)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GroupCURDControllerServer).GetGroup(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/protos.GroupCURDController/GetGroup",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GroupCURDControllerServer).GetGroup(ctx, req.(*GroupID))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _GroupCURDController_CountGroup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(empty.Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GroupCURDControllerServer).CountGroup(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/protos.GroupCURDController/CountGroup",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GroupCURDControllerServer).CountGroup(ctx, req.(*empty.Empty))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _GroupCURDController_ListGroup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(LimitOffset)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GroupCURDControllerServer).ListGroup(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/protos.GroupCURDController/ListGroup",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GroupCURDControllerServer).ListGroup(ctx, req.(*LimitOffset))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _GroupCURDController_UpdateGroup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateInput)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GroupCURDControllerServer).UpdateGroup(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/protos.GroupCURDController/UpdateGroup",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GroupCURDControllerServer).UpdateGroup(ctx, req.(*UpdateInput))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -402,6 +699,26 @@ var _GroupCURDController_serviceDesc = grpc.ServiceDesc{
 			MethodName: "CreateGroup",
 			Handler:    _GroupCURDController_CreateGroup_Handler,
 		},
+		{
+			MethodName: "DeleteGroup",
+			Handler:    _GroupCURDController_DeleteGroup_Handler,
+		},
+		{
+			MethodName: "GetGroup",
+			Handler:    _GroupCURDController_GetGroup_Handler,
+		},
+		{
+			MethodName: "CountGroup",
+			Handler:    _GroupCURDController_CountGroup_Handler,
+		},
+		{
+			MethodName: "ListGroup",
+			Handler:    _GroupCURDController_ListGroup_Handler,
+		},
+		{
+			MethodName: "UpdateGroup",
+			Handler:    _GroupCURDController_UpdateGroup_Handler,
+		},
 	},
 	Streams:  []grpc.StreamDesc{},
 	Metadata: "services.proto",
@@ -411,7 +728,7 @@ var _GroupCURDController_serviceDesc = grpc.ServiceDesc{
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type MembershipCURDControllerClient interface {
-	CreateMembership(ctx context.Context, in *CreateMembershipInput, opts ...grpc.CallOption) (*Empty, error)
+	CreateMembership(ctx context.Context, in *MembershipInfo, opts ...grpc.CallOption) (*empty.Empty, error)
 }
 
 type membershipCURDControllerClient struct {
@@ -422,8 +739,8 @@ func NewMembershipCURDControllerClient(cc grpc.ClientConnInterface) MembershipCU
 	return &membershipCURDControllerClient{cc}
 }
 
-func (c *membershipCURDControllerClient) CreateMembership(ctx context.Context, in *CreateMembershipInput, opts ...grpc.CallOption) (*Empty, error) {
-	out := new(Empty)
+func (c *membershipCURDControllerClient) CreateMembership(ctx context.Context, in *MembershipInfo, opts ...grpc.CallOption) (*empty.Empty, error) {
+	out := new(empty.Empty)
 	err := c.cc.Invoke(ctx, "/protos.MembershipCURDController/CreateMembership", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -433,14 +750,14 @@ func (c *membershipCURDControllerClient) CreateMembership(ctx context.Context, i
 
 // MembershipCURDControllerServer is the server API for MembershipCURDController service.
 type MembershipCURDControllerServer interface {
-	CreateMembership(context.Context, *CreateMembershipInput) (*Empty, error)
+	CreateMembership(context.Context, *MembershipInfo) (*empty.Empty, error)
 }
 
 // UnimplementedMembershipCURDControllerServer can be embedded to have forward compatible implementations.
 type UnimplementedMembershipCURDControllerServer struct {
 }
 
-func (*UnimplementedMembershipCURDControllerServer) CreateMembership(context.Context, *CreateMembershipInput) (*Empty, error) {
+func (*UnimplementedMembershipCURDControllerServer) CreateMembership(context.Context, *MembershipInfo) (*empty.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateMembership not implemented")
 }
 
@@ -449,7 +766,7 @@ func RegisterMembershipCURDControllerServer(s *grpc.Server, srv MembershipCURDCo
 }
 
 func _MembershipCURDController_CreateMembership_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CreateMembershipInput)
+	in := new(MembershipInfo)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -461,7 +778,7 @@ func _MembershipCURDController_CreateMembership_Handler(srv interface{}, ctx con
 		FullMethod: "/protos.MembershipCURDController/CreateMembership",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MembershipCURDControllerServer).CreateMembership(ctx, req.(*CreateMembershipInput))
+		return srv.(MembershipCURDControllerServer).CreateMembership(ctx, req.(*MembershipInfo))
 	}
 	return interceptor(ctx, in, info, handler)
 }

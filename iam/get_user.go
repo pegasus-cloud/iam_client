@@ -9,8 +9,9 @@ import (
 )
 
 func getUser(c grpc.ClientConnInterface, userID string) (output *protos.UserInfo, err error) {
-	ctx, _ := context.WithTimeout(context.Background(), time.Second)
-	user, err := protos.NewUserCURDControllerClient(use().conn).GetUser(ctx, &protos.GetUserInput{
+	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
+	defer cancel()
+	user, err := protos.NewUserCURDControllerClient(use().conn).GetUser(ctx, &protos.UserID{
 		ID: userID,
 	})
 	return &protos.UserInfo{
