@@ -28,4 +28,7 @@ service GroupCURDController {
 
 service MembershipCURDController {
   rpc CreateMembership(MembershipInfo) returns (google.protobuf.Empty){}
+  rpc DeleteMembership(MemUserGroupInput) returns (google.protobuf.Empty){}
+  rpc CountMembershipByUser(UserID) returns (CountOutput){}
+  rpc ListMembershipByUser(ListMembershipByUserInput) returns (ListMembershipByUserOutput){}
 }

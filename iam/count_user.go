@@ -22,6 +22,6 @@ func CountUser() (count *protos.CountOutput, err error) {
 }
 
 // CountUser ...
-func (cp *ConnProvider) CountUser(input *protos.UserInfo) (count *protos.CountOutput, err error) {
+func (cp *ConnProvider) CountUser() (count *protos.CountOutput, err error) {
 	return countUser(cp.init().conn)
 }

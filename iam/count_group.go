@@ -22,6 +22,6 @@ func CountGroup() (count *protos.CountOutput, err error) {
 }
 
 // CountGroup ...
-func (cp *ConnProvider) CountGroup(input *protos.UserInfo) (count *protos.CountOutput, err error) {
+func (cp *ConnProvider) CountGroup() (count *protos.CountOutput, err error) {
 	return countGroup(cp.init().conn)
 }
