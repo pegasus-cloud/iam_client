@@ -8,7 +8,7 @@ import (
 	"google.golang.org/grpc"
 )
 
-func listGroups(c grpc.ClientConnInterface, limit, offset int) (output *protos.GroupInfos, err error) {
+func listGroups(c grpc.ClientConnInterface, limit, offset int) (output *protos.ListGroupOutput, err error) {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 	defer cancel()
 	groups, err := protos.NewGroupCURDControllerClient(c).ListGroup(ctx, &protos.LimitOffset{
@@ -22,11 +22,11 @@ func listGroups(c grpc.ClientConnInterface, limit, offset int) (output *protos.G
 }
 
 // ListGroups ...
-func ListGroups(limit, offset int) (output *protos.GroupInfos, err error) {
+func ListGroups(limit, offset int) (output *protos.ListGroupOutput, err error) {
 	return listGroups(use().conn, limit, offset)
 }
 
 // ListGroups ...
-func (cp *ConnProvider) ListGroups(limit, offset int) (output *protos.GroupInfos, err error) {
+func (cp *ConnProvider) ListGroups(limit, offset int) (output *protos.ListGroupOutput, err error) {
 	return listGroups(cp.init().conn, limit, offset)
 }
