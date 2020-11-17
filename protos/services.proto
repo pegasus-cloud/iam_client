@@ -10,8 +10,8 @@ package protos;
 service UserCURDController {
   rpc CreateUser(UserInfo) returns (google.protobuf.Empty){}
   rpc GetUser(UserID) returns (UserInfo){}
-  rpc GetUserByGroup(GroupID) returns (GetUserByGroupOutput){}
-  rpc ListUser(LimitOffset) returns (UserInfos){}
+  rpc ListUserByGroup(GroupID) returns (UserInfos){}
+  rpc ListUser(LimitOffset) returns (ListUserOutput){}
   rpc DeleteUser(UserID) returns (google.protobuf.Empty){}
   rpc UpdateUser(UpdateInput) returns (google.protobuf.Empty){}
   rpc CountUser(google.protobuf.Empty) returns (CountOutput){}
@@ -22,7 +22,7 @@ service GroupCURDController {
   rpc DeleteGroup(GroupID) returns (google.protobuf.Empty){}
   rpc GetGroup(GroupID) returns (GroupInfo){}
   rpc CountGroup(google.protobuf.Empty) returns (CountOutput){}
-  rpc ListGroup(LimitOffset) returns (GroupInfos){}
+  rpc ListGroup(LimitOffset) returns (ListGroupOutput){}
   rpc UpdateGroup(UpdateInput) returns (google.protobuf.Empty){}
 }
 

@@ -46,14 +46,6 @@ func listGroups(c *gin.Context) {
 		})
 	}
 
-	total, err := iam.CountGroup()
-	if err != nil {
-		utility.ResponseWithType(c, http.StatusInternalServerError, &utility.ErrResponse{
-			Message: err.Error(),
-		})
-		return
-	}
-
-	listGroupOutput.Total = int(total.Data)
+	listGroupOutput.Total = int(groups.Count)
 	utility.ResponseWithType(c, http.StatusOK, listGroupOutput)
 }

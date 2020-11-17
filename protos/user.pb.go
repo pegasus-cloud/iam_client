@@ -167,6 +167,61 @@ func (x *UserInfos) GetData() []*UserInfo {
 	return nil
 }
 
+type ListUserOutput struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Count int64       `protobuf:"varint,1,opt,name=count,proto3" json:"count,omitempty"`
+	Data  []*UserInfo `protobuf:"bytes,2,rep,name=Data,proto3" json:"Data,omitempty"`
+}
+
+func (x *ListUserOutput) Reset() {
+	*x = ListUserOutput{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_user_proto_msgTypes[2]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ListUserOutput) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListUserOutput) ProtoMessage() {}
+
+func (x *ListUserOutput) ProtoReflect() protoreflect.Message {
+	mi := &file_user_proto_msgTypes[2]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListUserOutput.ProtoReflect.Descriptor instead.
+func (*ListUserOutput) Descriptor() ([]byte, []int) {
+	return file_user_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *ListUserOutput) GetCount() int64 {
+	if x != nil {
+		return x.Count
+	}
+	return 0
+}
+
+func (x *ListUserOutput) GetData() []*UserInfo {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
 type UserID struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -178,7 +233,7 @@ type UserID struct {
 func (x *UserID) Reset() {
 	*x = UserID{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_user_proto_msgTypes[2]
+		mi := &file_user_proto_msgTypes[3]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -191,7 +246,7 @@ func (x *UserID) String() string {
 func (*UserID) ProtoMessage() {}
 
 func (x *UserID) ProtoReflect() protoreflect.Message {
-	mi := &file_user_proto_msgTypes[2]
+	mi := &file_user_proto_msgTypes[3]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -204,7 +259,7 @@ func (x *UserID) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserID.ProtoReflect.Descriptor instead.
 func (*UserID) Descriptor() ([]byte, []int) {
-	return file_user_proto_rawDescGZIP(), []int{2}
+	return file_user_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *UserID) GetID() string {
@@ -212,53 +267,6 @@ func (x *UserID) GetID() string {
 		return x.ID
 	}
 	return ""
-}
-
-type GetUserByGroupOutput struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	Data map[string]string `protobuf:"bytes,1,rep,name=Data,proto3" json:"Data,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-}
-
-func (x *GetUserByGroupOutput) Reset() {
-	*x = GetUserByGroupOutput{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_user_proto_msgTypes[3]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *GetUserByGroupOutput) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GetUserByGroupOutput) ProtoMessage() {}
-
-func (x *GetUserByGroupOutput) ProtoReflect() protoreflect.Message {
-	mi := &file_user_proto_msgTypes[3]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GetUserByGroupOutput.ProtoReflect.Descriptor instead.
-func (*GetUserByGroupOutput) Descriptor() ([]byte, []int) {
-	return file_user_proto_rawDescGZIP(), []int{3}
-}
-
-func (x *GetUserByGroupOutput) GetData() map[string]string {
-	if x != nil {
-		return x.Data
-	}
-	return nil
 }
 
 var File_user_proto protoreflect.FileDescriptor
@@ -281,18 +289,14 @@ var file_user_proto_rawDesc = []byte{
 	0x52, 0x09, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x64, 0x41, 0x74, 0x22, 0x31, 0x0a, 0x09, 0x55,
 	0x73, 0x65, 0x72, 0x49, 0x6e, 0x66, 0x6f, 0x73, 0x12, 0x24, 0x0a, 0x04, 0x44, 0x61, 0x74, 0x61,
 	0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x10, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x73, 0x2e,
-	0x55, 0x73, 0x65, 0x72, 0x49, 0x6e, 0x66, 0x6f, 0x52, 0x04, 0x44, 0x61, 0x74, 0x61, 0x22, 0x18,
-	0x0a, 0x06, 0x55, 0x73, 0x65, 0x72, 0x49, 0x44, 0x12, 0x0e, 0x0a, 0x02, 0x49, 0x44, 0x18, 0x01,
-	0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x49, 0x44, 0x22, 0x8b, 0x01, 0x0a, 0x14, 0x47, 0x65, 0x74,
-	0x55, 0x73, 0x65, 0x72, 0x42, 0x79, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x4f, 0x75, 0x74, 0x70, 0x75,
-	0x74, 0x12, 0x3a, 0x0a, 0x04, 0x44, 0x61, 0x74, 0x61, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32,
-	0x26, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x73, 0x2e, 0x47, 0x65, 0x74, 0x55, 0x73, 0x65, 0x72,
-	0x42, 0x79, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x4f, 0x75, 0x74, 0x70, 0x75, 0x74, 0x2e, 0x44, 0x61,
-	0x74, 0x61, 0x45, 0x6e, 0x74, 0x72, 0x79, 0x52, 0x04, 0x44, 0x61, 0x74, 0x61, 0x1a, 0x37, 0x0a,
-	0x09, 0x44, 0x61, 0x74, 0x61, 0x45, 0x6e, 0x74, 0x72, 0x79, 0x12, 0x10, 0x0a, 0x03, 0x6b, 0x65,
-	0x79, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x03, 0x6b, 0x65, 0x79, 0x12, 0x14, 0x0a, 0x05,
-	0x76, 0x61, 0x6c, 0x75, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x76, 0x61, 0x6c,
-	0x75, 0x65, 0x3a, 0x02, 0x38, 0x01, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x55, 0x73, 0x65, 0x72, 0x49, 0x6e, 0x66, 0x6f, 0x52, 0x04, 0x44, 0x61, 0x74, 0x61, 0x22, 0x4c,
+	0x0a, 0x0e, 0x4c, 0x69, 0x73, 0x74, 0x55, 0x73, 0x65, 0x72, 0x4f, 0x75, 0x74, 0x70, 0x75, 0x74,
+	0x12, 0x14, 0x0a, 0x05, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52,
+	0x05, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x12, 0x24, 0x0a, 0x04, 0x44, 0x61, 0x74, 0x61, 0x18, 0x02,
+	0x20, 0x03, 0x28, 0x0b, 0x32, 0x10, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x73, 0x2e, 0x55, 0x73,
+	0x65, 0x72, 0x49, 0x6e, 0x66, 0x6f, 0x52, 0x04, 0x44, 0x61, 0x74, 0x61, 0x22, 0x18, 0x0a, 0x06,
+	0x55, 0x73, 0x65, 0x72, 0x49, 0x44, 0x12, 0x0e, 0x0a, 0x02, 0x49, 0x44, 0x18, 0x01, 0x20, 0x01,
+	0x28, 0x09, 0x52, 0x02, 0x49, 0x44, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -307,17 +311,16 @@ func file_user_proto_rawDescGZIP() []byte {
 	return file_user_proto_rawDescData
 }
 
-var file_user_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
+var file_user_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_user_proto_goTypes = []interface{}{
-	(*UserInfo)(nil),             // 0: protos.UserInfo
-	(*UserInfos)(nil),            // 1: protos.UserInfos
-	(*UserID)(nil),               // 2: protos.UserID
-	(*GetUserByGroupOutput)(nil), // 3: protos.GetUserByGroupOutput
-	nil,                          // 4: protos.GetUserByGroupOutput.DataEntry
+	(*UserInfo)(nil),       // 0: protos.UserInfo
+	(*UserInfos)(nil),      // 1: protos.UserInfos
+	(*ListUserOutput)(nil), // 2: protos.ListUserOutput
+	(*UserID)(nil),         // 3: protos.UserID
 }
 var file_user_proto_depIdxs = []int32{
 	0, // 0: protos.UserInfos.Data:type_name -> protos.UserInfo
-	4, // 1: protos.GetUserByGroupOutput.Data:type_name -> protos.GetUserByGroupOutput.DataEntry
+	0, // 1: protos.ListUserOutput.Data:type_name -> protos.UserInfo
 	2, // [2:2] is the sub-list for method output_type
 	2, // [2:2] is the sub-list for method input_type
 	2, // [2:2] is the sub-list for extension type_name
@@ -356,7 +359,7 @@ func file_user_proto_init() {
 			}
 		}
 		file_user_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*UserID); i {
+			switch v := v.(*ListUserOutput); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -368,7 +371,7 @@ func file_user_proto_init() {
 			}
 		}
 		file_user_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GetUserByGroupOutput); i {
+			switch v := v.(*UserID); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -386,7 +389,7 @@ func file_user_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_user_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   5,
+			NumMessages:   4,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

@@ -46,14 +46,6 @@ func listUsers(c *gin.Context) {
 		})
 	}
 
-	total, err := iam.CountUser()
-	if err != nil {
-		utility.ResponseWithType(c, http.StatusInternalServerError, &utility.ErrResponse{
-			Message: err.Error(),
-		})
-		return
-	}
-
-	listUserOutput.Total = int(total.Data)
+	listUserOutput.Total = int(users.Count)
 	utility.ResponseWithType(c, http.StatusOK, listUserOutput)
 }
