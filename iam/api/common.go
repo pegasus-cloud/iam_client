@@ -41,5 +41,16 @@ type (
 		Limit  int    `json:"limit" form:"limit,default=100" binding:"max=100"`
 		Offset int    `json:"offset" form:"offset,default=0" binding:"min=0"`
 		Order  string `json:"order" form:"order"`
+		_      struct{}
+	}
+	membership struct {
+		MembershipID       string  `json:"membershipId" xml:"membershipId"`
+		GroupID            string  `json:"groupId" binding:"required" xml:"groupId"`
+		UserID             string  `json:"userId" binding:"required" xml:"userId"`
+		GlobalPermissionID string  `json:"globalPermissionId" xml:"globalPermissionId"`
+		UserPermissionID   string  `json:"userPermissionId" xml:"userPermissionId"`
+		Frozen             *bool   `json:"frozen" xml:"frozen"`
+		Quota              *string `json:"quota" xml:"quota"`
+		_                  struct{}
 	}
 )

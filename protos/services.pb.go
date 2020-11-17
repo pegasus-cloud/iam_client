@@ -88,29 +88,46 @@ var file_services_proto_rawDesc = []byte{
 	0x0b, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x12, 0x13, 0x2e, 0x70,
 	0x72, 0x6f, 0x74, 0x6f, 0x73, 0x2e, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x49, 0x6e, 0x70, 0x75,
 	0x74, 0x1a, 0x16, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f,
-	0x62, 0x75, 0x66, 0x2e, 0x45, 0x6d, 0x70, 0x74, 0x79, 0x22, 0x00, 0x32, 0x60, 0x0a, 0x18, 0x4d,
-	0x65, 0x6d, 0x62, 0x65, 0x72, 0x73, 0x68, 0x69, 0x70, 0x43, 0x55, 0x52, 0x44, 0x43, 0x6f, 0x6e,
-	0x74, 0x72, 0x6f, 0x6c, 0x6c, 0x65, 0x72, 0x12, 0x44, 0x0a, 0x10, 0x43, 0x72, 0x65, 0x61, 0x74,
-	0x65, 0x4d, 0x65, 0x6d, 0x62, 0x65, 0x72, 0x73, 0x68, 0x69, 0x70, 0x12, 0x16, 0x2e, 0x70, 0x72,
-	0x6f, 0x74, 0x6f, 0x73, 0x2e, 0x4d, 0x65, 0x6d, 0x62, 0x65, 0x72, 0x73, 0x68, 0x69, 0x70, 0x49,
-	0x6e, 0x66, 0x6f, 0x1a, 0x16, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f,
-	0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x45, 0x6d, 0x70, 0x74, 0x79, 0x22, 0x00, 0x62, 0x06, 0x70,
-	0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x62, 0x75, 0x66, 0x2e, 0x45, 0x6d, 0x70, 0x74, 0x79, 0x22, 0x00, 0x32, 0xca, 0x02, 0x0a, 0x18,
+	0x4d, 0x65, 0x6d, 0x62, 0x65, 0x72, 0x73, 0x68, 0x69, 0x70, 0x43, 0x55, 0x52, 0x44, 0x43, 0x6f,
+	0x6e, 0x74, 0x72, 0x6f, 0x6c, 0x6c, 0x65, 0x72, 0x12, 0x44, 0x0a, 0x10, 0x43, 0x72, 0x65, 0x61,
+	0x74, 0x65, 0x4d, 0x65, 0x6d, 0x62, 0x65, 0x72, 0x73, 0x68, 0x69, 0x70, 0x12, 0x16, 0x2e, 0x70,
+	0x72, 0x6f, 0x74, 0x6f, 0x73, 0x2e, 0x4d, 0x65, 0x6d, 0x62, 0x65, 0x72, 0x73, 0x68, 0x69, 0x70,
+	0x49, 0x6e, 0x66, 0x6f, 0x1a, 0x16, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72,
+	0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x45, 0x6d, 0x70, 0x74, 0x79, 0x22, 0x00, 0x12, 0x47,
+	0x0a, 0x10, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x4d, 0x65, 0x6d, 0x62, 0x65, 0x72, 0x73, 0x68,
+	0x69, 0x70, 0x12, 0x19, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x73, 0x2e, 0x4d, 0x65, 0x6d, 0x55,
+	0x73, 0x65, 0x72, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x49, 0x6e, 0x70, 0x75, 0x74, 0x1a, 0x16, 0x2e,
+	0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e,
+	0x45, 0x6d, 0x70, 0x74, 0x79, 0x22, 0x00, 0x12, 0x3e, 0x0a, 0x15, 0x43, 0x6f, 0x75, 0x6e, 0x74,
+	0x4d, 0x65, 0x6d, 0x62, 0x65, 0x72, 0x73, 0x68, 0x69, 0x70, 0x42, 0x79, 0x55, 0x73, 0x65, 0x72,
+	0x12, 0x0e, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x73, 0x2e, 0x55, 0x73, 0x65, 0x72, 0x49, 0x44,
+	0x1a, 0x13, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x73, 0x2e, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x4f,
+	0x75, 0x74, 0x70, 0x75, 0x74, 0x22, 0x00, 0x12, 0x5f, 0x0a, 0x14, 0x4c, 0x69, 0x73, 0x74, 0x4d,
+	0x65, 0x6d, 0x62, 0x65, 0x72, 0x73, 0x68, 0x69, 0x70, 0x42, 0x79, 0x55, 0x73, 0x65, 0x72, 0x12,
+	0x21, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x73, 0x2e, 0x4c, 0x69, 0x73, 0x74, 0x4d, 0x65, 0x6d,
+	0x62, 0x65, 0x72, 0x73, 0x68, 0x69, 0x70, 0x42, 0x79, 0x55, 0x73, 0x65, 0x72, 0x49, 0x6e, 0x70,
+	0x75, 0x74, 0x1a, 0x22, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x73, 0x2e, 0x4c, 0x69, 0x73, 0x74,
+	0x4d, 0x65, 0x6d, 0x62, 0x65, 0x72, 0x73, 0x68, 0x69, 0x70, 0x42, 0x79, 0x55, 0x73, 0x65, 0x72,
+	0x4f, 0x75, 0x74, 0x70, 0x75, 0x74, 0x22, 0x00, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var file_services_proto_goTypes = []interface{}{
-	(*UserInfo)(nil),             // 0: protos.UserInfo
-	(*UserID)(nil),               // 1: protos.UserID
-	(*GroupID)(nil),              // 2: protos.GroupID
-	(*LimitOffset)(nil),          // 3: protos.LimitOffset
-	(*UpdateInput)(nil),          // 4: protos.UpdateInput
-	(*empty.Empty)(nil),          // 5: google.protobuf.Empty
-	(*GroupInfo)(nil),            // 6: protos.GroupInfo
-	(*MembershipInfo)(nil),       // 7: protos.MembershipInfo
-	(*GetUserByGroupOutput)(nil), // 8: protos.GetUserByGroupOutput
-	(*UserInfos)(nil),            // 9: protos.UserInfos
-	(*CountOutput)(nil),          // 10: protos.CountOutput
-	(*GroupInfos)(nil),           // 11: protos.GroupInfos
+	(*UserInfo)(nil),                   // 0: protos.UserInfo
+	(*UserID)(nil),                     // 1: protos.UserID
+	(*GroupID)(nil),                    // 2: protos.GroupID
+	(*LimitOffset)(nil),                // 3: protos.LimitOffset
+	(*UpdateInput)(nil),                // 4: protos.UpdateInput
+	(*empty.Empty)(nil),                // 5: google.protobuf.Empty
+	(*GroupInfo)(nil),                  // 6: protos.GroupInfo
+	(*MembershipInfo)(nil),             // 7: protos.MembershipInfo
+	(*MemUserGroupInput)(nil),          // 8: protos.MemUserGroupInput
+	(*ListMembershipByUserInput)(nil),  // 9: protos.ListMembershipByUserInput
+	(*GetUserByGroupOutput)(nil),       // 10: protos.GetUserByGroupOutput
+	(*UserInfos)(nil),                  // 11: protos.UserInfos
+	(*CountOutput)(nil),                // 12: protos.CountOutput
+	(*GroupInfos)(nil),                 // 13: protos.GroupInfos
+	(*ListMembershipByUserOutput)(nil), // 14: protos.ListMembershipByUserOutput
 }
 var file_services_proto_depIdxs = []int32{
 	0,  // 0: protos.UserCURDController.CreateUser:input_type -> protos.UserInfo
@@ -127,22 +144,28 @@ var file_services_proto_depIdxs = []int32{
 	3,  // 11: protos.GroupCURDController.ListGroup:input_type -> protos.LimitOffset
 	4,  // 12: protos.GroupCURDController.UpdateGroup:input_type -> protos.UpdateInput
 	7,  // 13: protos.MembershipCURDController.CreateMembership:input_type -> protos.MembershipInfo
-	5,  // 14: protos.UserCURDController.CreateUser:output_type -> google.protobuf.Empty
-	0,  // 15: protos.UserCURDController.GetUser:output_type -> protos.UserInfo
-	8,  // 16: protos.UserCURDController.GetUserByGroup:output_type -> protos.GetUserByGroupOutput
-	9,  // 17: protos.UserCURDController.ListUser:output_type -> protos.UserInfos
-	5,  // 18: protos.UserCURDController.DeleteUser:output_type -> google.protobuf.Empty
-	5,  // 19: protos.UserCURDController.UpdateUser:output_type -> google.protobuf.Empty
-	10, // 20: protos.UserCURDController.CountUser:output_type -> protos.CountOutput
-	5,  // 21: protos.GroupCURDController.CreateGroup:output_type -> google.protobuf.Empty
-	5,  // 22: protos.GroupCURDController.DeleteGroup:output_type -> google.protobuf.Empty
-	6,  // 23: protos.GroupCURDController.GetGroup:output_type -> protos.GroupInfo
-	10, // 24: protos.GroupCURDController.CountGroup:output_type -> protos.CountOutput
-	11, // 25: protos.GroupCURDController.ListGroup:output_type -> protos.GroupInfos
-	5,  // 26: protos.GroupCURDController.UpdateGroup:output_type -> google.protobuf.Empty
-	5,  // 27: protos.MembershipCURDController.CreateMembership:output_type -> google.protobuf.Empty
-	14, // [14:28] is the sub-list for method output_type
-	0,  // [0:14] is the sub-list for method input_type
+	8,  // 14: protos.MembershipCURDController.DeleteMembership:input_type -> protos.MemUserGroupInput
+	1,  // 15: protos.MembershipCURDController.CountMembershipByUser:input_type -> protos.UserID
+	9,  // 16: protos.MembershipCURDController.ListMembershipByUser:input_type -> protos.ListMembershipByUserInput
+	5,  // 17: protos.UserCURDController.CreateUser:output_type -> google.protobuf.Empty
+	0,  // 18: protos.UserCURDController.GetUser:output_type -> protos.UserInfo
+	10, // 19: protos.UserCURDController.GetUserByGroup:output_type -> protos.GetUserByGroupOutput
+	11, // 20: protos.UserCURDController.ListUser:output_type -> protos.UserInfos
+	5,  // 21: protos.UserCURDController.DeleteUser:output_type -> google.protobuf.Empty
+	5,  // 22: protos.UserCURDController.UpdateUser:output_type -> google.protobuf.Empty
+	12, // 23: protos.UserCURDController.CountUser:output_type -> protos.CountOutput
+	5,  // 24: protos.GroupCURDController.CreateGroup:output_type -> google.protobuf.Empty
+	5,  // 25: protos.GroupCURDController.DeleteGroup:output_type -> google.protobuf.Empty
+	6,  // 26: protos.GroupCURDController.GetGroup:output_type -> protos.GroupInfo
+	12, // 27: protos.GroupCURDController.CountGroup:output_type -> protos.CountOutput
+	13, // 28: protos.GroupCURDController.ListGroup:output_type -> protos.GroupInfos
+	5,  // 29: protos.GroupCURDController.UpdateGroup:output_type -> google.protobuf.Empty
+	5,  // 30: protos.MembershipCURDController.CreateMembership:output_type -> google.protobuf.Empty
+	5,  // 31: protos.MembershipCURDController.DeleteMembership:output_type -> google.protobuf.Empty
+	12, // 32: protos.MembershipCURDController.CountMembershipByUser:output_type -> protos.CountOutput
+	14, // 33: protos.MembershipCURDController.ListMembershipByUser:output_type -> protos.ListMembershipByUserOutput
+	17, // [17:34] is the sub-list for method output_type
+	0,  // [0:17] is the sub-list for method input_type
 	0,  // [0:0] is the sub-list for extension type_name
 	0,  // [0:0] is the sub-list for extension extendee
 	0,  // [0:0] is the sub-list for field type_name
@@ -729,6 +752,9 @@ var _GroupCURDController_serviceDesc = grpc.ServiceDesc{
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type MembershipCURDControllerClient interface {
 	CreateMembership(ctx context.Context, in *MembershipInfo, opts ...grpc.CallOption) (*empty.Empty, error)
+	DeleteMembership(ctx context.Context, in *MemUserGroupInput, opts ...grpc.CallOption) (*empty.Empty, error)
+	CountMembershipByUser(ctx context.Context, in *UserID, opts ...grpc.CallOption) (*CountOutput, error)
+	ListMembershipByUser(ctx context.Context, in *ListMembershipByUserInput, opts ...grpc.CallOption) (*ListMembershipByUserOutput, error)
 }
 
 type membershipCURDControllerClient struct {
@@ -748,9 +774,39 @@ func (c *membershipCURDControllerClient) CreateMembership(ctx context.Context, i
 	return out, nil
 }
 
+func (c *membershipCURDControllerClient) DeleteMembership(ctx context.Context, in *MemUserGroupInput, opts ...grpc.CallOption) (*empty.Empty, error) {
+	out := new(empty.Empty)
+	err := c.cc.Invoke(ctx, "/protos.MembershipCURDController/DeleteMembership", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *membershipCURDControllerClient) CountMembershipByUser(ctx context.Context, in *UserID, opts ...grpc.CallOption) (*CountOutput, error) {
+	out := new(CountOutput)
+	err := c.cc.Invoke(ctx, "/protos.MembershipCURDController/CountMembershipByUser", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *membershipCURDControllerClient) ListMembershipByUser(ctx context.Context, in *ListMembershipByUserInput, opts ...grpc.CallOption) (*ListMembershipByUserOutput, error) {
+	out := new(ListMembershipByUserOutput)
+	err := c.cc.Invoke(ctx, "/protos.MembershipCURDController/ListMembershipByUser", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // MembershipCURDControllerServer is the server API for MembershipCURDController service.
 type MembershipCURDControllerServer interface {
 	CreateMembership(context.Context, *MembershipInfo) (*empty.Empty, error)
+	DeleteMembership(context.Context, *MemUserGroupInput) (*empty.Empty, error)
+	CountMembershipByUser(context.Context, *UserID) (*CountOutput, error)
+	ListMembershipByUser(context.Context, *ListMembershipByUserInput) (*ListMembershipByUserOutput, error)
 }
 
 // UnimplementedMembershipCURDControllerServer can be embedded to have forward compatible implementations.
@@ -759,6 +815,15 @@ type UnimplementedMembershipCURDControllerServer struct {
 
 func (*UnimplementedMembershipCURDControllerServer) CreateMembership(context.Context, *MembershipInfo) (*empty.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateMembership not implemented")
+}
+func (*UnimplementedMembershipCURDControllerServer) DeleteMembership(context.Context, *MemUserGroupInput) (*empty.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteMembership not implemented")
+}
+func (*UnimplementedMembershipCURDControllerServer) CountMembershipByUser(context.Context, *UserID) (*CountOutput, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CountMembershipByUser not implemented")
+}
+func (*UnimplementedMembershipCURDControllerServer) ListMembershipByUser(context.Context, *ListMembershipByUserInput) (*ListMembershipByUserOutput, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListMembershipByUser not implemented")
 }
 
 func RegisterMembershipCURDControllerServer(s *grpc.Server, srv MembershipCURDControllerServer) {
@@ -783,6 +848,60 @@ func _MembershipCURDController_CreateMembership_Handler(srv interface{}, ctx con
 	return interceptor(ctx, in, info, handler)
 }
 
+func _MembershipCURDController_DeleteMembership_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MemUserGroupInput)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MembershipCURDControllerServer).DeleteMembership(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/protos.MembershipCURDController/DeleteMembership",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MembershipCURDControllerServer).DeleteMembership(ctx, req.(*MemUserGroupInput))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MembershipCURDController_CountMembershipByUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UserID)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MembershipCURDControllerServer).CountMembershipByUser(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/protos.MembershipCURDController/CountMembershipByUser",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MembershipCURDControllerServer).CountMembershipByUser(ctx, req.(*UserID))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MembershipCURDController_ListMembershipByUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListMembershipByUserInput)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MembershipCURDControllerServer).ListMembershipByUser(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/protos.MembershipCURDController/ListMembershipByUser",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MembershipCURDControllerServer).ListMembershipByUser(ctx, req.(*ListMembershipByUserInput))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _MembershipCURDController_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "protos.MembershipCURDController",
 	HandlerType: (*MembershipCURDControllerServer)(nil),
@@ -790,6 +909,18 @@ var _MembershipCURDController_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CreateMembership",
 			Handler:    _MembershipCURDController_CreateMembership_Handler,
+		},
+		{
+			MethodName: "DeleteMembership",
+			Handler:    _MembershipCURDController_DeleteMembership_Handler,
+		},
+		{
+			MethodName: "CountMembershipByUser",
+			Handler:    _MembershipCURDController_CountMembershipByUser_Handler,
+		},
+		{
+			MethodName: "ListMembershipByUser",
+			Handler:    _MembershipCURDController_ListMembershipByUser_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

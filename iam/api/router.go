@@ -30,4 +30,23 @@ func EnableAdminIAMRouter(rg *gin.RouterGroup) {
 			iam.DELETE(spGroup, "", deleteGroup, "admin:DeleteGroup", true)
 		}
 	}
+	member := rg.Group("members")
+	{
+		iam.POST(member, "", createMembership, "admin:CreateMembership", true)
+		user := member.Group("user/:user-id") // TODO: Need to check that the user has been created
+		{
+			iam.GET(user, "groups", listGroupsByMembership, "admin:ListGroupsByMembership", true)
+		}
+		indevGroup := member.Group("group/:group-id") // TODO: Need to check that the group has been created
+		{
+			iam.GET(indevGroup, "users", listMembershipsByGroup, "admin:ListMembershipsByGroup", true)
+
+			indevUser := indevGroup.Group("user/:user-id") // TODO: Need to check that the membership has been created
+			{
+				iam.GET(indevUser, "", getMembership, "admin:GetMembership", true)
+				iam.PUT(indevUser, "", updateMembership, "admin:UpdateMembership", true)
+				iam.DELETE(indevUser, "", deleteMembership, "admin:DeleteMembership", true)
+			}
+		}
+	}
 }
