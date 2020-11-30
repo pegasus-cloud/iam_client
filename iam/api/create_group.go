@@ -14,19 +14,14 @@ func createGroup(c *gin.Context) {
 	groupInfo := &group{}
 	if err := c.ShouldBindWith(groupInfo, binding.JSON); err != nil {
 		utility.ResponseWithType(c, http.StatusBadRequest, &utility.ErrResponse{
-			Message: err.Error(),
+			Message: utility.ConvertError(err).Error(),
 		})
 		return
 	}
 	if groupInfo.Force {
-		if output, err := iam.GetGroup(groupInfo.GroupID); err != nil {
-			utility.ResponseWithType(c, http.StatusInternalServerError, &utility.ErrResponse{
-				Message: databaseErrMsg,
-			})
-			return
-		} else if output.ID != "" {
-			utility.ResponseWithType(c, http.StatusBadRequest, &utility.ErrResponse{
-				Message: groupExistErrMsg,
+		if statusCode, err := checkGroupExist(c, groupInfo.GroupID, false); err != nil {
+			utility.ResponseWithType(c, statusCode, &utility.ErrResponse{
+				Message: err.Error(),
 			})
 			return
 		}
@@ -35,7 +30,7 @@ func createGroup(c *gin.Context) {
 			groupInfo.GroupID = utility.GetRandNumeric(16)
 			if output, err := iam.GetGroup(groupInfo.GroupID); err != nil {
 				utility.ResponseWithType(c, http.StatusInternalServerError, &utility.ErrResponse{
-					Message: databaseErrMsg,
+					Message: iamServerErrMsg,
 				})
 				return
 			} else if output.ID == "" {
@@ -43,18 +38,12 @@ func createGroup(c *gin.Context) {
 			}
 		}
 	}
-	if err := iam.CreateGroup(&protos.GroupInfo{
+	createGroupWithRespOutput, err := iam.CreateGroupWithResp(&protos.GroupInfo{
 		ID:          groupInfo.GroupID,
 		DisplayName: groupInfo.DisplayName,
 		Description: groupInfo.Description,
 		Extra:       groupInfo.Extra,
-	}); err != nil {
-		utility.ResponseWithType(c, http.StatusInternalServerError, &utility.ErrResponse{
-			Message: err.Error(),
-		})
-		return
-	}
-	getGroupOutput, err := iam.GetGroup(groupInfo.GroupID)
+	})
 	if err != nil {
 		utility.ResponseWithType(c, http.StatusInternalServerError, &utility.ErrResponse{
 			Message: err.Error(),
@@ -62,11 +51,11 @@ func createGroup(c *gin.Context) {
 		return
 	}
 	utility.ResponseWithType(c, http.StatusCreated, group{
-		GroupID:     getGroupOutput.ID,
-		DisplayName: getGroupOutput.DisplayName,
-		Description: getGroupOutput.Description,
-		Extra:       getGroupOutput.Extra,
-		CreatedAt:   getGroupOutput.CreatedAt,
-		UpdatedAt:   getGroupOutput.UpdatedAt,
+		GroupID:     createGroupWithRespOutput.ID,
+		DisplayName: createGroupWithRespOutput.DisplayName,
+		Description: createGroupWithRespOutput.Description,
+		Extra:       createGroupWithRespOutput.Extra,
+		CreatedAt:   createGroupWithRespOutput.CreatedAt,
+		UpdatedAt:   createGroupWithRespOutput.UpdatedAt,
 	})
 }

@@ -10,14 +10,14 @@ import (
 )
 
 type (
-	listGroupOutput struct {
+	listGroupsOutput struct {
 		Groups []group `json:"groups"`
 		Total  int     `json:"total"`
 	}
 )
 
 func listGroups(c *gin.Context) {
-	listGroupOutput := &listGroupOutput{}
+	listGroupsOutput := &listGroupsOutput{}
 
 	pagination := &pagination{}
 	if err := c.ShouldBindWith(pagination, binding.Query); err != nil {
@@ -36,7 +36,7 @@ func listGroups(c *gin.Context) {
 	}
 
 	for _, groupInfo := range groups.Data {
-		listGroupOutput.Groups = append(listGroupOutput.Groups, group{
+		listGroupsOutput.Groups = append(listGroupsOutput.Groups, group{
 			GroupID:     groupInfo.ID,
 			DisplayName: groupInfo.DisplayName,
 			Description: groupInfo.Description,
@@ -46,6 +46,6 @@ func listGroups(c *gin.Context) {
 		})
 	}
 
-	listGroupOutput.Total = int(groups.Count)
-	utility.ResponseWithType(c, http.StatusOK, listGroupOutput)
+	listGroupsOutput.Total = int(groups.Count)
+	utility.ResponseWithType(c, http.StatusOK, listGroupsOutput)
 }

@@ -2,6 +2,7 @@ syntax = "proto3";
 
 package protos;
 import "common.proto";
+import "google/protobuf/any.proto";
 message MembershipInfo {
   string ID = 1;
   string GroupID = 2;
@@ -9,7 +10,7 @@ message MembershipInfo {
   string GlobalPermissionID = 4;
   string UserPermissionID = 5;
   bool Frozen = 6;
-  string Quota = 7;
+  optional string Quota = 7;
 }
 
 message MemUserGroupInput {
@@ -17,7 +18,7 @@ message MemUserGroupInput {
   string GroupID = 2;
 }
 
-message MemberJoinGroup {
+message MemberJoin {
   string ID = 1;
 	string GroupID = 2;
 	string UserID = 3;
@@ -37,7 +38,32 @@ message ListMembershipByUserInput {
   LimitOffset Data = 2;
 }
 
-message ListMembershipByUserOutput {
+message ListMembershipByGroupInput {
+  string GroupID = 1;
+  LimitOffset Data = 2;
+}
+
+message ListMembershipJoinOutput {
   int64 count = 1;
-  repeated MemberJoinGroup Data = 2;
+  repeated MemberJoin Data = 2;
+}
+
+message UpdateMembershipInput {
+  string UserID = 1;
+  string GroupID = 2;
+  map<string,google.protobuf.Any> Data = 3;
+}
+
+message GetMembershipPermissionOutput {
+  string ID = 1;
+  string GroupID = 2;
+  string UserID = 3;
+  string GlobalPermissionID = 4;
+  string UserPermissionID = 5;
+  bool Frozen = 6;
+  optional string Quota = 7;
+  string GlobalPermissionLabel = 8;
+  string UserPermissionLabel = 9;
+  string GlobalPermissionOpa = 10;
+  string UserPermissionOpa = 11;
 }

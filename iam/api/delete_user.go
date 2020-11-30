@@ -14,7 +14,7 @@ func deleteUser(c *gin.Context) {
 		ID: c.Param(userIDParams),
 	}); err != nil {
 		utility.ResponseWithType(c, http.StatusInternalServerError, &utility.ErrResponse{
-			Message: databaseErrMsg,
+			Message: iamServerErrMsg,
 		})
 		return
 	}

@@ -12,7 +12,7 @@ func getUser(c *gin.Context) {
 	getUserOutput, err := iam.GetUser(c.Param(userIDParams))
 	if err != nil {
 		utility.ResponseWithType(c, http.StatusInternalServerError, &utility.ErrResponse{
-			Message: databaseErrMsg,
+			Message: iamServerErrMsg,
 		})
 		return
 	}
