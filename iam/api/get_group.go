@@ -12,7 +12,7 @@ func getGroup(c *gin.Context) {
 	getGroupOutput, err := iam.GetGroup(c.Param(groupIDParams))
 	if err != nil {
 		utility.ResponseWithType(c, http.StatusInternalServerError, &utility.ErrResponse{
-			Message: databaseErrMsg,
+			Message: iamServerErrMsg,
 		})
 		return
 	}

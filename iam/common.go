@@ -44,36 +44,45 @@ func (cp *ConnProvider) init() (c client) {
 	return c
 }
 
-type (
-	userHandler struct {
-		users []*protos.UserInfo
-	}
-)
-
-func (uh *userHandler) pbToMap() (output map[string]string) {
-	output = make(map[string]string)
-	for _, user := range uh.users {
-		e := reflect.ValueOf(user).Elem()
-		for i := 0; i < e.NumField(); i++ {
-			output[fmt.Sprintf("%s.%s", user.ID, e.Type().Field(i).Name)] = e.Field(i).Interface().(string)
+func convert(input interface{}) (output map[string]interface{}) {
+	output = make(map[string]interface{})
+	switch input.(type) {
+	case []*protos.GroupInfo:
+		for _, group := range input.([]*protos.GroupInfo) {
+			output = toMap(group.ID, reflect.ValueOf(group).Elem())
+		}
+	case []*protos.UserInfo:
+		for _, user := range input.([]*protos.UserInfo) {
+			output = toMap(user.ID, reflect.ValueOf(user).Elem())
+		}
+	case []*protos.MemberJoin:
+		for _, membership := range input.([]*protos.MemberJoin) {
+			output = toMap(membership.ID, reflect.ValueOf(membership).Elem())
 		}
 	}
 	return output
 }
 
-type (
-	groupHandler struct {
-		groups []*protos.GroupInfo
-	}
-)
+/*
+	[Example]
+	From:
+		GroupInfo struct {
+		state         protoimpl.MessageState
+		sizeCache     protoimpl.SizeCache
+		unknownFields protoimpl.UnknownFields
 
-func (gh *groupHandler) pbToMap() (output map[string]string) {
-	output = make(map[string]string)
-	for _, group := range gh.groups {
-		e := reflect.ValueOf(group).Elem()
-		for i := 0; i < e.NumField(); i++ {
-			output[fmt.Sprintf("%s.%s", group.ID, e.Type().Field(i).Name)] = e.Field(i).Interface().(string)
-		}
+		ID          string `protobuf:"bytes,1,opt,name=ID,proto3" json:"ID,omitempty"`
+		DisplayName string `protobuf:"bytes,2,opt,name=DisplayName,proto3" json:"DisplayName,omitempty"`
+	}
+	To:
+		omit state, sizeCache and unknownFields
+		map[<user>.ID] = ID
+		map[<user.DisplayName>] = DisplayName
+*/
+func toMap(prefix string, value reflect.Value) (output map[string]interface{}) {
+	output = make(map[string]interface{})
+	for i := 3; i < value.NumField(); i++ {
+		output[fmt.Sprintf("%s.%s", prefix, value.Type().Field(i).Name)] = value.Field(i).Interface()
 	}
 	return output
 }

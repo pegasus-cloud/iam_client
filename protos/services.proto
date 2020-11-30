@@ -5,30 +5,56 @@ import "group.proto";
 import "membership.proto";
 import "google/protobuf/empty.proto";
 import "common.proto";
+import "permission.proto";
 package protos;
 
 service UserCURDController {
   rpc CreateUser(UserInfo) returns (google.protobuf.Empty){}
+  rpc CreateUserWithResp(UserInfo) returns (UserInfo){}
   rpc GetUser(UserID) returns (UserInfo){}
   rpc ListUserByGroup(GroupID) returns (UserInfos){}
   rpc ListUser(LimitOffset) returns (ListUserOutput){}
   rpc DeleteUser(UserID) returns (google.protobuf.Empty){}
   rpc UpdateUser(UpdateInput) returns (google.protobuf.Empty){}
+  rpc UpdateUserWithResp(UpdateInput) returns (UserInfo){}
   rpc CountUser(google.protobuf.Empty) returns (CountOutput){}
 }
 
 service GroupCURDController {
   rpc CreateGroup(GroupInfo) returns (google.protobuf.Empty){}
+  rpc CreateGroupWithResp(GroupInfo) returns (GroupInfo){}
   rpc DeleteGroup(GroupID) returns (google.protobuf.Empty){}
   rpc GetGroup(GroupID) returns (GroupInfo){}
   rpc CountGroup(google.protobuf.Empty) returns (CountOutput){}
   rpc ListGroup(LimitOffset) returns (ListGroupOutput){}
   rpc UpdateGroup(UpdateInput) returns (google.protobuf.Empty){}
+  rpc UpdateGroupWithResp(UpdateInput) returns (GroupInfo){}
 }
 
 service MembershipCURDController {
   rpc CreateMembership(MembershipInfo) returns (google.protobuf.Empty){}
+  rpc CreateMembershipWithResp(MembershipInfo) returns (GetMembershipPermissionOutput){}
   rpc DeleteMembership(MemUserGroupInput) returns (google.protobuf.Empty){}
   rpc CountMembershipByUser(UserID) returns (CountOutput){}
-  rpc ListMembershipByUser(ListMembershipByUserInput) returns (ListMembershipByUserOutput){}
+  rpc ListMembershipByUser(ListMembershipByUserInput) returns (ListMembershipJoinOutput){}
+  rpc CountMembershipByGroup(GroupID) returns (CountOutput){}
+  rpc ListMembershipByGroup(ListMembershipByGroupInput) returns (ListMembershipJoinOutput){}
+  rpc UpdateMembership(UpdateMembershipInput) returns (google.protobuf.Empty){}
+  rpc UpdateMembershipWithResp(UpdateMembershipInput) returns (GetMembershipPermissionOutput){}
+  rpc UpdateMembershipByGroup(UpdateInput) returns (google.protobuf.Empty){}
+  rpc GetMembership(MemUserGroupInput) returns (MembershipInfo){}
+  rpc GetMembershipPermission(MemUserGroupInput) returns (GetMembershipPermissionOutput){}
+  rpc GetFrozen(MemUserGroupInput) returns (GBoolean){}
+  rpc GetMembershipJoin(MemUserGroupInput) returns (MemberJoin){}
+}
+
+service PermissionCURDController {
+  rpc CreatePermission(PermissionInfo) returns (google.protobuf.Empty){}
+  rpc DeletePermission(PermissionID) returns (google.protobuf.Empty){}
+  rpc GetPermissionByGroup(PermissionGroupInput) returns (PermissionJoinUser){}
+  rpc UpdatePermissionByGroup(UpdatePermissionByGroupInput) returns (google.protobuf.Empty){}
+  rpc ListPermissionByGroup(ListPermissionByGroupInput) returns (PermissionJoinUsers){}
+  rpc CheckPermissionByGroup(PermissionGroupInput) returns (GBoolean){}
+  rpc CheckPermissionByID(PermissionID) returns (GBoolean){}
+  rpc CountPermissionByGroup(GroupID) returns (CountOutput){}
 }

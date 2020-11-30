@@ -23,7 +23,7 @@ func updatePassword(c *gin.Context) {
 
 	if err := c.ShouldBindWith(updatePasswordInput, binding.JSON); err != nil {
 		utility.ResponseWithType(c, http.StatusBadRequest, &utility.ErrResponse{
-			Message: err.Error(),
+			Message: utility.ConvertError(err).Error(),
 		})
 		return
 	}

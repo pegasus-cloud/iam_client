@@ -14,7 +14,7 @@ func deleteGroup(c *gin.Context) {
 		ID: c.Param(groupIDParams),
 	}); err != nil {
 		utility.ResponseWithType(c, http.StatusInternalServerError, &utility.ErrResponse{
-			Message: databaseErrMsg,
+			Message: iamServerErrMsg,
 		})
 		return
 	}

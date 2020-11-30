@@ -40,7 +40,7 @@ func updateGroup(c *gin.Context) {
 
 	if err := c.ShouldBindWith(updateGroupInput, binding.JSON); err != nil {
 		utility.ResponseWithType(c, http.StatusBadRequest, &utility.ErrResponse{
-			Message: err.Error(),
+			Message: utility.ConvertError(err).Error(),
 		})
 		return
 	}
