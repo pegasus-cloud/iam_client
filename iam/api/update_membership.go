@@ -1,7 +1,6 @@
 package api
 
 import (
-	"fmt"
 	"net/http"
 	"reflect"
 
@@ -54,7 +53,6 @@ func updateMembership(c *gin.Context) {
 		GroupID: c.Param(groupIDParams),
 		Data:    updateMembershipInputMap,
 	}); err != nil {
-		fmt.Println(err)
 		utility.ResponseWithType(c, http.StatusInternalServerError, &utility.ErrResponse{
 			Message: iamServerErrMsg,
 		})
@@ -63,7 +61,6 @@ func updateMembership(c *gin.Context) {
 
 	getMembershipAndPermissionOutput, err := iam.GetMembershipAndPermission(c.Param(userIDParams), c.Param(groupIDParams))
 	if err != nil {
-		fmt.Println(err)
 		utility.ResponseWithType(c, http.StatusInternalServerError, &utility.ErrResponse{
 			Message: iamServerErrMsg,
 		})

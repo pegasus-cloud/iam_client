@@ -10,7 +10,9 @@ import (
 )
 
 func listPermissionActions(c *gin.Context) {
-	actions := iam.Actions.GetActions()
-	sort.Strings(actions)
-	utility.ResponseWithType(c, http.StatusOK, actions)
+	getActions := iam.Actions.GetActions()
+	sort.Strings(getActions)
+	utility.ResponseWithType(c, http.StatusOK, &actions{
+		Actions: getActions,
+	})
 }

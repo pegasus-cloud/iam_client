@@ -2,7 +2,6 @@ package iam
 
 import (
 	"context"
-	"fmt"
 	"time"
 
 	"github.com/pegasus-cloud/iam_client/protos"
@@ -12,7 +11,6 @@ import (
 func getUser(c grpc.ClientConnInterface, userID string) (output *protos.UserInfo, err error) {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 	defer cancel()
-	fmt.Println(c)
 	user, err := protos.NewUserCRUDControllerClient(c).GetUser(ctx, &protos.UserID{
 		ID: userID,
 	})

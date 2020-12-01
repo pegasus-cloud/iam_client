@@ -2,7 +2,6 @@ package iam
 
 import (
 	"context"
-	"fmt"
 	"time"
 
 	"github.com/pegasus-cloud/iam_client/protos"
@@ -19,8 +18,6 @@ func listMembershipsByUser(c grpc.ClientConnInterface, userID string, limit, off
 			Offset: int32(offset),
 		},
 	})
-	fmt.Println(limit, offset)
-	fmt.Println(memberships)
 	if err != nil {
 		return nil, err
 	}

@@ -38,6 +38,5 @@ func ConvertError(input error) (output error) {
 	}
 
 	validationError := validationErrors[0]
-	fmt.Println(validationError.Field(), validationError.Tag())
 	return errors.New(errorList[fmt.Sprintf("%s:%s", validationError.Field(), validationError.Tag())])
 }
