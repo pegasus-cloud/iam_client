@@ -11,7 +11,7 @@ import (
 func updateMembershipByGroup(c grpc.ClientConnInterface, input *protos.UpdateInput) (err error) {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 	defer cancel()
-	_, err = protos.NewMembershipCURDControllerClient(c).UpdateMembershipByGroup(ctx, input)
+	_, err = protos.NewMembershipCRUDControllerClient(c).UpdateMembershipByGroup(ctx, input)
 	return err
 }
 

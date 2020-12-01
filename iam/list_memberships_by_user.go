@@ -12,7 +12,7 @@ import (
 func listMembershipsByUser(c grpc.ClientConnInterface, userID string, limit, offset int) (output *protos.ListMembershipJoinOutput, err error) {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 	defer cancel()
-	memberships, err := protos.NewMembershipCURDControllerClient(c).ListMembershipByUser(ctx, &protos.ListMembershipByUserInput{
+	memberships, err := protos.NewMembershipCRUDControllerClient(c).ListMembershipByUser(ctx, &protos.ListMembershipByUserInput{
 		UserID: userID,
 		Data: &protos.LimitOffset{
 			Limit:  int32(limit),

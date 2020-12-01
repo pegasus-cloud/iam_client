@@ -11,7 +11,7 @@ import (
 func deleteMembership(c grpc.ClientConnInterface, input *protos.MemUserGroupInput) (err error) {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 	defer cancel()
-	_, err = protos.NewMembershipCURDControllerClient(c).DeleteMembership(ctx, input)
+	_, err = protos.NewMembershipCRUDControllerClient(c).DeleteMembership(ctx, input)
 	return err
 }
 

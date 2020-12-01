@@ -12,7 +12,7 @@ import (
 func countGroup(c grpc.ClientConnInterface) (output *protos.CountOutput, err error) {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 	defer cancel()
-	output, err = protos.NewGroupCURDControllerClient(c).CountGroup(ctx, &empty.Empty{})
+	output, err = protos.NewGroupCRUDControllerClient(c).CountGroup(ctx, &empty.Empty{})
 	return output, err
 }
 

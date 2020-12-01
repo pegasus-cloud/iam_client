@@ -11,7 +11,7 @@ import (
 func createMembership(c grpc.ClientConnInterface, input *protos.MembershipInfo) (err error) {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 	defer cancel()
-	_, err = protos.NewMembershipCURDControllerClient(c).CreateMembership(ctx, input)
+	_, err = protos.NewMembershipCRUDControllerClient(c).CreateMembership(ctx, input)
 	return err
 }
 
@@ -28,7 +28,7 @@ func (cp *ConnProvider) CreateMembership(input *protos.MembershipInfo) (err erro
 func createMembershipWithResp(c grpc.ClientConnInterface, input *protos.MembershipInfo) (output *protos.GetMembershipPermissionOutput, err error) {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 	defer cancel()
-	return protos.NewMembershipCURDControllerClient(c).CreateMembershipWithResp(ctx, input)
+	return protos.NewMembershipCRUDControllerClient(c).CreateMembershipWithResp(ctx, input)
 }
 
 // CreateMembershipWithResp ...

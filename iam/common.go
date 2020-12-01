@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"reflect"
 	"sync"
+	"time"
 
 	"github.com/pegasus-cloud/iam_client/protos"
 	"github.com/pegasus-cloud/iam_client/utility"
@@ -16,15 +17,18 @@ type (
 		Hosts             []string
 		ConnPerHost       int
 		RouteRepsonseType utility.ResponseType
+		Timeout           time.Duration
 		_                 struct{}
 	}
 	// ConnProvider ...
 	ConnProvider struct {
-		Host string
-		_    struct{}
+		Host    string
+		Timeout time.Duration
+		_       struct{}
 	}
 	// Pool ...
 	pool struct {
+		hosts   []string
 		clients chan client
 		count   int
 		mu      sync.Mutex
@@ -32,13 +36,19 @@ type (
 	}
 	// Client ...
 	client struct {
-		conn *grpc.ClientConn
-		_    struct{}
+		host    string
+		conn    *grpc.ClientConn
+		timeout time.Duration
+		_       struct{}
 	}
 )
 
 func (cp *ConnProvider) init() (c client) {
-	c.conn, _ = grpc.Dial(cp.Host, grpc.WithInsecure(), grpc.WithBlock())
+	var err error
+	c.conn, err = grpc.Dial(cp.Host, grpc.WithInsecure(), grpc.WithBlock(), grpc.WithTimeout(cp.Timeout*time.Millisecond))
+	if err != nil {
+		panic(err)
+	}
 	p.mu.Lock()
 	defer p.mu.Unlock()
 	return c

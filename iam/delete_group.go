@@ -11,7 +11,7 @@ import (
 func deleteGroup(c grpc.ClientConnInterface, input *protos.GroupID) (err error) {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 	defer cancel()
-	_, err = protos.NewGroupCURDControllerClient(c).DeleteGroup(ctx, input)
+	_, err = protos.NewGroupCRUDControllerClient(c).DeleteGroup(ctx, input)
 	return err
 }
 

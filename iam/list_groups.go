@@ -11,7 +11,7 @@ import (
 func listGroups(c grpc.ClientConnInterface, limit, offset int) (output *protos.ListGroupOutput, err error) {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 	defer cancel()
-	groups, err := protos.NewGroupCURDControllerClient(c).ListGroup(ctx, &protos.LimitOffset{
+	groups, err := protos.NewGroupCRUDControllerClient(c).ListGroup(ctx, &protos.LimitOffset{
 		Limit:  int32(limit),
 		Offset: int32(offset),
 	})

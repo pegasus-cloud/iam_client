@@ -11,7 +11,7 @@ import (
 func getPermissionByGroup(c grpc.ClientConnInterface, groupID string) (output *protos.PermissionJoinUser, err error) {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 	defer cancel()
-	permission, err := protos.NewPermissionCURDControllerClient(use().conn).GetPermissionByGroup(ctx, &protos.PermissionGroupInput{
+	permission, err := protos.NewPermissionCRUDControllerClient(c).GetPermissionByGroup(ctx, &protos.PermissionGroupInput{
 		GroupID: groupID,
 	})
 	return permission, err
