@@ -3,7 +3,6 @@ package api
 import (
 	"encoding/xml"
 	"errors"
-	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -12,20 +11,26 @@ import (
 )
 
 const (
-	iamServerErrMsg              = "The iam server errors occurred"
-	inputFormatErrMsg            = "The body only JSON supported"
-	userExistErrMsg              = "The user is already exist"
-	userDoesNotExistErrMsg       = "The user does not exist"
-	groupExistErrMsg             = "The group is already exist"
-	groupDoesNotExistErrMsg      = "The group does not exist"
-	membershipExistErrMsg        = "The membership is already exist"
-	membershipDoesNotExistErrMsg = "The membership does not exist"
-	permissionExistErrMsg        = "The permission is already exist"
-	permissionDoesNotExistErrMsg = "The permission does not exist"
-	quotaIsInvalid               = "The quota is invalid"
+	iamServerErrMsg                     = "The iam server errors occurred"
+	inputFormatErrMsg                   = "The body only JSON supported"
+	userExistErrMsg                     = "The user is already exist"
+	userDoesNotExistErrMsg              = "The user does not exist"
+	groupExistErrMsg                    = "The group is already exist"
+	groupDoesNotExistErrMsg             = "The group does not exist"
+	membershipExistErrMsg               = "The membership is already exist"
+	membershipDoesNotExistErrMsg        = "The membership does not exist"
+	permissionExistErrMsg               = "The permission is already exist"
+	permissionDoesNotExistErrMsg        = "The permission does not exist"
+	quotaIsInvalid                      = "The quota is invalid"
+	adminGroupShouldNotBeFrozen         = "Can't set frozen on group of administrator"
+	adminAndSystemUserShouldNotBeFrozen = "Can't set frozen on administrator or system user"
 
 	userIDParams  = "user-id"
 	groupIDParams = "group-id"
+
+	adminGroupID = "administrator"
+	adminUserID  = "administrator"
+	systemUserID = "system"
 )
 
 type (
@@ -137,8 +142,6 @@ func checkPermissionExist(c *gin.Context, permissionID, groupID string, expectEx
 		PermissionID: permissionID,
 		GroupID:      groupID,
 	})
-	fmt.Println(permissionID, groupID)
-	fmt.Println(permissionExist.GetVal())
 	if err != nil {
 		return http.StatusInternalServerError, errors.New(iamServerErrMsg)
 	}

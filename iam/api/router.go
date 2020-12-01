@@ -24,8 +24,18 @@ func checkGroup(c *gin.Context) {
 	c.Next()
 }
 
+func checkMembership(c *gin.Context) {
+	if statusCode, err := checkMembershipExist(c, c.Param(userIDParams), c.Param(groupIDParams), true); err != nil {
+		utility.ResponseWithType(c, statusCode, &utility.ErrResponse{
+			Message: err.Error(),
+		})
+	}
+	c.Next()
+}
+
 //EnableAdminIAMRouter 啟動預設的IAM Routers
 func EnableAdminIAMRouter(rg *gin.RouterGroup) {
+	iam.GET(rg, "/actions", listPermissionActions, "admin:ListPermissionActions", true)
 	user := rg.Group("user")
 	{
 		iam.POST(user, "", createUser, "admin:CreateUser", true)
@@ -68,5 +78,20 @@ func EnableAdminIAMRouter(rg *gin.RouterGroup) {
 			}
 		}
 	}
-	iam.GET(rg, "/actions", listPermissionActions, "admin:ListPermissionActions", true)
+	frozen := rg.Group("frozen")
+	{
+		forzenByGroup := frozen.Group("group/:group-id", checkGroup)
+		{
+			iam.PUT(forzenByGroup, "", setFrozenByGroup, "admin:SetFrozenByGroup", true)
+			forzenByUser := forzenByGroup.Group("user/:user-id", checkUser, checkMembership)
+			{
+				iam.PUT(forzenByUser, "", setFrozenByUser, "admin:SetFrozenByUser", true)
+			}
+		}
+	}
+	credential := rg.Group("credential/group/:group-id/user/:user-id", checkUser, checkGroup, checkMembership)
+	{
+		iam.PUT(credential, "", updateCredential, "admin:UpdateCredential", true)
+		iam.GET(credential, "", getCredential, "admin:GetCredential", true)
+	}
 }

@@ -2,7 +2,6 @@ package iam
 
 import (
 	"context"
-	"fmt"
 	"time"
 
 	"github.com/pegasus-cloud/iam_client/protos"
@@ -12,7 +11,6 @@ import (
 func getMembershipAndPermission(c grpc.ClientConnInterface, userID, groupID string) (output *protos.GetMembershipPermissionOutput, err error) {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 	defer cancel()
-	fmt.Println(c)
 	return protos.NewMembershipCRUDControllerClient(c).GetMembershipPermission(ctx, &protos.MemUserGroupInput{
 		UserID:  userID,
 		GroupID: groupID,
