@@ -87,6 +87,10 @@ type (
 		MaxQueueCount        int `json:"max_queue_count,omitempty"`
 		_                    struct{}
 	}
+	actions struct {
+		Actions []string `json:"actions" xml:"actions"`
+		_       struct{}
+	}
 )
 
 func checkUserExist(c *gin.Context, userID string, expectExist bool) (statusCode int, err error) {

@@ -2,6 +2,7 @@ package iam
 
 import (
 	"context"
+	"fmt"
 	"time"
 
 	"github.com/pegasus-cloud/iam_client/protos"
@@ -11,7 +12,8 @@ import (
 func getGroup(c grpc.ClientConnInterface, groupID string) (output *protos.GroupInfo, err error) {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 	defer cancel()
-	group, err := protos.NewGroupCURDControllerClient(use().conn).GetGroup(ctx, &protos.GroupID{
+	fmt.Println(c)
+	group, err := protos.NewGroupCRUDControllerClient(c).GetGroup(ctx, &protos.GroupID{
 		ID: groupID,
 	})
 	return group, err

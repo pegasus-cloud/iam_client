@@ -53,7 +53,7 @@ func updateGroup(c *gin.Context) {
 		Data: updateGroupInputMap,
 	}); err != nil {
 		utility.ResponseWithType(c, http.StatusInternalServerError, &utility.ErrResponse{
-			Message: err.Error(),
+			Message: iamServerErrMsg,
 		})
 		return
 	}
@@ -61,7 +61,7 @@ func updateGroup(c *gin.Context) {
 	getGroupOutput, err := iam.GetGroup(c.Param(groupIDParams))
 	if err != nil {
 		utility.ResponseWithType(c, http.StatusInternalServerError, &utility.ErrResponse{
-			Message: err.Error(),
+			Message: iamServerErrMsg,
 		})
 	}
 

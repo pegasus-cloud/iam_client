@@ -11,7 +11,7 @@ import (
 func deleteUser(c grpc.ClientConnInterface, input *protos.UserID) (err error) {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 	defer cancel()
-	_, err = protos.NewUserCURDControllerClient(c).DeleteUser(ctx, input)
+	_, err = protos.NewUserCRUDControllerClient(c).DeleteUser(ctx, input)
 	return err
 }
 

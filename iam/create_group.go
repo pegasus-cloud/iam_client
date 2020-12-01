@@ -11,7 +11,7 @@ import (
 func createGroup(c grpc.ClientConnInterface, input *protos.GroupInfo) (err error) {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 	defer cancel()
-	_, err = protos.NewGroupCURDControllerClient(c).CreateGroup(ctx, input)
+	_, err = protos.NewGroupCRUDControllerClient(c).CreateGroup(ctx, input)
 	return err
 }
 
@@ -28,7 +28,7 @@ func (cp *ConnProvider) CreateGroup(input *protos.GroupInfo) (err error) {
 func createGroupWithResp(c grpc.ClientConnInterface, input *protos.GroupInfo) (output *protos.GroupInfo, err error) {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 	defer cancel()
-	return protos.NewGroupCURDControllerClient(c).CreateGroupWithResp(ctx, input)
+	return protos.NewGroupCRUDControllerClient(c).CreateGroupWithResp(ctx, input)
 }
 
 // CreateGroupWithResp ...

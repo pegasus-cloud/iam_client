@@ -49,23 +49,24 @@ func EnableAdminIAMRouter(rg *gin.RouterGroup) {
 			iam.DELETE(spGroup, "", deleteGroup, "admin:DeleteGroup", true)
 		}
 	}
-	member := rg.Group("members")
+	membership := rg.Group("membership")
 	{
-		iam.POST(member, "", createMembership, "admin:CreateMembership", true)
-		user := member.Group("user/:user-id", checkUser)
+		iam.POST(membership, "", createMembership, "admin:CreateMembership", true)
+		user := membership.Group("user/:user-id", checkUser)
 		{
 			iam.GET(user, "", listMembershipsByUser, "admin:ListMembershipsByUser", true)
 		}
-		indevGroup := member.Group("group/:group-id", checkGroup)
+		indevGroup := membership.Group("group/:group-id", checkGroup)
 		{
-			iam.GET(indevGroup, "users", listMembershipsByGroup, "admin:ListMembershipsByGroup", true)
+			iam.GET(indevGroup, "", listMembershipsByGroup, "admin:ListMembershipsByGroup", true)
 
 			indevUser := indevGroup.Group("user/:user-id", checkUser)
 			{
-				iam.GET(indevUser, "", getMembership, "admin:GetMembership", true)
+				iam.GET(indevUser, "", getMembershipAndPermission, "admin:GetMembership", true)
 				iam.PUT(indevUser, "", updateMembership, "admin:UpdateMembership", true)
 				iam.DELETE(indevUser, "", deleteMembership, "admin:DeleteMembership", true)
 			}
 		}
 	}
+	iam.GET(rg, "/actions", listPermissionActions, "admin:ListPermissionActions", true)
 }

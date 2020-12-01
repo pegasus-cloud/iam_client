@@ -11,7 +11,7 @@ import (
 func updateGroup(c grpc.ClientConnInterface, input *protos.UpdateInput) (err error) {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 	defer cancel()
-	_, err = protos.NewGroupCURDControllerClient(c).UpdateGroup(ctx, input)
+	_, err = protos.NewGroupCRUDControllerClient(c).UpdateGroup(ctx, input)
 	return err
 }
 

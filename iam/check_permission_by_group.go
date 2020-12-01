@@ -11,7 +11,7 @@ import (
 func checkPermissionByGroup(c grpc.ClientConnInterface, input *protos.PermissionGroupInput) (output *protos.GBoolean, err error) {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 	defer cancel()
-	return protos.NewPermissionCURDControllerClient(c).CheckPermissionByGroup(ctx, input)
+	return protos.NewPermissionCRUDControllerClient(c).CheckPermissionByGroup(ctx, input)
 }
 
 // CheckPermissionByGroup ...

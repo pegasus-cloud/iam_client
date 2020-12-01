@@ -11,7 +11,7 @@ import (
 func getMembership(c grpc.ClientConnInterface, userID, groupID string) (output *protos.MembershipInfo, err error) {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 	defer cancel()
-	membership, err := protos.NewMembershipCURDControllerClient(use().conn).GetMembership(ctx, &protos.MemUserGroupInput{
+	membership, err := protos.NewMembershipCRUDControllerClient(c).GetMembership(ctx, &protos.MemUserGroupInput{
 		UserID:  userID,
 		GroupID: groupID,
 	})

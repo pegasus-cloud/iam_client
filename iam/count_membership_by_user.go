@@ -11,7 +11,7 @@ import (
 func countMembershipByUser(c grpc.ClientConnInterface, input *protos.UserID) (output *protos.CountOutput, err error) {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 	defer cancel()
-	output, err = protos.NewMembershipCURDControllerClient(c).CountMembershipByUser(ctx, input)
+	output, err = protos.NewMembershipCRUDControllerClient(c).CountMembershipByUser(ctx, input)
 	return output, err
 }
 

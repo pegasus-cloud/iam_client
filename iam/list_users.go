@@ -11,7 +11,7 @@ import (
 func listUsers(c grpc.ClientConnInterface, limit, offset int) (output *protos.ListUserOutput, err error) {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 	defer cancel()
-	users, err := protos.NewUserCURDControllerClient(c).ListUser(ctx, &protos.LimitOffset{
+	users, err := protos.NewUserCRUDControllerClient(c).ListUser(ctx, &protos.LimitOffset{
 		Limit:  int32(limit),
 		Offset: int32(offset),
 	})

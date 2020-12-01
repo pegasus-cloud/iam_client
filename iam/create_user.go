@@ -11,7 +11,7 @@ import (
 func createUser(c grpc.ClientConnInterface, input *protos.UserInfo) (err error) {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 	defer cancel()
-	_, err = protos.NewUserCURDControllerClient(c).CreateUser(ctx, input)
+	_, err = protos.NewUserCRUDControllerClient(c).CreateUser(ctx, input)
 	return err
 }
 
@@ -28,7 +28,7 @@ func (cp *ConnProvider) CreateUser(input *protos.UserInfo) (err error) {
 func createUserWithResp(c grpc.ClientConnInterface, input *protos.UserInfo) (output *protos.UserInfo, err error) {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 	defer cancel()
-	return protos.NewUserCURDControllerClient(c).CreateUserWithResp(ctx, input)
+	return protos.NewUserCRUDControllerClient(c).CreateUserWithResp(ctx, input)
 }
 
 // CreateUserWithResp ...

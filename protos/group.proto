@@ -7,8 +7,9 @@ message GroupInfo {
   string DisplayName = 2;
   string Description = 3;
   string Extra = 4;
-  string CreatedAt = 5;
-  string UpdatedAt = 6;
+  optional string Quota = 5;
+  string CreatedAt = 6;
+  string UpdatedAt = 7;
 }
 
 message GroupInfos {

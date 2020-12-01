@@ -11,7 +11,7 @@ import (
 func updateUser(c grpc.ClientConnInterface, input *protos.UpdateInput) (err error) {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 	defer cancel()
-	_, err = protos.NewUserCURDControllerClient(c).UpdateUser(ctx, input)
+	_, err = protos.NewUserCRUDControllerClient(c).UpdateUser(ctx, input)
 	return err
 }
 

@@ -12,7 +12,7 @@ import (
 func countUser(c grpc.ClientConnInterface) (output *protos.CountOutput, err error) {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 	defer cancel()
-	output, err = protos.NewUserCURDControllerClient(c).CountUser(ctx, &empty.Empty{})
+	output, err = protos.NewUserCRUDControllerClient(c).CountUser(ctx, &empty.Empty{})
 	return output, err
 }
 
