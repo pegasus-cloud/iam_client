@@ -56,15 +56,14 @@ service PermissionCRUDController {
   rpc GetPermissionByGroup(PermissionGroupInput) returns (PermissionJoinUser){}
   rpc UpdatePermissionByGroup(UpdatePermissionByGroupInput) returns (google.protobuf.Empty){}
   rpc UpdatePermissionByGroupWithResp(UpdatePermissionByGroupInput) returns (PermissionJoinUser){}
-  rpc ListPermissionByGroup(ListPermissionByGroupInput) returns (PermissionJoinUsers){}
+  rpc ListPermissionByGroup(ListPermissionByGroupInput) returns (ListPermissionJoinOuput){}
   rpc CheckPermissionByGroup(PermissionGroupInput) returns (GBoolean){}
   rpc CheckPermissionByID(PermissionID) returns (GBoolean){}
   rpc CountPermissionByGroup(GroupID) returns (CountOutput){}
 }
 
 service CredentialCRUDController {
-  rpc CreateCredential(CredentialInfo) returns (google.protobuf.Empty){}
   rpc UpdateCredential(UpdateInput) returns (google.protobuf.Empty){}
-  rpc GetCredential(CredUserGroupInput) returns (CredentailJoinMembership){}
-  rpc GetSecret(Access) returns (CredentailJoinMembership){}
+  rpc GetCredential(CredUserGroupInput) returns (CredentialJoinMembership){}
+  rpc GetSecret(Access) returns (CredentialJoinMembership){}
 }

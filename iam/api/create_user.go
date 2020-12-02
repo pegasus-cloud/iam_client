@@ -28,7 +28,9 @@ func createUser(c *gin.Context) {
 	} else {
 		for true {
 			userInfo.UserID = utility.GetRandNumeric(16)
-			if output, err := iam.GetUser(userInfo.UserID); err != nil {
+			if output, err := iam.GetUser(&protos.UserID{
+				ID: userInfo.UserID,
+			}); err != nil {
 				utility.ResponseWithType(c, http.StatusInternalServerError, &utility.ErrResponse{
 					Message: iamServerErrMsg,
 				})

@@ -59,15 +59,27 @@ func convert(input interface{}) (output map[string]interface{}) {
 	switch input.(type) {
 	case []*protos.GroupInfo:
 		for _, group := range input.([]*protos.GroupInfo) {
-			output = toMap(group.ID, reflect.ValueOf(group).Elem())
+			output = toMap(group.ID, reflect.ValueOf(group).Elem(), output)
 		}
 	case []*protos.UserInfo:
 		for _, user := range input.([]*protos.UserInfo) {
-			output = toMap(user.ID, reflect.ValueOf(user).Elem())
+			output = toMap(user.ID, reflect.ValueOf(user).Elem(), output)
 		}
 	case []*protos.MemberJoin:
 		for _, membership := range input.([]*protos.MemberJoin) {
-			output = toMap(membership.ID, reflect.ValueOf(membership).Elem())
+			output = toMap(membership.ID, reflect.ValueOf(membership).Elem(), output)
+		}
+	case []*protos.CredentialJoinMembership:
+		for _, credential := range input.([]*protos.CredentialJoinMembership) {
+			output = toMap(credential.MembershipID, reflect.ValueOf(credential).Elem(), output)
+		}
+	case []*protos.PermissionJoinUser:
+		for _, permission := range input.([]*protos.PermissionJoinUser) {
+			output = toMap(permission.ID, reflect.ValueOf(permission).Elem(), output)
+		}
+	case []*protos.GetMembershipPermissionOutput:
+		for _, membership := range input.([]*protos.GetMembershipPermissionOutput) {
+			output = toMap(membership.ID, reflect.ValueOf(membership).Elem(), output)
 		}
 	}
 	return output
@@ -89,10 +101,9 @@ func convert(input interface{}) (output map[string]interface{}) {
 		map[<user>.ID] = ID
 		map[<user.DisplayName>] = DisplayName
 */
-func toMap(prefix string, value reflect.Value) (output map[string]interface{}) {
-	output = make(map[string]interface{})
+func toMap(prefix string, value reflect.Value, input map[string]interface{}) (output map[string]interface{}) {
 	for i := 3; i < value.NumField(); i++ {
-		output[fmt.Sprintf("%s.%s", prefix, value.Type().Field(i).Name)] = value.Field(i).Interface()
+		input[fmt.Sprintf("%s.%s", prefix, value.Type().Field(i).Name)] = value.Field(i).Interface()
 	}
-	return output
+	return input
 }

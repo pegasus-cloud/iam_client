@@ -5,11 +5,15 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/pegasus-cloud/iam_client/iam"
+	"github.com/pegasus-cloud/iam_client/protos"
 	"github.com/pegasus-cloud/iam_client/utility"
 )
 
 func getMembershipAndPermission(c *gin.Context) {
-	getMembershipAndPermissionOutput, err := iam.GetMembershipAndPermission(c.Param(userIDParams), c.Param(groupIDParams))
+	getMembershipAndPermissionOutput, err := iam.GetMembershipAndPermission(&protos.MemUserGroupInput{
+		UserID:  c.Param(userIDParams),
+		GroupID: c.Param(groupIDParams),
+	})
 	if err != nil {
 		utility.ResponseWithType(c, http.StatusInternalServerError, &utility.ErrResponse{
 			Message: iamServerErrMsg,

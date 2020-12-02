@@ -507,6 +507,61 @@ func (x *ListPermissionByGroupInput) GetData() *LimitOffset {
 	return nil
 }
 
+type ListPermissionJoinOuput struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Count int64                 `protobuf:"varint,1,opt,name=count,proto3" json:"count,omitempty"`
+	Data  []*PermissionJoinUser `protobuf:"bytes,2,rep,name=Data,proto3" json:"Data,omitempty"`
+}
+
+func (x *ListPermissionJoinOuput) Reset() {
+	*x = ListPermissionJoinOuput{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_permission_proto_msgTypes[7]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ListPermissionJoinOuput) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListPermissionJoinOuput) ProtoMessage() {}
+
+func (x *ListPermissionJoinOuput) ProtoReflect() protoreflect.Message {
+	mi := &file_permission_proto_msgTypes[7]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListPermissionJoinOuput.ProtoReflect.Descriptor instead.
+func (*ListPermissionJoinOuput) Descriptor() ([]byte, []int) {
+	return file_permission_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *ListPermissionJoinOuput) GetCount() int64 {
+	if x != nil {
+		return x.Count
+	}
+	return 0
+}
+
+func (x *ListPermissionJoinOuput) GetData() []*PermissionJoinUser {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
 var File_permission_proto protoreflect.FileDescriptor
 
 var file_permission_proto_rawDesc = []byte{
@@ -577,7 +632,13 @@ var file_permission_proto_rawDesc = []byte{
 	0x09, 0x52, 0x07, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x49, 0x44, 0x12, 0x27, 0x0a, 0x04, 0x44, 0x61,
 	0x74, 0x61, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x13, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f,
 	0x73, 0x2e, 0x4c, 0x69, 0x6d, 0x69, 0x74, 0x4f, 0x66, 0x66, 0x73, 0x65, 0x74, 0x52, 0x04, 0x44,
-	0x61, 0x74, 0x61, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x61, 0x74, 0x61, 0x22, 0x5f, 0x0a, 0x17, 0x4c, 0x69, 0x73, 0x74, 0x50, 0x65, 0x72, 0x6d, 0x69,
+	0x73, 0x73, 0x69, 0x6f, 0x6e, 0x4a, 0x6f, 0x69, 0x6e, 0x4f, 0x75, 0x70, 0x75, 0x74, 0x12, 0x14,
+	0x0a, 0x05, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x05, 0x63,
+	0x6f, 0x75, 0x6e, 0x74, 0x12, 0x2e, 0x0a, 0x04, 0x44, 0x61, 0x74, 0x61, 0x18, 0x02, 0x20, 0x03,
+	0x28, 0x0b, 0x32, 0x1a, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x73, 0x2e, 0x50, 0x65, 0x72, 0x6d,
+	0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x4a, 0x6f, 0x69, 0x6e, 0x55, 0x73, 0x65, 0x72, 0x52, 0x04,
+	0x44, 0x61, 0x74, 0x61, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -592,7 +653,7 @@ func file_permission_proto_rawDescGZIP() []byte {
 	return file_permission_proto_rawDescData
 }
 
-var file_permission_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
+var file_permission_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
 var file_permission_proto_goTypes = []interface{}{
 	(*PermissionInfo)(nil),               // 0: protos.PermissionInfo
 	(*PermissionID)(nil),                 // 1: protos.PermissionID
@@ -601,20 +662,22 @@ var file_permission_proto_goTypes = []interface{}{
 	(*UpdatePermissionByGroupInput)(nil), // 4: protos.UpdatePermissionByGroupInput
 	(*PermissionJoinUsers)(nil),          // 5: protos.PermissionJoinUsers
 	(*ListPermissionByGroupInput)(nil),   // 6: protos.ListPermissionByGroupInput
-	nil,                                  // 7: protos.UpdatePermissionByGroupInput.DataEntry
-	(*LimitOffset)(nil),                  // 8: protos.LimitOffset
-	(*any.Any)(nil),                      // 9: google.protobuf.Any
+	(*ListPermissionJoinOuput)(nil),      // 7: protos.ListPermissionJoinOuput
+	nil,                                  // 8: protos.UpdatePermissionByGroupInput.DataEntry
+	(*LimitOffset)(nil),                  // 9: protos.LimitOffset
+	(*any.Any)(nil),                      // 10: google.protobuf.Any
 }
 var file_permission_proto_depIdxs = []int32{
-	7, // 0: protos.UpdatePermissionByGroupInput.Data:type_name -> protos.UpdatePermissionByGroupInput.DataEntry
-	3, // 1: protos.PermissionJoinUsers.Data:type_name -> protos.PermissionJoinUser
-	8, // 2: protos.ListPermissionByGroupInput.Data:type_name -> protos.LimitOffset
-	9, // 3: protos.UpdatePermissionByGroupInput.DataEntry.value:type_name -> google.protobuf.Any
-	4, // [4:4] is the sub-list for method output_type
-	4, // [4:4] is the sub-list for method input_type
-	4, // [4:4] is the sub-list for extension type_name
-	4, // [4:4] is the sub-list for extension extendee
-	0, // [0:4] is the sub-list for field type_name
+	8,  // 0: protos.UpdatePermissionByGroupInput.Data:type_name -> protos.UpdatePermissionByGroupInput.DataEntry
+	3,  // 1: protos.PermissionJoinUsers.Data:type_name -> protos.PermissionJoinUser
+	9,  // 2: protos.ListPermissionByGroupInput.Data:type_name -> protos.LimitOffset
+	3,  // 3: protos.ListPermissionJoinOuput.Data:type_name -> protos.PermissionJoinUser
+	10, // 4: protos.UpdatePermissionByGroupInput.DataEntry.value:type_name -> google.protobuf.Any
+	5,  // [5:5] is the sub-list for method output_type
+	5,  // [5:5] is the sub-list for method input_type
+	5,  // [5:5] is the sub-list for extension type_name
+	5,  // [5:5] is the sub-list for extension extendee
+	0,  // [0:5] is the sub-list for field type_name
 }
 
 func init() { file_permission_proto_init() }
@@ -708,6 +771,18 @@ func file_permission_proto_init() {
 				return nil
 			}
 		}
+		file_permission_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ListPermissionJoinOuput); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -715,7 +790,7 @@ func file_permission_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_permission_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   8,
+			NumMessages:   9,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

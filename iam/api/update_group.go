@@ -37,40 +37,30 @@ func (uui *updateGroupInput) convertToMap() (output map[string]*any.Any) {
 
 func updateGroup(c *gin.Context) {
 	updateGroupInput := &updateGroupInput{}
-
 	if err := c.ShouldBindWith(updateGroupInput, binding.JSON); err != nil {
 		utility.ResponseWithType(c, http.StatusBadRequest, &utility.ErrResponse{
 			Message: utility.ConvertError(err).Error(),
 		})
 		return
 	}
-
 	updateGroupInputMap := make(map[string]*any.Any)
 	updateGroupInputMap = updateGroupInput.convertToMap()
-
-	if err := iam.UpdateGroup(&protos.UpdateInput{
+	updateGroupWithRespOutput, err := iam.UpdateGroupWithResp(&protos.UpdateInput{
 		ID:   c.Param(groupIDParams),
 		Data: updateGroupInputMap,
-	}); err != nil {
+	})
+	if err != nil {
 		utility.ResponseWithType(c, http.StatusInternalServerError, &utility.ErrResponse{
 			Message: iamServerErrMsg,
 		})
 		return
 	}
-
-	getGroupOutput, err := iam.GetGroup(c.Param(groupIDParams))
-	if err != nil {
-		utility.ResponseWithType(c, http.StatusInternalServerError, &utility.ErrResponse{
-			Message: iamServerErrMsg,
-		})
-	}
-
 	utility.ResponseWithType(c, http.StatusOK, group{
-		GroupID:     getGroupOutput.ID,
-		DisplayName: getGroupOutput.DisplayName,
-		Description: getGroupOutput.Description,
-		Extra:       getGroupOutput.Extra,
-		CreatedAt:   getGroupOutput.CreatedAt,
-		UpdatedAt:   getGroupOutput.UpdatedAt,
+		GroupID:     updateGroupWithRespOutput.ID,
+		DisplayName: updateGroupWithRespOutput.DisplayName,
+		Description: updateGroupWithRespOutput.Description,
+		Extra:       updateGroupWithRespOutput.Extra,
+		CreatedAt:   updateGroupWithRespOutput.CreatedAt,
+		UpdatedAt:   updateGroupWithRespOutput.UpdatedAt,
 	})
 }

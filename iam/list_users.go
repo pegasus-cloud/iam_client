@@ -8,32 +8,25 @@ import (
 	"google.golang.org/grpc"
 )
 
-func listUsers(c grpc.ClientConnInterface, limit, offset int) (output *protos.ListUserOutput, err error) {
+func listUsers(c grpc.ClientConnInterface, input *protos.LimitOffset) (output *protos.ListUserOutput, err error) {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 	defer cancel()
-	users, err := protos.NewUserCRUDControllerClient(c).ListUser(ctx, &protos.LimitOffset{
-		Limit:  int32(limit),
-		Offset: int32(offset),
-	})
-	if err != nil {
-		return nil, err
-	}
-	return users, nil
+	return protos.NewUserCRUDControllerClient(c).ListUser(ctx, input)
 }
 
 // ListUsers ...
-func ListUsers(limit, offset int) (output *protos.ListUserOutput, err error) {
-	return listUsers(use().conn, limit, offset)
+func ListUsers(input *protos.LimitOffset) (output *protos.ListUserOutput, err error) {
+	return listUsers(use().conn, input)
 }
 
 // ListUsers ...
-func (cp *ConnProvider) ListUsers(limit, offset int) (output *protos.ListUserOutput, err error) {
-	return listUsers(cp.init().conn, limit, offset)
+func (cp *ConnProvider) ListUsers(input *protos.LimitOffset) (output *protos.ListUserOutput, err error) {
+	return listUsers(cp.init().conn, input)
 }
 
-func listUsersMap(c grpc.ClientConnInterface, limit, offset int) (output map[string]interface{}, err error) {
+func listUsersMap(c grpc.ClientConnInterface, input *protos.LimitOffset) (output map[string]interface{}, err error) {
 	output = make(map[string]interface{})
-	users, err := listUsers(c, limit, offset)
+	users, err := listUsers(c, input)
 	if err != nil {
 		return output, err
 	}
@@ -43,19 +36,11 @@ func listUsersMap(c grpc.ClientConnInterface, limit, offset int) (output map[str
 }
 
 // ListUsersMap ...
-func ListUsersMap(limit, offset int) (output map[string]interface{}, err error) {
-	groups, err := listUsersMap(use().conn, limit, offset)
-	if err != nil {
-		return nil, err
-	}
-	return groups, nil
+func ListUsersMap(input *protos.LimitOffset) (output map[string]interface{}, err error) {
+	return listUsersMap(use().conn, input)
 }
 
 // ListUsersMap ...
-func (cp *ConnProvider) ListUsersMap(limit, offset int) (output map[string]interface{}, err error) {
-	groups, err := listUsersMap(cp.init().conn, limit, offset)
-	if err != nil {
-		return nil, err
-	}
-	return groups, nil
+func (cp *ConnProvider) ListUsersMap(input *protos.LimitOffset) (output map[string]interface{}, err error) {
+	return listUsersMap(cp.init().conn, input)
 }

@@ -5,11 +5,14 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/pegasus-cloud/iam_client/iam"
+	"github.com/pegasus-cloud/iam_client/protos"
 	"github.com/pegasus-cloud/iam_client/utility"
 )
 
 func getGroup(c *gin.Context) {
-	getGroupOutput, err := iam.GetGroup(c.Param(groupIDParams))
+	getGroupOutput, err := iam.GetGroup(&protos.GroupID{
+		ID: c.Param(groupIDParams),
+	})
 	if err != nil {
 		utility.ResponseWithType(c, http.StatusInternalServerError, &utility.ErrResponse{
 			Message: iamServerErrMsg,

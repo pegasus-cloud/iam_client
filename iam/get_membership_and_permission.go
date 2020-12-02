@@ -8,27 +8,24 @@ import (
 	"google.golang.org/grpc"
 )
 
-func getMembershipAndPermission(c grpc.ClientConnInterface, userID, groupID string) (output *protos.GetMembershipPermissionOutput, err error) {
+func getMembershipAndPermission(c grpc.ClientConnInterface, input *protos.MemUserGroupInput) (output *protos.GetMembershipPermissionOutput, err error) {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 	defer cancel()
-	return protos.NewMembershipCRUDControllerClient(c).GetMembershipPermission(ctx, &protos.MemUserGroupInput{
-		UserID:  userID,
-		GroupID: groupID,
-	})
+	return protos.NewMembershipCRUDControllerClient(c).GetMembershipPermission(ctx, input)
 }
 
 // GetMembershipAndPermission ...
-func GetMembershipAndPermission(userID, groupID string) (output *protos.GetMembershipPermissionOutput, err error) {
-	return getMembershipAndPermission(use().conn, userID, groupID)
+func GetMembershipAndPermission(input *protos.MemUserGroupInput) (output *protos.GetMembershipPermissionOutput, err error) {
+	return getMembershipAndPermission(use().conn, input)
 }
 
 // GetMembershipAndPermission ...
-func (cp *ConnProvider) GetMembershipAndPermission(userID, groupID string) (output *protos.GetMembershipPermissionOutput, err error) {
-	return getMembershipAndPermission(cp.init().conn, userID, groupID)
+func (cp *ConnProvider) GetMembershipAndPermission(input *protos.MemUserGroupInput) (output *protos.GetMembershipPermissionOutput, err error) {
+	return getMembershipAndPermission(cp.init().conn, input)
 }
 
-func getMembershipAndPermissionMap(c grpc.ClientConnInterface, userID, groupID string) (output map[string]interface{}, err error) {
-	membershipAndPermission, err := getMembershipAndPermission(c, userID, groupID)
+func getMembershipAndPermissionMap(c grpc.ClientConnInterface, input *protos.MemUserGroupInput) (output map[string]interface{}, err error) {
+	membershipAndPermission, err := getMembershipAndPermission(c, input)
 	if err != nil {
 		return nil, err
 	}
@@ -37,11 +34,11 @@ func getMembershipAndPermissionMap(c grpc.ClientConnInterface, userID, groupID s
 }
 
 // GetMembershipAndPermissionMap ...
-func GetMembershipAndPermissionMap(userID, groupID string) (output map[string]interface{}, err error) {
-	return getMembershipAndPermissionMap(use().conn, userID, groupID)
+func GetMembershipAndPermissionMap(input *protos.MemUserGroupInput) (output map[string]interface{}, err error) {
+	return getMembershipAndPermissionMap(use().conn, input)
 }
 
 // GetMembershipAndPermissionMap ...
-func (cp *ConnProvider) GetMembershipAndPermissionMap(userID, groupID string) (output map[string]interface{}, err error) {
-	return getMembershipAndPermissionMap(cp.init().conn, userID, groupID)
+func (cp *ConnProvider) GetMembershipAndPermissionMap(input *protos.MemUserGroupInput) (output map[string]interface{}, err error) {
+	return getMembershipAndPermissionMap(cp.init().conn, input)
 }

@@ -6,6 +6,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/gin-gonic/gin/binding"
 	"github.com/pegasus-cloud/iam_client/iam"
+	"github.com/pegasus-cloud/iam_client/protos"
 	"github.com/pegasus-cloud/iam_client/utility"
 )
 
@@ -27,7 +28,10 @@ func listUsers(c *gin.Context) {
 		return
 	}
 
-	users, err := iam.ListUsers(pagination.Limit, pagination.Offset)
+	users, err := iam.ListUsers(&protos.LimitOffset{
+		Limit:  int32(pagination.Limit),
+		Offset: int32(pagination.Offset),
+	})
 	if err != nil {
 		utility.ResponseWithType(c, http.StatusInternalServerError, &utility.ErrResponse{
 			Message: err.Error(),

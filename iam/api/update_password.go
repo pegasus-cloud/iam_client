@@ -20,16 +20,13 @@ type (
 
 func updatePassword(c *gin.Context) {
 	updatePasswordInput := &updatePasswordInput{}
-
 	if err := c.ShouldBindWith(updatePasswordInput, binding.JSON); err != nil {
 		utility.ResponseWithType(c, http.StatusBadRequest, &utility.ErrResponse{
 			Message: utility.ConvertError(err).Error(),
 		})
 		return
 	}
-
 	updatePasswordInputMap := make(map[string]*any.Any)
-
 	password, err := ptypes.MarshalAny(&protos.GString{Val: &updatePasswordInput.Password})
 	if err != nil {
 		utility.ResponseWithType(c, http.StatusBadRequest, &utility.ErrResponse{
@@ -37,9 +34,7 @@ func updatePassword(c *gin.Context) {
 		})
 		return
 	}
-
 	updatePasswordInputMap["Password_Hash"] = password
-
 	if err := iam.UpdateUser(&protos.UpdateInput{
 		ID:   c.Param(userIDParams),
 		Data: updatePasswordInputMap,
@@ -49,6 +44,5 @@ func updatePassword(c *gin.Context) {
 		})
 		return
 	}
-
 	utility.ResponseWithType(c, http.StatusOK, nil)
 }

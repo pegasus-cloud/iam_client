@@ -78,16 +78,14 @@ func EnableAdminIAMRouter(rg *gin.RouterGroup) {
 			}
 		}
 	}
-	frozen := rg.Group("frozen")
+	frozen := rg.Group("frozen/group/:group-id", checkGroup)
 	{
-		forzenByGroup := frozen.Group("group/:group-id", checkGroup)
+		iam.PUT(frozen, "", setFrozenByGroup, "admin:SetFrozenByGroup", true)
+		forzenByUser := frozen.Group("user/:user-id", checkUser, checkMembership)
 		{
-			iam.PUT(forzenByGroup, "", setFrozenByGroup, "admin:SetFrozenByGroup", true)
-			forzenByUser := forzenByGroup.Group("user/:user-id", checkUser, checkMembership)
-			{
-				iam.PUT(forzenByUser, "", setFrozenByUser, "admin:SetFrozenByUser", true)
-			}
+			iam.PUT(forzenByUser, "", setFrozenByUser, "admin:SetFrozenByUser", true)
 		}
+
 	}
 	credential := rg.Group("credential/group/:group-id/user/:user-id", checkUser, checkGroup, checkMembership)
 	{

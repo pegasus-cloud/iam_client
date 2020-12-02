@@ -177,7 +177,7 @@ var file_services_proto_rawDesc = []byte{
 	0x69, 0x70, 0x4a, 0x6f, 0x69, 0x6e, 0x12, 0x19, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x73, 0x2e,
 	0x4d, 0x65, 0x6d, 0x55, 0x73, 0x65, 0x72, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x49, 0x6e, 0x70, 0x75,
 	0x74, 0x1a, 0x12, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x73, 0x2e, 0x4d, 0x65, 0x6d, 0x62, 0x65,
-	0x72, 0x4a, 0x6f, 0x69, 0x6e, 0x22, 0x00, 0x32, 0xb7, 0x06, 0x0a, 0x18, 0x50, 0x65, 0x72, 0x6d,
+	0x72, 0x4a, 0x6f, 0x69, 0x6e, 0x22, 0x00, 0x32, 0xbb, 0x06, 0x0a, 0x18, 0x50, 0x65, 0x72, 0x6d,
 	0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x43, 0x52, 0x55, 0x44, 0x43, 0x6f, 0x6e, 0x74, 0x72, 0x6f,
 	0x6c, 0x6c, 0x65, 0x72, 0x12, 0x44, 0x0a, 0x10, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x50, 0x65,
 	0x72, 0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x12, 0x16, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f,
@@ -210,46 +210,41 @@ var file_services_proto_rawDesc = []byte{
 	0x74, 0x65, 0x50, 0x65, 0x72, 0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x42, 0x79, 0x47, 0x72,
 	0x6f, 0x75, 0x70, 0x49, 0x6e, 0x70, 0x75, 0x74, 0x1a, 0x1a, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f,
 	0x73, 0x2e, 0x50, 0x65, 0x72, 0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x4a, 0x6f, 0x69, 0x6e,
-	0x55, 0x73, 0x65, 0x72, 0x22, 0x00, 0x12, 0x5a, 0x0a, 0x15, 0x4c, 0x69, 0x73, 0x74, 0x50, 0x65,
+	0x55, 0x73, 0x65, 0x72, 0x22, 0x00, 0x12, 0x5e, 0x0a, 0x15, 0x4c, 0x69, 0x73, 0x74, 0x50, 0x65,
 	0x72, 0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x42, 0x79, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x12,
 	0x22, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x73, 0x2e, 0x4c, 0x69, 0x73, 0x74, 0x50, 0x65, 0x72,
 	0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x42, 0x79, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x49, 0x6e,
-	0x70, 0x75, 0x74, 0x1a, 0x1b, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x73, 0x2e, 0x50, 0x65, 0x72,
-	0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x4a, 0x6f, 0x69, 0x6e, 0x55, 0x73, 0x65, 0x72, 0x73,
-	0x22, 0x00, 0x12, 0x4a, 0x0a, 0x16, 0x43, 0x68, 0x65, 0x63, 0x6b, 0x50, 0x65, 0x72, 0x6d, 0x69,
-	0x73, 0x73, 0x69, 0x6f, 0x6e, 0x42, 0x79, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x12, 0x1c, 0x2e, 0x70,
-	0x72, 0x6f, 0x74, 0x6f, 0x73, 0x2e, 0x50, 0x65, 0x72, 0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e,
-	0x47, 0x72, 0x6f, 0x75, 0x70, 0x49, 0x6e, 0x70, 0x75, 0x74, 0x1a, 0x10, 0x2e, 0x70, 0x72, 0x6f,
-	0x74, 0x6f, 0x73, 0x2e, 0x47, 0x42, 0x6f, 0x6f, 0x6c, 0x65, 0x61, 0x6e, 0x22, 0x00, 0x12, 0x3f,
-	0x0a, 0x13, 0x43, 0x68, 0x65, 0x63, 0x6b, 0x50, 0x65, 0x72, 0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f,
-	0x6e, 0x42, 0x79, 0x49, 0x44, 0x12, 0x14, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x73, 0x2e, 0x50,
-	0x65, 0x72, 0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x49, 0x44, 0x1a, 0x10, 0x2e, 0x70, 0x72,
-	0x6f, 0x74, 0x6f, 0x73, 0x2e, 0x47, 0x42, 0x6f, 0x6f, 0x6c, 0x65, 0x61, 0x6e, 0x22, 0x00, 0x12,
-	0x40, 0x0a, 0x16, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x50, 0x65, 0x72, 0x6d, 0x69, 0x73, 0x73, 0x69,
-	0x6f, 0x6e, 0x42, 0x79, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x12, 0x0f, 0x2e, 0x70, 0x72, 0x6f, 0x74,
-	0x6f, 0x73, 0x2e, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x49, 0x44, 0x1a, 0x13, 0x2e, 0x70, 0x72, 0x6f,
-	0x74, 0x6f, 0x73, 0x2e, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x4f, 0x75, 0x74, 0x70, 0x75, 0x74, 0x22,
-	0x00, 0x32, 0xb5, 0x02, 0x0a, 0x18, 0x43, 0x72, 0x65, 0x64, 0x65, 0x6e, 0x74, 0x69, 0x61, 0x6c,
-	0x43, 0x52, 0x55, 0x44, 0x43, 0x6f, 0x6e, 0x74, 0x72, 0x6f, 0x6c, 0x6c, 0x65, 0x72, 0x12, 0x44,
-	0x0a, 0x10, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x43, 0x72, 0x65, 0x64, 0x65, 0x6e, 0x74, 0x69,
-	0x61, 0x6c, 0x12, 0x16, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x73, 0x2e, 0x43, 0x72, 0x65, 0x64,
-	0x65, 0x6e, 0x74, 0x69, 0x61, 0x6c, 0x49, 0x6e, 0x66, 0x6f, 0x1a, 0x16, 0x2e, 0x67, 0x6f, 0x6f,
-	0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x45, 0x6d, 0x70,
-	0x74, 0x79, 0x22, 0x00, 0x12, 0x41, 0x0a, 0x10, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x43, 0x72,
-	0x65, 0x64, 0x65, 0x6e, 0x74, 0x69, 0x61, 0x6c, 0x12, 0x13, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f,
-	0x73, 0x2e, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x49, 0x6e, 0x70, 0x75, 0x74, 0x1a, 0x16, 0x2e,
-	0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e,
-	0x45, 0x6d, 0x70, 0x74, 0x79, 0x22, 0x00, 0x12, 0x4f, 0x0a, 0x0d, 0x47, 0x65, 0x74, 0x43, 0x72,
-	0x65, 0x64, 0x65, 0x6e, 0x74, 0x69, 0x61, 0x6c, 0x12, 0x1a, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f,
-	0x73, 0x2e, 0x43, 0x72, 0x65, 0x64, 0x55, 0x73, 0x65, 0x72, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x49,
-	0x6e, 0x70, 0x75, 0x74, 0x1a, 0x20, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x73, 0x2e, 0x43, 0x72,
-	0x65, 0x64, 0x65, 0x6e, 0x74, 0x61, 0x69, 0x6c, 0x4a, 0x6f, 0x69, 0x6e, 0x4d, 0x65, 0x6d, 0x62,
-	0x65, 0x72, 0x73, 0x68, 0x69, 0x70, 0x22, 0x00, 0x12, 0x3f, 0x0a, 0x09, 0x47, 0x65, 0x74, 0x53,
-	0x65, 0x63, 0x72, 0x65, 0x74, 0x12, 0x0e, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x73, 0x2e, 0x41,
-	0x63, 0x63, 0x65, 0x73, 0x73, 0x1a, 0x20, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x73, 0x2e, 0x43,
-	0x72, 0x65, 0x64, 0x65, 0x6e, 0x74, 0x61, 0x69, 0x6c, 0x4a, 0x6f, 0x69, 0x6e, 0x4d, 0x65, 0x6d,
-	0x62, 0x65, 0x72, 0x73, 0x68, 0x69, 0x70, 0x22, 0x00, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f,
-	0x33,
+	0x70, 0x75, 0x74, 0x1a, 0x1f, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x73, 0x2e, 0x4c, 0x69, 0x73,
+	0x74, 0x50, 0x65, 0x72, 0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x4a, 0x6f, 0x69, 0x6e, 0x4f,
+	0x75, 0x70, 0x75, 0x74, 0x22, 0x00, 0x12, 0x4a, 0x0a, 0x16, 0x43, 0x68, 0x65, 0x63, 0x6b, 0x50,
+	0x65, 0x72, 0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x42, 0x79, 0x47, 0x72, 0x6f, 0x75, 0x70,
+	0x12, 0x1c, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x73, 0x2e, 0x50, 0x65, 0x72, 0x6d, 0x69, 0x73,
+	0x73, 0x69, 0x6f, 0x6e, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x49, 0x6e, 0x70, 0x75, 0x74, 0x1a, 0x10,
+	0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x73, 0x2e, 0x47, 0x42, 0x6f, 0x6f, 0x6c, 0x65, 0x61, 0x6e,
+	0x22, 0x00, 0x12, 0x3f, 0x0a, 0x13, 0x43, 0x68, 0x65, 0x63, 0x6b, 0x50, 0x65, 0x72, 0x6d, 0x69,
+	0x73, 0x73, 0x69, 0x6f, 0x6e, 0x42, 0x79, 0x49, 0x44, 0x12, 0x14, 0x2e, 0x70, 0x72, 0x6f, 0x74,
+	0x6f, 0x73, 0x2e, 0x50, 0x65, 0x72, 0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x49, 0x44, 0x1a,
+	0x10, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x73, 0x2e, 0x47, 0x42, 0x6f, 0x6f, 0x6c, 0x65, 0x61,
+	0x6e, 0x22, 0x00, 0x12, 0x40, 0x0a, 0x16, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x50, 0x65, 0x72, 0x6d,
+	0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x42, 0x79, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x12, 0x0f, 0x2e,
+	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x73, 0x2e, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x49, 0x44, 0x1a, 0x13,
+	0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x73, 0x2e, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x4f, 0x75, 0x74,
+	0x70, 0x75, 0x74, 0x22, 0x00, 0x32, 0xef, 0x01, 0x0a, 0x18, 0x43, 0x72, 0x65, 0x64, 0x65, 0x6e,
+	0x74, 0x69, 0x61, 0x6c, 0x43, 0x52, 0x55, 0x44, 0x43, 0x6f, 0x6e, 0x74, 0x72, 0x6f, 0x6c, 0x6c,
+	0x65, 0x72, 0x12, 0x41, 0x0a, 0x10, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x43, 0x72, 0x65, 0x64,
+	0x65, 0x6e, 0x74, 0x69, 0x61, 0x6c, 0x12, 0x13, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x73, 0x2e,
+	0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x49, 0x6e, 0x70, 0x75, 0x74, 0x1a, 0x16, 0x2e, 0x67, 0x6f,
+	0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x45, 0x6d,
+	0x70, 0x74, 0x79, 0x22, 0x00, 0x12, 0x4f, 0x0a, 0x0d, 0x47, 0x65, 0x74, 0x43, 0x72, 0x65, 0x64,
+	0x65, 0x6e, 0x74, 0x69, 0x61, 0x6c, 0x12, 0x1a, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x73, 0x2e,
+	0x43, 0x72, 0x65, 0x64, 0x55, 0x73, 0x65, 0x72, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x49, 0x6e, 0x70,
+	0x75, 0x74, 0x1a, 0x20, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x73, 0x2e, 0x43, 0x72, 0x65, 0x64,
+	0x65, 0x6e, 0x74, 0x69, 0x61, 0x6c, 0x4a, 0x6f, 0x69, 0x6e, 0x4d, 0x65, 0x6d, 0x62, 0x65, 0x72,
+	0x73, 0x68, 0x69, 0x70, 0x22, 0x00, 0x12, 0x3f, 0x0a, 0x09, 0x47, 0x65, 0x74, 0x53, 0x65, 0x63,
+	0x72, 0x65, 0x74, 0x12, 0x0e, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x73, 0x2e, 0x41, 0x63, 0x63,
+	0x65, 0x73, 0x73, 0x1a, 0x20, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x73, 0x2e, 0x43, 0x72, 0x65,
+	0x64, 0x65, 0x6e, 0x74, 0x69, 0x61, 0x6c, 0x4a, 0x6f, 0x69, 0x6e, 0x4d, 0x65, 0x6d, 0x62, 0x65,
+	0x72, 0x73, 0x68, 0x69, 0x70, 0x22, 0x00, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var file_services_proto_goTypes = []interface{}{
@@ -270,20 +265,19 @@ var file_services_proto_goTypes = []interface{}{
 	(*PermissionGroupInput)(nil),          // 14: protos.PermissionGroupInput
 	(*UpdatePermissionByGroupInput)(nil),  // 15: protos.UpdatePermissionByGroupInput
 	(*ListPermissionByGroupInput)(nil),    // 16: protos.ListPermissionByGroupInput
-	(*CredentialInfo)(nil),                // 17: protos.CredentialInfo
-	(*CredUserGroupInput)(nil),            // 18: protos.CredUserGroupInput
-	(*Access)(nil),                        // 19: protos.Access
-	(*UserInfos)(nil),                     // 20: protos.UserInfos
-	(*ListUserOutput)(nil),                // 21: protos.ListUserOutput
-	(*CountOutput)(nil),                   // 22: protos.CountOutput
-	(*ListGroupOutput)(nil),               // 23: protos.ListGroupOutput
-	(*GetMembershipPermissionOutput)(nil), // 24: protos.GetMembershipPermissionOutput
-	(*ListMembershipJoinOutput)(nil),      // 25: protos.ListMembershipJoinOutput
-	(*GBoolean)(nil),                      // 26: protos.GBoolean
-	(*MemberJoin)(nil),                    // 27: protos.MemberJoin
-	(*PermissionJoinUser)(nil),            // 28: protos.PermissionJoinUser
-	(*PermissionJoinUsers)(nil),           // 29: protos.PermissionJoinUsers
-	(*CredentailJoinMembership)(nil),      // 30: protos.CredentailJoinMembership
+	(*CredUserGroupInput)(nil),            // 17: protos.CredUserGroupInput
+	(*Access)(nil),                        // 18: protos.Access
+	(*UserInfos)(nil),                     // 19: protos.UserInfos
+	(*ListUserOutput)(nil),                // 20: protos.ListUserOutput
+	(*CountOutput)(nil),                   // 21: protos.CountOutput
+	(*ListGroupOutput)(nil),               // 22: protos.ListGroupOutput
+	(*GetMembershipPermissionOutput)(nil), // 23: protos.GetMembershipPermissionOutput
+	(*ListMembershipJoinOutput)(nil),      // 24: protos.ListMembershipJoinOutput
+	(*GBoolean)(nil),                      // 25: protos.GBoolean
+	(*MemberJoin)(nil),                    // 26: protos.MemberJoin
+	(*PermissionJoinUser)(nil),            // 27: protos.PermissionJoinUser
+	(*ListPermissionJoinOuput)(nil),       // 28: protos.ListPermissionJoinOuput
+	(*CredentialJoinMembership)(nil),      // 29: protos.CredentialJoinMembership
 }
 var file_services_proto_depIdxs = []int32{
 	0,  // 0: protos.UserCRUDController.CreateUser:input_type -> protos.UserInfo
@@ -327,57 +321,55 @@ var file_services_proto_depIdxs = []int32{
 	14, // 38: protos.PermissionCRUDController.CheckPermissionByGroup:input_type -> protos.PermissionGroupInput
 	13, // 39: protos.PermissionCRUDController.CheckPermissionByID:input_type -> protos.PermissionID
 	2,  // 40: protos.PermissionCRUDController.CountPermissionByGroup:input_type -> protos.GroupID
-	17, // 41: protos.CredentialCRUDController.CreateCredential:input_type -> protos.CredentialInfo
-	4,  // 42: protos.CredentialCRUDController.UpdateCredential:input_type -> protos.UpdateInput
-	18, // 43: protos.CredentialCRUDController.GetCredential:input_type -> protos.CredUserGroupInput
-	19, // 44: protos.CredentialCRUDController.GetSecret:input_type -> protos.Access
-	5,  // 45: protos.UserCRUDController.CreateUser:output_type -> google.protobuf.Empty
-	0,  // 46: protos.UserCRUDController.CreateUserWithResp:output_type -> protos.UserInfo
-	0,  // 47: protos.UserCRUDController.GetUser:output_type -> protos.UserInfo
-	20, // 48: protos.UserCRUDController.ListUserByGroup:output_type -> protos.UserInfos
-	21, // 49: protos.UserCRUDController.ListUser:output_type -> protos.ListUserOutput
-	5,  // 50: protos.UserCRUDController.DeleteUser:output_type -> google.protobuf.Empty
-	5,  // 51: protos.UserCRUDController.UpdateUser:output_type -> google.protobuf.Empty
-	0,  // 52: protos.UserCRUDController.UpdateUserWithResp:output_type -> protos.UserInfo
-	22, // 53: protos.UserCRUDController.CountUser:output_type -> protos.CountOutput
-	5,  // 54: protos.GroupCRUDController.CreateGroup:output_type -> google.protobuf.Empty
-	6,  // 55: protos.GroupCRUDController.CreateGroupWithResp:output_type -> protos.GroupInfo
-	5,  // 56: protos.GroupCRUDController.DeleteGroup:output_type -> google.protobuf.Empty
-	6,  // 57: protos.GroupCRUDController.GetGroup:output_type -> protos.GroupInfo
-	22, // 58: protos.GroupCRUDController.CountGroup:output_type -> protos.CountOutput
-	23, // 59: protos.GroupCRUDController.ListGroup:output_type -> protos.ListGroupOutput
-	5,  // 60: protos.GroupCRUDController.UpdateGroup:output_type -> google.protobuf.Empty
-	6,  // 61: protos.GroupCRUDController.UpdateGroupWithResp:output_type -> protos.GroupInfo
-	5,  // 62: protos.MembershipCRUDController.CreateMembership:output_type -> google.protobuf.Empty
-	24, // 63: protos.MembershipCRUDController.CreateMembershipWithResp:output_type -> protos.GetMembershipPermissionOutput
-	5,  // 64: protos.MembershipCRUDController.DeleteMembership:output_type -> google.protobuf.Empty
-	22, // 65: protos.MembershipCRUDController.CountMembershipByUser:output_type -> protos.CountOutput
-	25, // 66: protos.MembershipCRUDController.ListMembershipByUser:output_type -> protos.ListMembershipJoinOutput
-	22, // 67: protos.MembershipCRUDController.CountMembershipByGroup:output_type -> protos.CountOutput
-	25, // 68: protos.MembershipCRUDController.ListMembershipByGroup:output_type -> protos.ListMembershipJoinOutput
-	5,  // 69: protos.MembershipCRUDController.UpdateMembership:output_type -> google.protobuf.Empty
-	24, // 70: protos.MembershipCRUDController.UpdateMembershipWithResp:output_type -> protos.GetMembershipPermissionOutput
-	5,  // 71: protos.MembershipCRUDController.UpdateMembershipByGroup:output_type -> google.protobuf.Empty
-	7,  // 72: protos.MembershipCRUDController.GetMembership:output_type -> protos.MembershipInfo
-	24, // 73: protos.MembershipCRUDController.GetMembershipPermission:output_type -> protos.GetMembershipPermissionOutput
-	26, // 74: protos.MembershipCRUDController.GetFrozen:output_type -> protos.GBoolean
-	27, // 75: protos.MembershipCRUDController.GetMembershipJoin:output_type -> protos.MemberJoin
-	5,  // 76: protos.PermissionCRUDController.CreatePermission:output_type -> google.protobuf.Empty
-	28, // 77: protos.PermissionCRUDController.CreatePermissionWithResp:output_type -> protos.PermissionJoinUser
-	5,  // 78: protos.PermissionCRUDController.DeletePermission:output_type -> google.protobuf.Empty
-	28, // 79: protos.PermissionCRUDController.GetPermissionByGroup:output_type -> protos.PermissionJoinUser
-	5,  // 80: protos.PermissionCRUDController.UpdatePermissionByGroup:output_type -> google.protobuf.Empty
-	28, // 81: protos.PermissionCRUDController.UpdatePermissionByGroupWithResp:output_type -> protos.PermissionJoinUser
-	29, // 82: protos.PermissionCRUDController.ListPermissionByGroup:output_type -> protos.PermissionJoinUsers
-	26, // 83: protos.PermissionCRUDController.CheckPermissionByGroup:output_type -> protos.GBoolean
-	26, // 84: protos.PermissionCRUDController.CheckPermissionByID:output_type -> protos.GBoolean
-	22, // 85: protos.PermissionCRUDController.CountPermissionByGroup:output_type -> protos.CountOutput
-	5,  // 86: protos.CredentialCRUDController.CreateCredential:output_type -> google.protobuf.Empty
-	5,  // 87: protos.CredentialCRUDController.UpdateCredential:output_type -> google.protobuf.Empty
-	30, // 88: protos.CredentialCRUDController.GetCredential:output_type -> protos.CredentailJoinMembership
-	30, // 89: protos.CredentialCRUDController.GetSecret:output_type -> protos.CredentailJoinMembership
-	45, // [45:90] is the sub-list for method output_type
-	0,  // [0:45] is the sub-list for method input_type
+	4,  // 41: protos.CredentialCRUDController.UpdateCredential:input_type -> protos.UpdateInput
+	17, // 42: protos.CredentialCRUDController.GetCredential:input_type -> protos.CredUserGroupInput
+	18, // 43: protos.CredentialCRUDController.GetSecret:input_type -> protos.Access
+	5,  // 44: protos.UserCRUDController.CreateUser:output_type -> google.protobuf.Empty
+	0,  // 45: protos.UserCRUDController.CreateUserWithResp:output_type -> protos.UserInfo
+	0,  // 46: protos.UserCRUDController.GetUser:output_type -> protos.UserInfo
+	19, // 47: protos.UserCRUDController.ListUserByGroup:output_type -> protos.UserInfos
+	20, // 48: protos.UserCRUDController.ListUser:output_type -> protos.ListUserOutput
+	5,  // 49: protos.UserCRUDController.DeleteUser:output_type -> google.protobuf.Empty
+	5,  // 50: protos.UserCRUDController.UpdateUser:output_type -> google.protobuf.Empty
+	0,  // 51: protos.UserCRUDController.UpdateUserWithResp:output_type -> protos.UserInfo
+	21, // 52: protos.UserCRUDController.CountUser:output_type -> protos.CountOutput
+	5,  // 53: protos.GroupCRUDController.CreateGroup:output_type -> google.protobuf.Empty
+	6,  // 54: protos.GroupCRUDController.CreateGroupWithResp:output_type -> protos.GroupInfo
+	5,  // 55: protos.GroupCRUDController.DeleteGroup:output_type -> google.protobuf.Empty
+	6,  // 56: protos.GroupCRUDController.GetGroup:output_type -> protos.GroupInfo
+	21, // 57: protos.GroupCRUDController.CountGroup:output_type -> protos.CountOutput
+	22, // 58: protos.GroupCRUDController.ListGroup:output_type -> protos.ListGroupOutput
+	5,  // 59: protos.GroupCRUDController.UpdateGroup:output_type -> google.protobuf.Empty
+	6,  // 60: protos.GroupCRUDController.UpdateGroupWithResp:output_type -> protos.GroupInfo
+	5,  // 61: protos.MembershipCRUDController.CreateMembership:output_type -> google.protobuf.Empty
+	23, // 62: protos.MembershipCRUDController.CreateMembershipWithResp:output_type -> protos.GetMembershipPermissionOutput
+	5,  // 63: protos.MembershipCRUDController.DeleteMembership:output_type -> google.protobuf.Empty
+	21, // 64: protos.MembershipCRUDController.CountMembershipByUser:output_type -> protos.CountOutput
+	24, // 65: protos.MembershipCRUDController.ListMembershipByUser:output_type -> protos.ListMembershipJoinOutput
+	21, // 66: protos.MembershipCRUDController.CountMembershipByGroup:output_type -> protos.CountOutput
+	24, // 67: protos.MembershipCRUDController.ListMembershipByGroup:output_type -> protos.ListMembershipJoinOutput
+	5,  // 68: protos.MembershipCRUDController.UpdateMembership:output_type -> google.protobuf.Empty
+	23, // 69: protos.MembershipCRUDController.UpdateMembershipWithResp:output_type -> protos.GetMembershipPermissionOutput
+	5,  // 70: protos.MembershipCRUDController.UpdateMembershipByGroup:output_type -> google.protobuf.Empty
+	7,  // 71: protos.MembershipCRUDController.GetMembership:output_type -> protos.MembershipInfo
+	23, // 72: protos.MembershipCRUDController.GetMembershipPermission:output_type -> protos.GetMembershipPermissionOutput
+	25, // 73: protos.MembershipCRUDController.GetFrozen:output_type -> protos.GBoolean
+	26, // 74: protos.MembershipCRUDController.GetMembershipJoin:output_type -> protos.MemberJoin
+	5,  // 75: protos.PermissionCRUDController.CreatePermission:output_type -> google.protobuf.Empty
+	27, // 76: protos.PermissionCRUDController.CreatePermissionWithResp:output_type -> protos.PermissionJoinUser
+	5,  // 77: protos.PermissionCRUDController.DeletePermission:output_type -> google.protobuf.Empty
+	27, // 78: protos.PermissionCRUDController.GetPermissionByGroup:output_type -> protos.PermissionJoinUser
+	5,  // 79: protos.PermissionCRUDController.UpdatePermissionByGroup:output_type -> google.protobuf.Empty
+	27, // 80: protos.PermissionCRUDController.UpdatePermissionByGroupWithResp:output_type -> protos.PermissionJoinUser
+	28, // 81: protos.PermissionCRUDController.ListPermissionByGroup:output_type -> protos.ListPermissionJoinOuput
+	25, // 82: protos.PermissionCRUDController.CheckPermissionByGroup:output_type -> protos.GBoolean
+	25, // 83: protos.PermissionCRUDController.CheckPermissionByID:output_type -> protos.GBoolean
+	21, // 84: protos.PermissionCRUDController.CountPermissionByGroup:output_type -> protos.CountOutput
+	5,  // 85: protos.CredentialCRUDController.UpdateCredential:output_type -> google.protobuf.Empty
+	29, // 86: protos.CredentialCRUDController.GetCredential:output_type -> protos.CredentialJoinMembership
+	29, // 87: protos.CredentialCRUDController.GetSecret:output_type -> protos.CredentialJoinMembership
+	44, // [44:88] is the sub-list for method output_type
+	0,  // [0:44] is the sub-list for method input_type
 	0,  // [0:0] is the sub-list for extension type_name
 	0,  // [0:0] is the sub-list for extension extendee
 	0,  // [0:0] is the sub-list for field type_name
@@ -1655,7 +1647,7 @@ type PermissionCRUDControllerClient interface {
 	GetPermissionByGroup(ctx context.Context, in *PermissionGroupInput, opts ...grpc.CallOption) (*PermissionJoinUser, error)
 	UpdatePermissionByGroup(ctx context.Context, in *UpdatePermissionByGroupInput, opts ...grpc.CallOption) (*empty.Empty, error)
 	UpdatePermissionByGroupWithResp(ctx context.Context, in *UpdatePermissionByGroupInput, opts ...grpc.CallOption) (*PermissionJoinUser, error)
-	ListPermissionByGroup(ctx context.Context, in *ListPermissionByGroupInput, opts ...grpc.CallOption) (*PermissionJoinUsers, error)
+	ListPermissionByGroup(ctx context.Context, in *ListPermissionByGroupInput, opts ...grpc.CallOption) (*ListPermissionJoinOuput, error)
 	CheckPermissionByGroup(ctx context.Context, in *PermissionGroupInput, opts ...grpc.CallOption) (*GBoolean, error)
 	CheckPermissionByID(ctx context.Context, in *PermissionID, opts ...grpc.CallOption) (*GBoolean, error)
 	CountPermissionByGroup(ctx context.Context, in *GroupID, opts ...grpc.CallOption) (*CountOutput, error)
@@ -1723,8 +1715,8 @@ func (c *permissionCRUDControllerClient) UpdatePermissionByGroupWithResp(ctx con
 	return out, nil
 }
 
-func (c *permissionCRUDControllerClient) ListPermissionByGroup(ctx context.Context, in *ListPermissionByGroupInput, opts ...grpc.CallOption) (*PermissionJoinUsers, error) {
-	out := new(PermissionJoinUsers)
+func (c *permissionCRUDControllerClient) ListPermissionByGroup(ctx context.Context, in *ListPermissionByGroupInput, opts ...grpc.CallOption) (*ListPermissionJoinOuput, error) {
+	out := new(ListPermissionJoinOuput)
 	err := c.cc.Invoke(ctx, "/protos.PermissionCRUDController/ListPermissionByGroup", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -1767,7 +1759,7 @@ type PermissionCRUDControllerServer interface {
 	GetPermissionByGroup(context.Context, *PermissionGroupInput) (*PermissionJoinUser, error)
 	UpdatePermissionByGroup(context.Context, *UpdatePermissionByGroupInput) (*empty.Empty, error)
 	UpdatePermissionByGroupWithResp(context.Context, *UpdatePermissionByGroupInput) (*PermissionJoinUser, error)
-	ListPermissionByGroup(context.Context, *ListPermissionByGroupInput) (*PermissionJoinUsers, error)
+	ListPermissionByGroup(context.Context, *ListPermissionByGroupInput) (*ListPermissionJoinOuput, error)
 	CheckPermissionByGroup(context.Context, *PermissionGroupInput) (*GBoolean, error)
 	CheckPermissionByID(context.Context, *PermissionID) (*GBoolean, error)
 	CountPermissionByGroup(context.Context, *GroupID) (*CountOutput, error)
@@ -1795,7 +1787,7 @@ func (*UnimplementedPermissionCRUDControllerServer) UpdatePermissionByGroup(cont
 func (*UnimplementedPermissionCRUDControllerServer) UpdatePermissionByGroupWithResp(context.Context, *UpdatePermissionByGroupInput) (*PermissionJoinUser, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdatePermissionByGroupWithResp not implemented")
 }
-func (*UnimplementedPermissionCRUDControllerServer) ListPermissionByGroup(context.Context, *ListPermissionByGroupInput) (*PermissionJoinUsers, error) {
+func (*UnimplementedPermissionCRUDControllerServer) ListPermissionByGroup(context.Context, *ListPermissionByGroupInput) (*ListPermissionJoinOuput, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListPermissionByGroup not implemented")
 }
 func (*UnimplementedPermissionCRUDControllerServer) CheckPermissionByGroup(context.Context, *PermissionGroupInput) (*GBoolean, error) {
@@ -2045,10 +2037,9 @@ var _PermissionCRUDController_serviceDesc = grpc.ServiceDesc{
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type CredentialCRUDControllerClient interface {
-	CreateCredential(ctx context.Context, in *CredentialInfo, opts ...grpc.CallOption) (*empty.Empty, error)
 	UpdateCredential(ctx context.Context, in *UpdateInput, opts ...grpc.CallOption) (*empty.Empty, error)
-	GetCredential(ctx context.Context, in *CredUserGroupInput, opts ...grpc.CallOption) (*CredentailJoinMembership, error)
-	GetSecret(ctx context.Context, in *Access, opts ...grpc.CallOption) (*CredentailJoinMembership, error)
+	GetCredential(ctx context.Context, in *CredUserGroupInput, opts ...grpc.CallOption) (*CredentialJoinMembership, error)
+	GetSecret(ctx context.Context, in *Access, opts ...grpc.CallOption) (*CredentialJoinMembership, error)
 }
 
 type credentialCRUDControllerClient struct {
@@ -2057,15 +2048,6 @@ type credentialCRUDControllerClient struct {
 
 func NewCredentialCRUDControllerClient(cc grpc.ClientConnInterface) CredentialCRUDControllerClient {
 	return &credentialCRUDControllerClient{cc}
-}
-
-func (c *credentialCRUDControllerClient) CreateCredential(ctx context.Context, in *CredentialInfo, opts ...grpc.CallOption) (*empty.Empty, error) {
-	out := new(empty.Empty)
-	err := c.cc.Invoke(ctx, "/protos.CredentialCRUDController/CreateCredential", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
 }
 
 func (c *credentialCRUDControllerClient) UpdateCredential(ctx context.Context, in *UpdateInput, opts ...grpc.CallOption) (*empty.Empty, error) {
@@ -2077,8 +2059,8 @@ func (c *credentialCRUDControllerClient) UpdateCredential(ctx context.Context, i
 	return out, nil
 }
 
-func (c *credentialCRUDControllerClient) GetCredential(ctx context.Context, in *CredUserGroupInput, opts ...grpc.CallOption) (*CredentailJoinMembership, error) {
-	out := new(CredentailJoinMembership)
+func (c *credentialCRUDControllerClient) GetCredential(ctx context.Context, in *CredUserGroupInput, opts ...grpc.CallOption) (*CredentialJoinMembership, error) {
+	out := new(CredentialJoinMembership)
 	err := c.cc.Invoke(ctx, "/protos.CredentialCRUDController/GetCredential", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -2086,8 +2068,8 @@ func (c *credentialCRUDControllerClient) GetCredential(ctx context.Context, in *
 	return out, nil
 }
 
-func (c *credentialCRUDControllerClient) GetSecret(ctx context.Context, in *Access, opts ...grpc.CallOption) (*CredentailJoinMembership, error) {
-	out := new(CredentailJoinMembership)
+func (c *credentialCRUDControllerClient) GetSecret(ctx context.Context, in *Access, opts ...grpc.CallOption) (*CredentialJoinMembership, error) {
+	out := new(CredentialJoinMembership)
 	err := c.cc.Invoke(ctx, "/protos.CredentialCRUDController/GetSecret", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -2097,49 +2079,27 @@ func (c *credentialCRUDControllerClient) GetSecret(ctx context.Context, in *Acce
 
 // CredentialCRUDControllerServer is the server API for CredentialCRUDController service.
 type CredentialCRUDControllerServer interface {
-	CreateCredential(context.Context, *CredentialInfo) (*empty.Empty, error)
 	UpdateCredential(context.Context, *UpdateInput) (*empty.Empty, error)
-	GetCredential(context.Context, *CredUserGroupInput) (*CredentailJoinMembership, error)
-	GetSecret(context.Context, *Access) (*CredentailJoinMembership, error)
+	GetCredential(context.Context, *CredUserGroupInput) (*CredentialJoinMembership, error)
+	GetSecret(context.Context, *Access) (*CredentialJoinMembership, error)
 }
 
 // UnimplementedCredentialCRUDControllerServer can be embedded to have forward compatible implementations.
 type UnimplementedCredentialCRUDControllerServer struct {
 }
 
-func (*UnimplementedCredentialCRUDControllerServer) CreateCredential(context.Context, *CredentialInfo) (*empty.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CreateCredential not implemented")
-}
 func (*UnimplementedCredentialCRUDControllerServer) UpdateCredential(context.Context, *UpdateInput) (*empty.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateCredential not implemented")
 }
-func (*UnimplementedCredentialCRUDControllerServer) GetCredential(context.Context, *CredUserGroupInput) (*CredentailJoinMembership, error) {
+func (*UnimplementedCredentialCRUDControllerServer) GetCredential(context.Context, *CredUserGroupInput) (*CredentialJoinMembership, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetCredential not implemented")
 }
-func (*UnimplementedCredentialCRUDControllerServer) GetSecret(context.Context, *Access) (*CredentailJoinMembership, error) {
+func (*UnimplementedCredentialCRUDControllerServer) GetSecret(context.Context, *Access) (*CredentialJoinMembership, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetSecret not implemented")
 }
 
 func RegisterCredentialCRUDControllerServer(s *grpc.Server, srv CredentialCRUDControllerServer) {
 	s.RegisterService(&_CredentialCRUDController_serviceDesc, srv)
-}
-
-func _CredentialCRUDController_CreateCredential_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CredentialInfo)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CredentialCRUDControllerServer).CreateCredential(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/protos.CredentialCRUDController/CreateCredential",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CredentialCRUDControllerServer).CreateCredential(ctx, req.(*CredentialInfo))
-	}
-	return interceptor(ctx, in, info, handler)
 }
 
 func _CredentialCRUDController_UpdateCredential_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -2200,10 +2160,6 @@ var _CredentialCRUDController_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "protos.CredentialCRUDController",
 	HandlerType: (*CredentialCRUDControllerServer)(nil),
 	Methods: []grpc.MethodDesc{
-		{
-			MethodName: "CreateCredential",
-			Handler:    _CredentialCRUDController_CreateCredential_Handler,
-		},
 		{
 			MethodName: "UpdateCredential",
 			Handler:    _CredentialCRUDController_UpdateCredential_Handler,

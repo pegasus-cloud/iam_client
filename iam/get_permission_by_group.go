@@ -8,27 +8,24 @@ import (
 	"google.golang.org/grpc"
 )
 
-func getPermissionByGroup(c grpc.ClientConnInterface, groupID string) (output *protos.PermissionJoinUser, err error) {
+func getPermissionByGroup(c grpc.ClientConnInterface, input *protos.PermissionGroupInput) (output *protos.PermissionJoinUser, err error) {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 	defer cancel()
-	permission, err := protos.NewPermissionCRUDControllerClient(c).GetPermissionByGroup(ctx, &protos.PermissionGroupInput{
-		GroupID: groupID,
-	})
-	return permission, err
+	return protos.NewPermissionCRUDControllerClient(c).GetPermissionByGroup(ctx, input)
 }
 
 // GetPermissionByGroup ...
-func GetPermissionByGroup(groupID string) (output *protos.PermissionJoinUser, err error) {
-	return getPermissionByGroup(use().conn, groupID)
+func GetPermissionByGroup(input *protos.PermissionGroupInput) (output *protos.PermissionJoinUser, err error) {
+	return getPermissionByGroup(use().conn, input)
 }
 
 // GetPermissionByGroup ...
-func (cp *ConnProvider) GetPermissionByGroup(groupID string) (output *protos.PermissionJoinUser, err error) {
-	return getPermissionByGroup(cp.init().conn, groupID)
+func (cp *ConnProvider) GetPermissionByGroup(input *protos.PermissionGroupInput) (output *protos.PermissionJoinUser, err error) {
+	return getPermissionByGroup(cp.init().conn, input)
 }
 
-func getPermissionByGroupMap(c grpc.ClientConnInterface, groupID string) (output map[string]interface{}, err error) {
-	permission, err := getPermissionByGroup(c, groupID)
+func getPermissionByGroupMap(c grpc.ClientConnInterface, input *protos.PermissionGroupInput) (output map[string]interface{}, err error) {
+	permission, err := getPermissionByGroup(c, input)
 	if err != nil {
 		return nil, err
 	}
@@ -37,11 +34,11 @@ func getPermissionByGroupMap(c grpc.ClientConnInterface, groupID string) (output
 }
 
 // GetPermissionByGroupMap ...
-func GetPermissionByGroupMap(userID, groupID string) (output map[string]interface{}, err error) {
-	return getPermissionByGroupMap(use().conn, groupID)
+func GetPermissionByGroupMap(input *protos.PermissionGroupInput) (output map[string]interface{}, err error) {
+	return getPermissionByGroupMap(use().conn, input)
 }
 
 // GetPermissionByGroupMap ...
-func (cp *ConnProvider) GetPermissionByGroupMap(userID, groupID string) (output map[string]interface{}, err error) {
-	return getPermissionByGroupMap(cp.init().conn, groupID)
+func (cp *ConnProvider) GetPermissionByGroupMap(input *protos.PermissionGroupInput) (output map[string]interface{}, err error) {
+	return getPermissionByGroupMap(cp.init().conn, input)
 }

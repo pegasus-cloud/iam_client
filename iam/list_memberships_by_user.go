@@ -8,35 +8,25 @@ import (
 	"google.golang.org/grpc"
 )
 
-func listMembershipsByUser(c grpc.ClientConnInterface, userID string, limit, offset int) (output *protos.ListMembershipJoinOutput, err error) {
+func listMembershipsByUser(c grpc.ClientConnInterface, input *protos.ListMembershipByUserInput) (output *protos.ListMembershipJoinOutput, err error) {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 	defer cancel()
-	memberships, err := protos.NewMembershipCRUDControllerClient(c).ListMembershipByUser(ctx, &protos.ListMembershipByUserInput{
-		UserID: userID,
-		Data: &protos.LimitOffset{
-			Limit:  int32(limit),
-			Offset: int32(offset),
-		},
-	})
-	if err != nil {
-		return nil, err
-	}
-	return memberships, nil
+	return protos.NewMembershipCRUDControllerClient(c).ListMembershipByUser(ctx, input)
 }
 
 // ListMembershipsByUser ...
-func ListMembershipsByUser(userID string, limit, offset int) (output *protos.ListMembershipJoinOutput, err error) {
-	return listMembershipsByUser(use().conn, userID, limit, offset)
+func ListMembershipsByUser(input *protos.ListMembershipByUserInput) (output *protos.ListMembershipJoinOutput, err error) {
+	return listMembershipsByUser(use().conn, input)
 }
 
 // ListMembershipsByUser ...
-func (cp *ConnProvider) ListMembershipsByUser(userID string, limit, offset int) (output *protos.ListMembershipJoinOutput, err error) {
-	return listMembershipsByUser(cp.init().conn, userID, limit, offset)
+func (cp *ConnProvider) ListMembershipsByUser(input *protos.ListMembershipByUserInput) (output *protos.ListMembershipJoinOutput, err error) {
+	return listMembershipsByUser(cp.init().conn, input)
 }
 
-func listMembershipsByUserMap(c grpc.ClientConnInterface, userID string, limit, offset int) (output map[string]interface{}, err error) {
+func listMembershipsByUserMap(c grpc.ClientConnInterface, input *protos.ListMembershipByUserInput) (output map[string]interface{}, err error) {
 	output = make(map[string]interface{})
-	memberships, err := listMembershipsByUser(c, userID, limit, offset)
+	memberships, err := listMembershipsByUser(c, input)
 	if err != nil {
 		return output, err
 	}
@@ -46,19 +36,11 @@ func listMembershipsByUserMap(c grpc.ClientConnInterface, userID string, limit, 
 }
 
 // ListMembershipsByUserMap ...
-func ListMembershipsByUserMap(userID string, limit, offset int) (output map[string]interface{}, err error) {
-	memberships, err := listMembershipsByUserMap(use().conn, userID, limit, offset)
-	if err != nil {
-		return nil, err
-	}
-	return memberships, nil
+func ListMembershipsByUserMap(input *protos.ListMembershipByUserInput) (output map[string]interface{}, err error) {
+	return listMembershipsByUserMap(use().conn, input)
 }
 
 // ListMembershipsByUserMap ...
-func (cp *ConnProvider) ListMembershipsByUserMap(userID string, limit, offset int) (output map[string]interface{}, err error) {
-	memberships, err := listMembershipsByUserMap(cp.init().conn, userID, limit, offset)
-	if err != nil {
-		return nil, err
-	}
-	return memberships, nil
+func (cp *ConnProvider) ListMembershipsByUserMap(input *protos.ListMembershipByUserInput) (output map[string]interface{}, err error) {
+	return listMembershipsByUserMap(cp.init().conn, input)
 }
