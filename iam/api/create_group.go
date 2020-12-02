@@ -28,7 +28,9 @@ func createGroup(c *gin.Context) {
 	} else {
 		for true {
 			groupInfo.GroupID = utility.GetRandNumeric(16)
-			if output, err := iam.GetGroup(groupInfo.GroupID); err != nil {
+			if output, err := iam.GetGroup(&protos.GroupID{
+				ID: c.Param(groupIDParams),
+			}); err != nil {
 				utility.ResponseWithType(c, http.StatusInternalServerError, &utility.ErrResponse{
 					Message: iamServerErrMsg,
 				})

@@ -25,7 +25,6 @@ type (
 func (uui *updateUserInput) convertToMap() (output map[string]*any.Any) {
 	output = make(map[string]*anypb.Any)
 	e := reflect.ValueOf(uui).Elem()
-
 	for i := 0; i < e.NumField(); i++ {
 		key, value := e.Type().Field(i).Name, e.Field(i).Interface()
 		if value.(*string) != nil {
@@ -37,17 +36,14 @@ func (uui *updateUserInput) convertToMap() (output map[string]*any.Any) {
 
 func updateUser(c *gin.Context) {
 	updateUserInput := &updateUserInput{}
-
 	if err := c.ShouldBindWith(updateUserInput, binding.JSON); err != nil {
 		utility.ResponseWithType(c, http.StatusBadRequest, &utility.ErrResponse{
 			Message: utility.ConvertError(err).Error(),
 		})
 		return
 	}
-
 	updateUserInputMap := make(map[string]*any.Any)
 	updateUserInputMap = updateUserInput.convertToMap()
-
 	if err := iam.UpdateUser(&protos.UpdateInput{
 		ID:   c.Param(userIDParams),
 		Data: updateUserInputMap,
@@ -57,14 +53,14 @@ func updateUser(c *gin.Context) {
 		})
 		return
 	}
-
-	getUserOutput, err := iam.GetUser(c.Param(userIDParams))
+	getUserOutput, err := iam.GetUser(&protos.UserID{
+		ID: c.Param(userIDParams),
+	})
 	if err != nil {
 		utility.ResponseWithType(c, http.StatusInternalServerError, &utility.ErrResponse{
 			Message: err.Error(),
 		})
 	}
-
 	utility.ResponseWithType(c, http.StatusOK, user{
 		UserID:      getUserOutput.ID,
 		DisplayName: getUserOutput.DisplayName,

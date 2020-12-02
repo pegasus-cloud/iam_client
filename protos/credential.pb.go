@@ -159,7 +159,7 @@ func (x *CredUserGroupInput) GetGroupID() string {
 	return ""
 }
 
-type CredentailJoinMembership struct {
+type CredentialJoinMembership struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -171,8 +171,8 @@ type CredentailJoinMembership struct {
 	UserID       string `protobuf:"bytes,5,opt,name=UserID,proto3" json:"UserID,omitempty"`
 }
 
-func (x *CredentailJoinMembership) Reset() {
-	*x = CredentailJoinMembership{}
+func (x *CredentialJoinMembership) Reset() {
+	*x = CredentialJoinMembership{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_credential_proto_msgTypes[2]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -180,13 +180,13 @@ func (x *CredentailJoinMembership) Reset() {
 	}
 }
 
-func (x *CredentailJoinMembership) String() string {
+func (x *CredentialJoinMembership) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*CredentailJoinMembership) ProtoMessage() {}
+func (*CredentialJoinMembership) ProtoMessage() {}
 
-func (x *CredentailJoinMembership) ProtoReflect() protoreflect.Message {
+func (x *CredentialJoinMembership) ProtoReflect() protoreflect.Message {
 	mi := &file_credential_proto_msgTypes[2]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -198,40 +198,40 @@ func (x *CredentailJoinMembership) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CredentailJoinMembership.ProtoReflect.Descriptor instead.
-func (*CredentailJoinMembership) Descriptor() ([]byte, []int) {
+// Deprecated: Use CredentialJoinMembership.ProtoReflect.Descriptor instead.
+func (*CredentialJoinMembership) Descriptor() ([]byte, []int) {
 	return file_credential_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *CredentailJoinMembership) GetAccess() string {
+func (x *CredentialJoinMembership) GetAccess() string {
 	if x != nil {
 		return x.Access
 	}
 	return ""
 }
 
-func (x *CredentailJoinMembership) GetSecret() string {
+func (x *CredentialJoinMembership) GetSecret() string {
 	if x != nil {
 		return x.Secret
 	}
 	return ""
 }
 
-func (x *CredentailJoinMembership) GetMembershipID() string {
+func (x *CredentialJoinMembership) GetMembershipID() string {
 	if x != nil {
 		return x.MembershipID
 	}
 	return ""
 }
 
-func (x *CredentailJoinMembership) GetGroupID() string {
+func (x *CredentialJoinMembership) GetGroupID() string {
 	if x != nil {
 		return x.GroupID
 	}
 	return ""
 }
 
-func (x *CredentailJoinMembership) GetUserID() string {
+func (x *CredentialJoinMembership) GetUserID() string {
 	if x != nil {
 		return x.UserID
 	}
@@ -305,7 +305,7 @@ var file_credential_proto_rawDesc = []byte{
 	0x01, 0x28, 0x09, 0x52, 0x06, 0x55, 0x73, 0x65, 0x72, 0x49, 0x44, 0x12, 0x18, 0x0a, 0x07, 0x47,
 	0x72, 0x6f, 0x75, 0x70, 0x49, 0x44, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x47, 0x72,
 	0x6f, 0x75, 0x70, 0x49, 0x44, 0x22, 0xa0, 0x01, 0x0a, 0x18, 0x43, 0x72, 0x65, 0x64, 0x65, 0x6e,
-	0x74, 0x61, 0x69, 0x6c, 0x4a, 0x6f, 0x69, 0x6e, 0x4d, 0x65, 0x6d, 0x62, 0x65, 0x72, 0x73, 0x68,
+	0x74, 0x69, 0x61, 0x6c, 0x4a, 0x6f, 0x69, 0x6e, 0x4d, 0x65, 0x6d, 0x62, 0x65, 0x72, 0x73, 0x68,
 	0x69, 0x70, 0x12, 0x16, 0x0a, 0x06, 0x41, 0x63, 0x63, 0x65, 0x73, 0x73, 0x18, 0x01, 0x20, 0x01,
 	0x28, 0x09, 0x52, 0x06, 0x41, 0x63, 0x63, 0x65, 0x73, 0x73, 0x12, 0x16, 0x0a, 0x06, 0x53, 0x65,
 	0x63, 0x72, 0x65, 0x74, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x53, 0x65, 0x63, 0x72,
@@ -335,7 +335,7 @@ var file_credential_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_credential_proto_goTypes = []interface{}{
 	(*CredentialInfo)(nil),           // 0: protos.CredentialInfo
 	(*CredUserGroupInput)(nil),       // 1: protos.CredUserGroupInput
-	(*CredentailJoinMembership)(nil), // 2: protos.CredentailJoinMembership
+	(*CredentialJoinMembership)(nil), // 2: protos.CredentialJoinMembership
 	(*Access)(nil),                   // 3: protos.Access
 }
 var file_credential_proto_depIdxs = []int32{
@@ -377,7 +377,7 @@ func file_credential_proto_init() {
 			}
 		}
 		file_credential_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CredentailJoinMembership); i {
+			switch v := v.(*CredentialJoinMembership); i {
 			case 0:
 				return &v.state
 			case 1:

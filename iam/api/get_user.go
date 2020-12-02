@@ -5,11 +5,14 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/pegasus-cloud/iam_client/iam"
+	"github.com/pegasus-cloud/iam_client/protos"
 	"github.com/pegasus-cloud/iam_client/utility"
 )
 
 func getUser(c *gin.Context) {
-	getUserOutput, err := iam.GetUser(c.Param(userIDParams))
+	getUserOutput, err := iam.GetUser(&protos.UserID{
+		ID: c.Param(userIDParams),
+	})
 	if err != nil {
 		utility.ResponseWithType(c, http.StatusInternalServerError, &utility.ErrResponse{
 			Message: iamServerErrMsg,

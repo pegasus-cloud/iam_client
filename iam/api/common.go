@@ -25,8 +25,9 @@ const (
 	adminGroupShouldNotBeFrozen         = "Can't set frozen on group of administrator"
 	adminAndSystemUserShouldNotBeFrozen = "Can't set frozen on administrator or system user"
 
-	userIDParams  = "user-id"
-	groupIDParams = "group-id"
+	userIDParams       = "user-id"
+	groupIDParams      = "group-id"
+	membershipIDParams = "membership-id"
 
 	adminGroupID = "administrator"
 	adminUserID  = "administrator"
@@ -96,10 +97,20 @@ type (
 		Actions []string `json:"actions" xml:"actions"`
 		_       struct{}
 	}
+	credential struct {
+		AccessKey    string `json:"accessKey,omitempty" xml:"accessKey,omitempty"`
+		SecretKey    string `json:"secretKey,omitempty" xml:"secretKey,omitempty"`
+		MembershipID string `json:"membershipId,omitempty" xml:"membershipId,omitempty"`
+		GroupID      string `json:"groupId,omitempty" xml:"groupId,omitempty"`
+		UserID       string `json:"userId,omitempty" xml:"userId,omitempty"`
+		_            struct{}
+	}
 )
 
 func checkUserExist(c *gin.Context, userID string, expectExist bool) (statusCode int, err error) {
-	getUserOutput, err := iam.GetUser(userID)
+	getUserOutput, err := iam.GetUser(&protos.UserID{
+		ID: userID,
+	})
 	if err != nil {
 		return http.StatusInternalServerError, errors.New(iamServerErrMsg)
 	}
@@ -112,7 +123,9 @@ func checkUserExist(c *gin.Context, userID string, expectExist bool) (statusCode
 }
 
 func checkGroupExist(c *gin.Context, groupID string, expectExist bool) (statusCode int, err error) {
-	getGroupOutput, err := iam.GetGroup(groupID)
+	getGroupOutput, err := iam.GetGroup(&protos.GroupID{
+		ID: groupID,
+	})
 	if err != nil {
 		return http.StatusInternalServerError, errors.New(iamServerErrMsg)
 	}
@@ -125,7 +138,10 @@ func checkGroupExist(c *gin.Context, groupID string, expectExist bool) (statusCo
 }
 
 func checkMembershipExist(c *gin.Context, userID, groupID string, expectExist bool) (statusCode int, err error) {
-	getMembershipOutput, err := iam.GetMembership(userID, groupID)
+	getMembershipOutput, err := iam.GetMembership(&protos.MemUserGroupInput{
+		UserID:  userID,
+		GroupID: groupID,
+	})
 	if err != nil {
 		return http.StatusInternalServerError, errors.New(iamServerErrMsg)
 	}
@@ -134,13 +150,13 @@ func checkMembershipExist(c *gin.Context, userID, groupID string, expectExist bo
 	} else if getMembershipOutput.ID != "" && !expectExist {
 		return http.StatusBadRequest, errors.New(membershipExistErrMsg)
 	}
+	c.Set(membershipIDParams, getMembershipOutput.ID)
 	return http.StatusOK, nil
 }
 
 func checkPermissionExist(c *gin.Context, permissionID, groupID string, expectExist bool) (statusCode int, err error) {
-	permissionExist, err := iam.CheckPermissionByGroup(&protos.PermissionGroupInput{
-		PermissionID: permissionID,
-		GroupID:      groupID,
+	permissionExist, err := iam.CheckPermissionByID(&protos.PermissionID{
+		ID: permissionID,
 	})
 	if err != nil {
 		return http.StatusInternalServerError, errors.New(iamServerErrMsg)

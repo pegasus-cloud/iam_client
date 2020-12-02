@@ -6,6 +6,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/gin-gonic/gin/binding"
 	"github.com/pegasus-cloud/iam_client/iam"
+	"github.com/pegasus-cloud/iam_client/protos"
 	"github.com/pegasus-cloud/iam_client/utility"
 )
 
@@ -27,7 +28,13 @@ func listMembershipsByGroup(c *gin.Context) {
 		return
 	}
 
-	memberships, err := iam.ListMembershipsByGroup(c.Param(groupIDParams), pagination.Limit, pagination.Offset)
+	memberships, err := iam.ListMembershipsByGroup(&protos.ListMembershipByGroupInput{
+		GroupID: c.Param(groupIDParams),
+		Data: &protos.LimitOffset{
+			Limit:  int32(pagination.Limit),
+			Offset: int32(pagination.Offset),
+		},
+	})
 	if err != nil {
 		utility.ResponseWithType(c, http.StatusInternalServerError, &utility.ErrResponse{
 			Message: err.Error(),

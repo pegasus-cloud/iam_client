@@ -24,3 +24,35 @@ func UpdateGroup(input *protos.UpdateInput) (err error) {
 func (cp *ConnProvider) UpdateGroup(input *protos.UpdateInput) (err error) {
 	return updateGroup(cp.init().conn, input)
 }
+
+func updateGroupWithResp(c grpc.ClientConnInterface, input *protos.UpdateInput) (group *protos.GroupInfo, err error) {
+	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
+	defer cancel()
+	return protos.NewGroupCRUDControllerClient(c).UpdateGroupWithResp(ctx, input)
+}
+
+// UpdateGroupWithResp ...
+func UpdateGroupWithResp(input *protos.UpdateInput) (permission *protos.GroupInfo, err error) {
+	return updateGroupWithResp(use().conn, input)
+}
+
+// UpdateGroupWithResp ...
+func (cp *ConnProvider) UpdateGroupWithResp(input *protos.UpdateInput) (permission *protos.GroupInfo, err error) {
+	return updateGroupWithResp(cp.init().conn, input)
+}
+
+func updateGroupWithRespMap(c grpc.ClientConnInterface, input *protos.UpdateInput) (output map[string]interface{}, err error) {
+	group, err := updateGroupWithResp(c, input)
+	var groups []*protos.GroupInfo
+	return convert(append(groups, group)), err
+}
+
+// UpdateGroupWithRespMap ...
+func UpdateGroupWithRespMap(input *protos.UpdateInput) (output map[string]interface{}, err error) {
+	return updateGroupWithRespMap(use().conn, input)
+}
+
+// UpdateGroupWithRespMap ...
+func (cp *ConnProvider) UpdateGroupWithRespMap(input *protos.UpdateInput) (output map[string]interface{}, err error) {
+	return updateGroupWithRespMap(cp.init().conn, input)
+}
