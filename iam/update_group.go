@@ -41,18 +41,18 @@ func (cp *ConnProvider) UpdateGroupWithResp(input *protos.UpdateInput) (permissi
 	return updateGroupWithResp(cp.init().conn, input)
 }
 
-func updateGroupWithRespMap(c grpc.ClientConnInterface, input *protos.UpdateInput) (output map[string]interface{}, err error) {
+func updateGroupWithRespMap(c grpc.ClientConnInterface, input *protos.UpdateInput) (output map[string]*protos.GroupInfo, err error) {
 	group, err := updateGroupWithResp(c, input)
-	var groups []*protos.GroupInfo
-	return convert(append(groups, group)), err
+	output[group.ID] = group
+	return output, err
 }
 
 // UpdateGroupWithRespMap ...
-func UpdateGroupWithRespMap(input *protos.UpdateInput) (output map[string]interface{}, err error) {
+func UpdateGroupWithRespMap(input *protos.UpdateInput) (output map[string]*protos.GroupInfo, err error) {
 	return updateGroupWithRespMap(use().conn, input)
 }
 
 // UpdateGroupWithRespMap ...
-func (cp *ConnProvider) UpdateGroupWithRespMap(input *protos.UpdateInput) (output map[string]interface{}, err error) {
+func (cp *ConnProvider) UpdateGroupWithRespMap(input *protos.UpdateInput) (output map[string]*protos.GroupInfo, err error) {
 	return updateGroupWithRespMap(cp.init().conn, input)
 }

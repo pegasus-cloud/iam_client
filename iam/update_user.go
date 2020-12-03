@@ -41,18 +41,18 @@ func (cp *ConnProvider) UpdateUserWithResp(input *protos.UpdateInput) (permissio
 	return updateUserWithResp(cp.init().conn, input)
 }
 
-func updateUserWithRespMap(c grpc.ClientConnInterface, input *protos.UpdateInput) (output map[string]interface{}, err error) {
+func updateUserWithRespMap(c grpc.ClientConnInterface, input *protos.UpdateInput) (output map[string]*protos.UserInfo, err error) {
 	user, err := updateUserWithResp(c, input)
-	var users []*protos.UserInfo
-	return convert(append(users, user)), err
+	output[user.ID] = user
+	return output, err
 }
 
 // UpdateUserWithRespMap ...
-func UpdateUserWithRespMap(input *protos.UpdateInput) (output map[string]interface{}, err error) {
+func UpdateUserWithRespMap(input *protos.UpdateInput) (output map[string]*protos.UserInfo, err error) {
 	return updateUserWithRespMap(use().conn, input)
 }
 
 // UpdateUserWithRespMap ...
-func (cp *ConnProvider) UpdateUserWithRespMap(input *protos.UpdateInput) (output map[string]interface{}, err error) {
+func (cp *ConnProvider) UpdateUserWithRespMap(input *protos.UpdateInput) (output map[string]*protos.UserInfo, err error) {
 	return updateUserWithRespMap(cp.init().conn, input)
 }

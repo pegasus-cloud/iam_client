@@ -41,18 +41,18 @@ func (cp *ConnProvider) CreateGroupWithResp(input *protos.GroupInfo) (output *pr
 	return createGroupWithResp(cp.init().conn, input)
 }
 
-func createGroupWithRespMap(c grpc.ClientConnInterface, input *protos.GroupInfo) (output map[string]interface{}, err error) {
+func createGroupWithRespMap(c grpc.ClientConnInterface, input *protos.GroupInfo) (output map[string]*protos.GroupInfo, err error) {
 	group, err := createGroupWithResp(c, input)
-	var groups []*protos.GroupInfo
-	return convert(append(groups, group)), err
+	output[group.ID] = group
+	return output, err
 }
 
 // CreateGroupWithRespMap ...
-func CreateGroupWithRespMap(input *protos.GroupInfo) (output map[string]interface{}, err error) {
+func CreateGroupWithRespMap(input *protos.GroupInfo) (output map[string]*protos.GroupInfo, err error) {
 	return createGroupWithRespMap(use().conn, input)
 }
 
 // CreateGroupWithRespMap ...
-func (cp *ConnProvider) CreateGroupWithRespMap(input *protos.GroupInfo) (output map[string]interface{}, err error) {
+func (cp *ConnProvider) CreateGroupWithRespMap(input *protos.GroupInfo) (output map[string]*protos.GroupInfo, err error) {
 	return createGroupWithRespMap(cp.init().conn, input)
 }

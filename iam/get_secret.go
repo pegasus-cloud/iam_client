@@ -24,21 +24,18 @@ func (cp *ConnProvider) GetSecret(input *protos.Access) (output *protos.Credenti
 	return getSecret(cp.init().conn, input)
 }
 
-func getSecretMap(c grpc.ClientConnInterface, input *protos.Access) (output map[string]interface{}, err error) {
+func getSecretMap(c grpc.ClientConnInterface, input *protos.Access) (output map[string]*protos.CredentialJoinMembership, err error) {
 	credential, err := getSecret(c, input)
-	if err != nil {
-		return nil, err
-	}
-	var credentials []*protos.CredentialJoinMembership
-	return convert(append(credentials, credential)), nil
+	output[credential.UserID] = credential
+	return output, err
 }
 
 // GetSecretMap ...
-func GetSecretMap(input *protos.Access) (output map[string]interface{}, err error) {
+func GetSecretMap(input *protos.Access) (output map[string]*protos.CredentialJoinMembership, err error) {
 	return getSecretMap(use().conn, input)
 }
 
 // GetSecretMap ...
-func (cp *ConnProvider) GetSecretMap(input *protos.Access) (output map[string]interface{}, err error) {
+func (cp *ConnProvider) GetSecretMap(input *protos.Access) (output map[string]*protos.CredentialJoinMembership, err error) {
 	return getSecretMap(cp.init().conn, input)
 }

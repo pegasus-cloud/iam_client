@@ -24,23 +24,20 @@ func (cp *ConnProvider) ListUsers(input *protos.LimitOffset) (output *protos.Lis
 	return listUsers(cp.init().conn, input)
 }
 
-func listUsersMap(c grpc.ClientConnInterface, input *protos.LimitOffset) (output map[string]interface{}, err error) {
-	output = make(map[string]interface{})
+func listUsersMap(c grpc.ClientConnInterface, input *protos.LimitOffset) (output map[string]*protos.UserInfo, count int64, err error) {
 	users, err := listUsers(c, input)
-	if err != nil {
-		return output, err
+	for _, user := range users.Data {
+		output[user.ID] = user
 	}
-	output = convert(users.Data)
-	output["count"] = users.Count
-	return output, nil
+	return output, users.Count, err
 }
 
 // ListUsersMap ...
-func ListUsersMap(input *protos.LimitOffset) (output map[string]interface{}, err error) {
+func ListUsersMap(input *protos.LimitOffset) (output map[string]*protos.UserInfo, count int64, err error) {
 	return listUsersMap(use().conn, input)
 }
 
 // ListUsersMap ...
-func (cp *ConnProvider) ListUsersMap(input *protos.LimitOffset) (output map[string]interface{}, err error) {
+func (cp *ConnProvider) ListUsersMap(input *protos.LimitOffset) (output map[string]*protos.UserInfo, count int64, err error) {
 	return listUsersMap(cp.init().conn, input)
 }

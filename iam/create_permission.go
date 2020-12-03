@@ -41,18 +41,18 @@ func (cp *ConnProvider) CreatePermissionWithResp(input *protos.PermissionInfo) (
 	return createPermissionWithResp(cp.init().conn, input)
 }
 
-func createPermissionWithRespMap(c grpc.ClientConnInterface, input *protos.PermissionInfo) (output map[string]interface{}, err error) {
+func createPermissionWithRespMap(c grpc.ClientConnInterface, input *protos.PermissionInfo) (output map[string]*protos.PermissionJoinUser, err error) {
 	permission, err := createPermissionWithResp(c, input)
-	var permissions []*protos.PermissionJoinUser
-	return convert(append(permissions, permission)), err
+	output[permission.ID] = permission
+	return output, err
 }
 
 // CreatePermissionWithRespMap ...
-func CreatePermissionWithRespMap(input *protos.PermissionInfo) (output map[string]interface{}, err error) {
+func CreatePermissionWithRespMap(input *protos.PermissionInfo) (output map[string]*protos.PermissionJoinUser, err error) {
 	return createPermissionWithRespMap(use().conn, input)
 }
 
 // CreatePermissionWithRespMap ...
-func (cp *ConnProvider) CreatePermissionWithRespMap(input *protos.PermissionInfo) (output map[string]interface{}, err error) {
+func (cp *ConnProvider) CreatePermissionWithRespMap(input *protos.PermissionInfo) (output map[string]*protos.PermissionJoinUser, err error) {
 	return createPermissionWithRespMap(cp.init().conn, input)
 }

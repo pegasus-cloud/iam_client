@@ -41,18 +41,18 @@ func (cp *ConnProvider) CreateUserWithResp(input *protos.UserInfo) (output *prot
 	return createUserWithResp(cp.init().conn, input)
 }
 
-func createUserWithRespMap(c grpc.ClientConnInterface, input *protos.UserInfo) (output map[string]interface{}, err error) {
+func createUserWithRespMap(c grpc.ClientConnInterface, input *protos.UserInfo) (output map[string]*protos.UserInfo, err error) {
 	user, err := createUserWithResp(c, input)
-	var users []*protos.UserInfo
-	return convert(append(users, user)), err
+	output[user.ID] = user
+	return output, err
 }
 
 // CreateUserWithRespMap ...
-func CreateUserWithRespMap(input *protos.UserInfo) (output map[string]interface{}, err error) {
+func CreateUserWithRespMap(input *protos.UserInfo) (output map[string]*protos.UserInfo, err error) {
 	return createUserWithRespMap(use().conn, input)
 }
 
 // CreateUserWithRespMap ...
-func (cp *ConnProvider) CreateUserWithRespMap(input *protos.UserInfo) (output map[string]interface{}, err error) {
+func (cp *ConnProvider) CreateUserWithRespMap(input *protos.UserInfo) (output map[string]*protos.UserInfo, err error) {
 	return createUserWithRespMap(cp.init().conn, input)
 }

@@ -24,21 +24,18 @@ func (cp *ConnProvider) GetPermissionByGroup(input *protos.PermissionGroupInput)
 	return getPermissionByGroup(cp.init().conn, input)
 }
 
-func getPermissionByGroupMap(c grpc.ClientConnInterface, input *protos.PermissionGroupInput) (output map[string]interface{}, err error) {
+func getPermissionByGroupMap(c grpc.ClientConnInterface, input *protos.PermissionGroupInput) (output map[string]*protos.PermissionJoinUser, err error) {
 	permission, err := getPermissionByGroup(c, input)
-	if err != nil {
-		return nil, err
-	}
-	var permissions []*protos.PermissionJoinUser
-	return convert(append(permissions, permission)), nil
+	output[permission.ID] = permission
+	return output, err
 }
 
 // GetPermissionByGroupMap ...
-func GetPermissionByGroupMap(input *protos.PermissionGroupInput) (output map[string]interface{}, err error) {
+func GetPermissionByGroupMap(input *protos.PermissionGroupInput) (output map[string]*protos.PermissionJoinUser, err error) {
 	return getPermissionByGroupMap(use().conn, input)
 }
 
 // GetPermissionByGroupMap ...
-func (cp *ConnProvider) GetPermissionByGroupMap(input *protos.PermissionGroupInput) (output map[string]interface{}, err error) {
+func (cp *ConnProvider) GetPermissionByGroupMap(input *protos.PermissionGroupInput) (output map[string]*protos.PermissionJoinUser, err error) {
 	return getPermissionByGroupMap(cp.init().conn, input)
 }

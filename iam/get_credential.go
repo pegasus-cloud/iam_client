@@ -24,21 +24,18 @@ func (cp *ConnProvider) GetCredential(input *protos.CredUserGroupInput) (output 
 	return getCredential(cp.init().conn, input)
 }
 
-func getCredentialMap(c grpc.ClientConnInterface, input *protos.CredUserGroupInput) (output map[string]interface{}, err error) {
+func getCredentialMap(c grpc.ClientConnInterface, input *protos.CredUserGroupInput) (output map[string]*protos.CredentialJoinMembership, err error) {
 	credential, err := getCredential(c, input)
-	if err != nil {
-		return nil, err
-	}
-	var credentials []*protos.CredentialJoinMembership
-	return convert(append(credentials, credential)), nil
+	output[credential.UserID] = credential
+	return output, err
 }
 
 // GetCredentialMap ...
-func GetCredentialMap(input *protos.CredUserGroupInput) (output map[string]interface{}, err error) {
+func GetCredentialMap(input *protos.CredUserGroupInput) (output map[string]*protos.CredentialJoinMembership, err error) {
 	return getCredentialMap(use().conn, input)
 }
 
 // GetCredentialMap ...
-func (cp *ConnProvider) GetCredentialMap(input *protos.CredUserGroupInput) (output map[string]interface{}, err error) {
+func (cp *ConnProvider) GetCredentialMap(input *protos.CredUserGroupInput) (output map[string]*protos.CredentialJoinMembership, err error) {
 	return getCredentialMap(cp.init().conn, input)
 }
