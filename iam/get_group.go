@@ -24,21 +24,18 @@ func (cp *ConnProvider) GetGroup(input *protos.GroupID) (output *protos.GroupInf
 	return getGroup(cp.init().conn, input)
 }
 
-func getGroupMap(c grpc.ClientConnInterface, input *protos.GroupID) (output map[string]interface{}, err error) {
+func getGroupMap(c grpc.ClientConnInterface, input *protos.GroupID) (output map[string]*protos.GroupInfo, err error) {
 	group, err := getGroup(c, input)
-	if err != nil {
-		return nil, err
-	}
-	var groups []*protos.GroupInfo
-	return convert(append(groups, group)), nil
+	output[group.ID] = group
+	return output, err
 }
 
 // GetGroupMap ...
-func GetGroupMap(input *protos.GroupID) (output map[string]interface{}, err error) {
+func GetGroupMap(input *protos.GroupID) (output map[string]*protos.GroupInfo, err error) {
 	return getGroupMap(use().conn, input)
 }
 
 // GetGroupMap ...
-func (cp *ConnProvider) GetGroupMap(input *protos.GroupID) (output map[string]interface{}, err error) {
+func (cp *ConnProvider) GetGroupMap(input *protos.GroupID) (output map[string]*protos.GroupInfo, err error) {
 	return getGroupMap(cp.init().conn, input)
 }

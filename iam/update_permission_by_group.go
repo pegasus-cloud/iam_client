@@ -41,18 +41,18 @@ func (cp *ConnProvider) UpdatePermissionByGroupWithResp(input *protos.UpdatePerm
 	return updatePermissionByGroupWithResp(cp.init().conn, input)
 }
 
-func updatePermissionByGroupWithRespMap(c grpc.ClientConnInterface, input *protos.UpdatePermissionByGroupInput) (output map[string]interface{}, err error) {
+func updatePermissionByGroupWithRespMap(c grpc.ClientConnInterface, input *protos.UpdatePermissionByGroupInput) (output map[string]*protos.PermissionJoinUser, err error) {
 	permission, err := updatePermissionByGroupWithResp(c, input)
-	var permissions []*protos.PermissionJoinUser
-	return convert(append(permissions, permission)), err
+	output[permission.ID] = permission
+	return output, err
 }
 
 // UpdatePermissionByGroupWithRespMap ...
-func UpdatePermissionByGroupWithRespMap(input *protos.UpdatePermissionByGroupInput) (output map[string]interface{}, err error) {
+func UpdatePermissionByGroupWithRespMap(input *protos.UpdatePermissionByGroupInput) (output map[string]*protos.PermissionJoinUser, err error) {
 	return updatePermissionByGroupWithRespMap(use().conn, input)
 }
 
 // UpdatePermissionByGroupWithRespMap ...
-func (cp *ConnProvider) UpdatePermissionByGroupWithRespMap(input *protos.UpdatePermissionByGroupInput) (output map[string]interface{}, err error) {
+func (cp *ConnProvider) UpdatePermissionByGroupWithRespMap(input *protos.UpdatePermissionByGroupInput) (output map[string]*protos.PermissionJoinUser, err error) {
 	return updatePermissionByGroupWithRespMap(cp.init().conn, input)
 }

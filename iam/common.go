@@ -1,12 +1,9 @@
 package iam
 
 import (
-	"fmt"
-	"reflect"
 	"sync"
 	"time"
 
-	"github.com/pegasus-cloud/iam_client/protos"
 	"github.com/pegasus-cloud/iam_client/utility"
 	"google.golang.org/grpc"
 )
@@ -52,58 +49,4 @@ func (cp *ConnProvider) init() (c client) {
 	p.mu.Lock()
 	defer p.mu.Unlock()
 	return c
-}
-
-func convert(input interface{}) (output map[string]interface{}) {
-	output = make(map[string]interface{})
-	switch input.(type) {
-	case []*protos.GroupInfo:
-		for _, group := range input.([]*protos.GroupInfo) {
-			output = toMap(group.ID, reflect.ValueOf(group).Elem(), output)
-		}
-	case []*protos.UserInfo:
-		for _, user := range input.([]*protos.UserInfo) {
-			output = toMap(user.ID, reflect.ValueOf(user).Elem(), output)
-		}
-	case []*protos.MemberJoin:
-		for _, membership := range input.([]*protos.MemberJoin) {
-			output = toMap(membership.ID, reflect.ValueOf(membership).Elem(), output)
-		}
-	case []*protos.CredentialJoinMembership:
-		for _, credential := range input.([]*protos.CredentialJoinMembership) {
-			output = toMap(credential.MembershipID, reflect.ValueOf(credential).Elem(), output)
-		}
-	case []*protos.PermissionJoinUser:
-		for _, permission := range input.([]*protos.PermissionJoinUser) {
-			output = toMap(permission.ID, reflect.ValueOf(permission).Elem(), output)
-		}
-	case []*protos.GetMembershipPermissionOutput:
-		for _, membership := range input.([]*protos.GetMembershipPermissionOutput) {
-			output = toMap(membership.ID, reflect.ValueOf(membership).Elem(), output)
-		}
-	}
-	return output
-}
-
-/*
-	[Example]
-	From:
-		GroupInfo struct {
-		state         protoimpl.MessageState
-		sizeCache     protoimpl.SizeCache
-		unknownFields protoimpl.UnknownFields
-
-		ID          string `protobuf:"bytes,1,opt,name=ID,proto3" json:"ID,omitempty"`
-		DisplayName string `protobuf:"bytes,2,opt,name=DisplayName,proto3" json:"DisplayName,omitempty"`
-	}
-	To:
-		omit state, sizeCache and unknownFields
-		map[<user>.ID] = ID
-		map[<user.DisplayName>] = DisplayName
-*/
-func toMap(prefix string, value reflect.Value, input map[string]interface{}) (output map[string]interface{}) {
-	for i := 3; i < value.NumField(); i++ {
-		input[fmt.Sprintf("%s.%s", prefix, value.Type().Field(i).Name)] = value.Field(i).Interface()
-	}
-	return input
 }

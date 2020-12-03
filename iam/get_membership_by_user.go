@@ -24,21 +24,18 @@ func (cp *ConnProvider) GetMembershipByUser(input *protos.MemUserGroupInput) (ou
 	return getMembershipByUser(cp.init().conn, input)
 }
 
-func getMembershipByUserMap(c grpc.ClientConnInterface, input *protos.MemUserGroupInput) (output map[string]interface{}, err error) {
+func getMembershipByUserMap(c grpc.ClientConnInterface, input *protos.MemUserGroupInput) (output map[string]*protos.MemberJoin, err error) {
 	membership, err := getMembershipByUser(c, input)
-	if err != nil {
-		return nil, err
-	}
-	var memberships []*protos.MemberJoin
-	return convert(append(memberships, membership)), nil
+	output[membership.ID] = membership
+	return output, err
 }
 
 // GetMembershipByUserMap ...
-func GetMembershipByUserMap(input *protos.MemUserGroupInput) (output map[string]interface{}, err error) {
+func GetMembershipByUserMap(input *protos.MemUserGroupInput) (output map[string]*protos.MemberJoin, err error) {
 	return getMembershipByUserMap(use().conn, input)
 }
 
 // GetMembershipByUserMap ...
-func (cp *ConnProvider) GetMembershipByUserMap(input *protos.MemUserGroupInput) (output map[string]interface{}, err error) {
+func (cp *ConnProvider) GetMembershipByUserMap(input *protos.MemUserGroupInput) (output map[string]*protos.MemberJoin, err error) {
 	return getMembershipByUserMap(cp.init().conn, input)
 }

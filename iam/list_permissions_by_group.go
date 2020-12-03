@@ -24,23 +24,20 @@ func (cp *ConnProvider) ListPermissionsByGroup(input *protos.ListPermissionByGro
 	return listPermissionsByGroup(cp.init().conn, input)
 }
 
-func listPermissionsByGroupMap(c grpc.ClientConnInterface, input *protos.ListPermissionByGroupInput) (output map[string]interface{}, err error) {
-	output = make(map[string]interface{})
+func listPermissionsByGroupMap(c grpc.ClientConnInterface, input *protos.ListPermissionByGroupInput) (output map[string]*protos.PermissionJoinUser, count int64, err error) {
 	permissions, err := listPermissionsByGroup(c, input)
-	if err != nil {
-		return output, err
+	for _, permission := range permissions.Data {
+		output[permission.ID] = permission
 	}
-	output = convert(permissions.Data)
-	output["count"] = permissions.Count
-	return output, nil
+	return output, permissions.Count, err
 }
 
 // ListPermissionsByGroupMap ...
-func ListPermissionsByGroupMap(input *protos.ListPermissionByGroupInput) (output map[string]interface{}, err error) {
+func ListPermissionsByGroupMap(input *protos.ListPermissionByGroupInput) (output map[string]*protos.PermissionJoinUser, count int64, err error) {
 	return listPermissionsByGroupMap(use().conn, input)
 }
 
 // ListPermissionsByGroupMap ...
-func (cp *ConnProvider) ListPermissionsByGroupMap(input *protos.ListPermissionByGroupInput) (output map[string]interface{}, err error) {
+func (cp *ConnProvider) ListPermissionsByGroupMap(input *protos.ListPermissionByGroupInput) (output map[string]*protos.PermissionJoinUser, count int64, err error) {
 	return listPermissionsByGroupMap(cp.init().conn, input)
 }

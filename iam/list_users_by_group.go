@@ -24,22 +24,20 @@ func (cp *ConnProvider) ListUsersByGroup(input *protos.GroupID) (output *protos.
 	return listUsersByGroup(cp.init().conn, input)
 }
 
-func listUsersByGroupMap(c grpc.ClientConnInterface, input *protos.GroupID) (output map[string]interface{}, err error) {
-	output = make(map[string]interface{})
+func listUsersByGroupMap(c grpc.ClientConnInterface, input *protos.GroupID) (output map[string]*protos.UserInfo, err error) {
 	users, err := listUsersByGroup(c, input)
-	if err != nil {
-		return output, err
+	for _, user := range users.Data {
+		output[user.ID] = user
 	}
-	output = convert(users.Data)
-	return output, nil
+	return output, err
 }
 
 // ListUsersByGroupMap ...
-func ListUsersByGroupMap(input *protos.GroupID) (output map[string]interface{}, err error) {
+func ListUsersByGroupMap(input *protos.GroupID) (output map[string]*protos.UserInfo, err error) {
 	return listUsersByGroupMap(use().conn, input)
 }
 
 // ListUsersByGroupMap ...
-func (cp *ConnProvider) ListUsersByGroupMap(input *protos.GroupID) (output map[string]interface{}, err error) {
+func (cp *ConnProvider) ListUsersByGroupMap(input *protos.GroupID) (output map[string]*protos.UserInfo, err error) {
 	return listUsersByGroupMap(cp.init().conn, input)
 }

@@ -24,23 +24,20 @@ func (cp *ConnProvider) ListGroups(input *protos.LimitOffset) (output *protos.Li
 	return listGroups(cp.init().conn, input)
 }
 
-func listGroupsMap(c grpc.ClientConnInterface, input *protos.LimitOffset) (output map[string]interface{}, err error) {
-	output = make(map[string]interface{})
+func listGroupsMap(c grpc.ClientConnInterface, input *protos.LimitOffset) (output map[string]*protos.GroupInfo, count int64, err error) {
 	groups, err := listGroups(c, input)
-	if err != nil {
-		return output, err
+	for _, group := range groups.Data {
+		output[group.ID] = group
 	}
-	output = convert(groups.Data)
-	output["count"] = groups.Count
-	return output, nil
+	return output, groups.Count, err
 }
 
 // ListGroupsMap ...
-func ListGroupsMap(input *protos.LimitOffset) (output map[string]interface{}, err error) {
+func ListGroupsMap(input *protos.LimitOffset) (output map[string]*protos.GroupInfo, count int64, err error) {
 	return listGroupsMap(use().conn, input)
 }
 
 // ListGroupsMap ...
-func (cp *ConnProvider) ListGroupsMap(input *protos.LimitOffset) (output map[string]interface{}, err error) {
+func (cp *ConnProvider) ListGroupsMap(input *protos.LimitOffset) (output map[string]*protos.GroupInfo, count int64, err error) {
 	return listGroupsMap(cp.init().conn, input)
 }

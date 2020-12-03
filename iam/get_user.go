@@ -24,21 +24,18 @@ func (cp *ConnProvider) GetUser(input *protos.UserID) (output *protos.UserInfo, 
 	return getUser(cp.init().conn, input)
 }
 
-func getUserMap(c grpc.ClientConnInterface, input *protos.UserID) (output map[string]interface{}, err error) {
+func getUserMap(c grpc.ClientConnInterface, input *protos.UserID) (output map[string]*protos.UserInfo, err error) {
 	user, err := getUser(c, input)
-	if err != nil {
-		return nil, err
-	}
-	var users []*protos.UserInfo
-	return convert(append(users, user)), nil
+	output[user.ID] = user
+	return output, err
 }
 
 // GetUserMap ...
-func GetUserMap(input *protos.UserID) (output map[string]interface{}, err error) {
+func GetUserMap(input *protos.UserID) (output map[string]*protos.UserInfo, err error) {
 	return getUserMap(use().conn, input)
 }
 
 // GetUserMap ...
-func (cp *ConnProvider) GetUserMap(input *protos.UserID) (output map[string]interface{}, err error) {
+func (cp *ConnProvider) GetUserMap(input *protos.UserID) (output map[string]*protos.UserInfo, err error) {
 	return getUserMap(cp.init().conn, input)
 }

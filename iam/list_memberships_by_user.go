@@ -24,23 +24,20 @@ func (cp *ConnProvider) ListMembershipsByUser(input *protos.ListMembershipByUser
 	return listMembershipsByUser(cp.init().conn, input)
 }
 
-func listMembershipsByUserMap(c grpc.ClientConnInterface, input *protos.ListMembershipByUserInput) (output map[string]interface{}, err error) {
-	output = make(map[string]interface{})
+func listMembershipsByUserMap(c grpc.ClientConnInterface, input *protos.ListMembershipByUserInput) (output map[string]*protos.MemberJoin, count int64, err error) {
 	memberships, err := listMembershipsByUser(c, input)
-	if err != nil {
-		return output, err
+	for _, membership := range memberships.Data {
+		output[membership.ID] = membership
 	}
-	output = convert(memberships.Data)
-	output["count"] = memberships.Count
-	return output, nil
+	return output, memberships.Count, err
 }
 
 // ListMembershipsByUserMap ...
-func ListMembershipsByUserMap(input *protos.ListMembershipByUserInput) (output map[string]interface{}, err error) {
+func ListMembershipsByUserMap(input *protos.ListMembershipByUserInput) (output map[string]*protos.MemberJoin, count int64, err error) {
 	return listMembershipsByUserMap(use().conn, input)
 }
 
 // ListMembershipsByUserMap ...
-func (cp *ConnProvider) ListMembershipsByUserMap(input *protos.ListMembershipByUserInput) (output map[string]interface{}, err error) {
+func (cp *ConnProvider) ListMembershipsByUserMap(input *protos.ListMembershipByUserInput) (output map[string]*protos.MemberJoin, count int64, err error) {
 	return listMembershipsByUserMap(cp.init().conn, input)
 }
