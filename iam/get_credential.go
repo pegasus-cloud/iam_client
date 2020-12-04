@@ -25,6 +25,7 @@ func (cp *ConnProvider) GetCredential(input *protos.CredUserGroupInput) (output 
 }
 
 func getCredentialMap(c grpc.ClientConnInterface, input *protos.CredUserGroupInput) (output map[string]*protos.CredentialJoinMembership, err error) {
+	output = make(map[string]*protos.CredentialJoinMembership)
 	credential, err := getCredential(c, input)
 	output[credential.UserID] = credential
 	return output, err

@@ -42,6 +42,7 @@ func (cp *ConnProvider) UpdateGroupWithResp(input *protos.UpdateInput) (permissi
 }
 
 func updateGroupWithRespMap(c grpc.ClientConnInterface, input *protos.UpdateInput) (output map[string]*protos.GroupInfo, err error) {
+	output = make(map[string]*protos.GroupInfo)
 	group, err := updateGroupWithResp(c, input)
 	output[group.ID] = group
 	return output, err

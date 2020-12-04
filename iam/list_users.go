@@ -25,6 +25,7 @@ func (cp *ConnProvider) ListUsers(input *protos.LimitOffset) (output *protos.Lis
 }
 
 func listUsersMap(c grpc.ClientConnInterface, input *protos.LimitOffset) (output map[string]*protos.UserInfo, count int64, err error) {
+	output = make(map[string]*protos.UserInfo)
 	users, err := listUsers(c, input)
 	for _, user := range users.Data {
 		output[user.ID] = user

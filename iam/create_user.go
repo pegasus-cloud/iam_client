@@ -42,6 +42,7 @@ func (cp *ConnProvider) CreateUserWithResp(input *protos.UserInfo) (output *prot
 }
 
 func createUserWithRespMap(c grpc.ClientConnInterface, input *protos.UserInfo) (output map[string]*protos.UserInfo, err error) {
+	output = make(map[string]*protos.UserInfo)
 	user, err := createUserWithResp(c, input)
 	output[user.ID] = user
 	return output, err

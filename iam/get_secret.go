@@ -25,6 +25,7 @@ func (cp *ConnProvider) GetSecret(input *protos.Access) (output *protos.Credenti
 }
 
 func getSecretMap(c grpc.ClientConnInterface, input *protos.Access) (output map[string]*protos.CredentialJoinMembership, err error) {
+	output = make(map[string]*protos.CredentialJoinMembership)
 	credential, err := getSecret(c, input)
 	output[credential.UserID] = credential
 	return output, err

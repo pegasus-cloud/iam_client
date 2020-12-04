@@ -42,6 +42,7 @@ func (cp *ConnProvider) CreatePermissionWithResp(input *protos.PermissionInfo) (
 }
 
 func createPermissionWithRespMap(c grpc.ClientConnInterface, input *protos.PermissionInfo) (output map[string]*protos.PermissionJoinUser, err error) {
+	output = make(map[string]*protos.PermissionJoinUser)
 	permission, err := createPermissionWithResp(c, input)
 	output[permission.ID] = permission
 	return output, err

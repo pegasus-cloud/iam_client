@@ -25,6 +25,7 @@ func (cp *ConnProvider) ListPermissionsByGroup(input *protos.ListPermissionByGro
 }
 
 func listPermissionsByGroupMap(c grpc.ClientConnInterface, input *protos.ListPermissionByGroupInput) (output map[string]*protos.PermissionJoinUser, count int64, err error) {
+	output = make(map[string]*protos.PermissionJoinUser)
 	permissions, err := listPermissionsByGroup(c, input)
 	for _, permission := range permissions.Data {
 		output[permission.ID] = permission

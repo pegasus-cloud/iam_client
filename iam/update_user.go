@@ -42,6 +42,7 @@ func (cp *ConnProvider) UpdateUserWithResp(input *protos.UpdateInput) (permissio
 }
 
 func updateUserWithRespMap(c grpc.ClientConnInterface, input *protos.UpdateInput) (output map[string]*protos.UserInfo, err error) {
+	output = make(map[string]*protos.UserInfo)
 	user, err := updateUserWithResp(c, input)
 	output[user.ID] = user
 	return output, err

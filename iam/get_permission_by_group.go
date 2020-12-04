@@ -25,6 +25,7 @@ func (cp *ConnProvider) GetPermissionByGroup(input *protos.PermissionGroupInput)
 }
 
 func getPermissionByGroupMap(c grpc.ClientConnInterface, input *protos.PermissionGroupInput) (output map[string]*protos.PermissionJoinUser, err error) {
+	output = make(map[string]*protos.PermissionJoinUser)
 	permission, err := getPermissionByGroup(c, input)
 	output[permission.ID] = permission
 	return output, err

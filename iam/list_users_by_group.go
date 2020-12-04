@@ -25,6 +25,7 @@ func (cp *ConnProvider) ListUsersByGroup(input *protos.GroupID) (output *protos.
 }
 
 func listUsersByGroupMap(c grpc.ClientConnInterface, input *protos.GroupID) (output map[string]*protos.UserInfo, err error) {
+	output = make(map[string]*protos.UserInfo)
 	users, err := listUsersByGroup(c, input)
 	for _, user := range users.Data {
 		output[user.ID] = user
