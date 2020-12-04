@@ -25,6 +25,7 @@ func (cp *ConnProvider) ListMembershipsByUser(input *protos.ListMembershipByUser
 }
 
 func listMembershipsByUserMap(c grpc.ClientConnInterface, input *protos.ListMembershipByUserInput) (output map[string]*protos.MemberJoin, count int64, err error) {
+	output = make(map[string]*protos.MemberJoin)
 	memberships, err := listMembershipsByUser(c, input)
 	for _, membership := range memberships.Data {
 		output[membership.ID] = membership

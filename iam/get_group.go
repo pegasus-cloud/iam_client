@@ -25,6 +25,7 @@ func (cp *ConnProvider) GetGroup(input *protos.GroupID) (output *protos.GroupInf
 }
 
 func getGroupMap(c grpc.ClientConnInterface, input *protos.GroupID) (output map[string]*protos.GroupInfo, err error) {
+	output = make(map[string]*protos.GroupInfo)
 	group, err := getGroup(c, input)
 	output[group.ID] = group
 	return output, err

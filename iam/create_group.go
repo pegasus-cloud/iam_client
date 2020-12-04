@@ -42,6 +42,7 @@ func (cp *ConnProvider) CreateGroupWithResp(input *protos.GroupInfo) (output *pr
 }
 
 func createGroupWithRespMap(c grpc.ClientConnInterface, input *protos.GroupInfo) (output map[string]*protos.GroupInfo, err error) {
+	output = make(map[string]*protos.GroupInfo)
 	group, err := createGroupWithResp(c, input)
 	output[group.ID] = group
 	return output, err

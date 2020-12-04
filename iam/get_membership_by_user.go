@@ -25,6 +25,7 @@ func (cp *ConnProvider) GetMembershipByUser(input *protos.MemUserGroupInput) (ou
 }
 
 func getMembershipByUserMap(c grpc.ClientConnInterface, input *protos.MemUserGroupInput) (output map[string]*protos.MemberJoin, err error) {
+	output = make(map[string]*protos.MemberJoin)
 	membership, err := getMembershipByUser(c, input)
 	output[membership.ID] = membership
 	return output, err

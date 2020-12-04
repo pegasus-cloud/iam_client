@@ -25,6 +25,7 @@ func (cp *ConnProvider) ListGroups(input *protos.LimitOffset) (output *protos.Li
 }
 
 func listGroupsMap(c grpc.ClientConnInterface, input *protos.LimitOffset) (output map[string]*protos.GroupInfo, count int64, err error) {
+	output = make(map[string]*protos.GroupInfo)
 	groups, err := listGroups(c, input)
 	for _, group := range groups.Data {
 		output[group.ID] = group

@@ -42,6 +42,7 @@ func (cp *ConnProvider) CreateMembershipWithResp(input *protos.MembershipInfo) (
 }
 
 func createMembershipWithRespMap(c grpc.ClientConnInterface, input *protos.MembershipInfo) (output map[string]*protos.GetMembershipPermissionOutput, err error) {
+	output = make(map[string]*protos.GetMembershipPermissionOutput)
 	membership, err := createMembershipWithResp(c, input)
 	output[membership.ID] = membership
 	return output, err

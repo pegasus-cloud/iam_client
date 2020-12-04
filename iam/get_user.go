@@ -25,6 +25,7 @@ func (cp *ConnProvider) GetUser(input *protos.UserID) (output *protos.UserInfo, 
 }
 
 func getUserMap(c grpc.ClientConnInterface, input *protos.UserID) (output map[string]*protos.UserInfo, err error) {
+	output = make(map[string]*protos.UserInfo)
 	user, err := getUser(c, input)
 	output[user.ID] = user
 	return output, err

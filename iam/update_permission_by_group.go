@@ -42,6 +42,7 @@ func (cp *ConnProvider) UpdatePermissionByGroupWithResp(input *protos.UpdatePerm
 }
 
 func updatePermissionByGroupWithRespMap(c grpc.ClientConnInterface, input *protos.UpdatePermissionByGroupInput) (output map[string]*protos.PermissionJoinUser, err error) {
+	output = make(map[string]*protos.PermissionJoinUser)
 	permission, err := updatePermissionByGroupWithResp(c, input)
 	output[permission.ID] = permission
 	return output, err
