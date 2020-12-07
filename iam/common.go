@@ -42,7 +42,11 @@ type (
 
 func (cp *ConnProvider) init() (c client) {
 	var err error
-	c.conn, err = grpc.Dial(cp.Host, grpc.WithInsecure(), grpc.WithBlock(), grpc.WithTimeout(cp.Timeout*time.Millisecond))
+	var timeout time.Duration = 5000
+	if cp.Timeout != 0 {
+		timeout = cp.Timeout
+	}
+	c.conn, err = grpc.Dial(cp.Host, grpc.WithInsecure(), grpc.WithBlock(), grpc.WithTimeout(timeout*time.Millisecond))
 	if err != nil {
 		panic(err)
 	}
