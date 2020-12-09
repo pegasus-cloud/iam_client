@@ -60,5 +60,6 @@ func createUser(c *gin.Context) {
 		Extra:       createUserWithRespOutput.Extra,
 		CreatedAt:   createUserWithRespOutput.CreatedAt,
 		UpdatedAt:   createUserWithRespOutput.UpdatedAt,
+		Force:       userInfo.Force,
 	})
 }
