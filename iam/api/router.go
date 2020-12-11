@@ -2,7 +2,7 @@ package api
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/pegasus-cloud/iam_client/iam"
+	"github.com/pegasus-cloud/iam_client/iam/abac"
 	"github.com/pegasus-cloud/iam_client/utility"
 )
 
@@ -35,61 +35,61 @@ func checkMembership(c *gin.Context) {
 
 //EnableAdminIAMRouter 啟動預設的IAM Routers
 func EnableAdminIAMRouter(rg *gin.RouterGroup) {
-	iam.GET(rg, "/actions", listPermissionActions, "admin:ListPermissionActions", true)
+	abac.GET(rg, "/actions", listPermissionActions, "admin:ListPermissionActions", true)
 	user := rg.Group("user")
 	{
-		iam.POST(user, "", createUser, "admin:CreateUser", true)
-		iam.GET(user, "", listUsers, "admin:ListUser", true)
+		abac.POST(user, "", createUser, "admin:CreateUser", true)
+		abac.GET(user, "", listUsers, "admin:ListUser", true)
 		spUser := user.Group(":user-id", checkUser)
 		{
-			iam.GET(spUser, "", getUser, "admin:GetUser", true)
-			iam.PUT(spUser, "", updateUser, "admin:UpdateUser", true)
-			iam.PUT(spUser, "password", updatePassword, "admin:UpdatePassword", true)
-			iam.DELETE(spUser, "", deleteUser, "admin:DeleteUser", true)
+			abac.GET(spUser, "", getUser, "admin:GetUser", true)
+			abac.PUT(spUser, "", updateUser, "admin:UpdateUser", true)
+			abac.PUT(spUser, "password", updatePassword, "admin:UpdatePassword", true)
+			abac.DELETE(spUser, "", deleteUser, "admin:DeleteUser", true)
 		}
 	}
 	group := rg.Group("group")
 	{
-		iam.POST(group, "", createGroup, "admin:CreateGroup", true)
-		iam.GET(group, "", listGroups, "admin:ListGroups", true)
+		abac.POST(group, "", createGroup, "admin:CreateGroup", true)
+		abac.GET(group, "", listGroups, "admin:ListGroups", true)
 		spGroup := group.Group(":group-id", checkGroup)
 		{
-			iam.GET(spGroup, "", getGroup, "admin:GetGroup", true)
-			iam.PUT(spGroup, "", updateGroup, "admin:UpdateGroup", true)
-			iam.DELETE(spGroup, "", deleteGroup, "admin:DeleteGroup", true)
+			abac.GET(spGroup, "", getGroup, "admin:GetGroup", true)
+			abac.PUT(spGroup, "", updateGroup, "admin:UpdateGroup", true)
+			abac.DELETE(spGroup, "", deleteGroup, "admin:DeleteGroup", true)
 		}
 	}
 	membership := rg.Group("membership")
 	{
-		iam.POST(membership, "", createMembership, "admin:CreateMembership", true)
+		abac.POST(membership, "", createMembership, "admin:CreateMembership", true)
 		user := membership.Group("user/:user-id", checkUser)
 		{
-			iam.GET(user, "", listMembershipsByUser, "admin:ListMembershipsByUser", true)
+			abac.GET(user, "", listMembershipsByUser, "admin:ListMembershipsByUser", true)
 		}
 		indevGroup := membership.Group("group/:group-id", checkGroup)
 		{
-			iam.GET(indevGroup, "", listMembershipsByGroup, "admin:ListMembershipsByGroup", true)
+			abac.GET(indevGroup, "", listMembershipsByGroup, "admin:ListMembershipsByGroup", true)
 
 			indevUser := indevGroup.Group("user/:user-id", checkUser)
 			{
-				iam.GET(indevUser, "", getMembershipAndPermission, "admin:GetMembership", true)
-				iam.PUT(indevUser, "", updateMembership, "admin:UpdateMembership", true)
-				iam.DELETE(indevUser, "", deleteMembership, "admin:DeleteMembership", true)
+				abac.GET(indevUser, "", getMembershipAndPermission, "admin:GetMembership", true)
+				abac.PUT(indevUser, "", updateMembership, "admin:UpdateMembership", true)
+				abac.DELETE(indevUser, "", deleteMembership, "admin:DeleteMembership", true)
 			}
 		}
 	}
 	frozen := rg.Group("frozen/group/:group-id", checkGroup)
 	{
-		iam.PUT(frozen, "", setFrozenByGroup, "admin:SetFrozenByGroup", true)
+		abac.PUT(frozen, "", setFrozenByGroup, "admin:SetFrozenByGroup", true)
 		forzenByUser := frozen.Group("user/:user-id", checkUser, checkMembership)
 		{
-			iam.PUT(forzenByUser, "", setFrozenByUser, "admin:SetFrozenByUser", true)
+			abac.PUT(forzenByUser, "", setFrozenByUser, "admin:SetFrozenByUser", true)
 		}
 
 	}
 	credential := rg.Group("credential/group/:group-id/user/:user-id", checkUser, checkGroup, checkMembership)
 	{
-		iam.PUT(credential, "", updateCredential, "admin:UpdateCredential", true)
-		iam.GET(credential, "", getCredential, "admin:GetCredential", true)
+		abac.PUT(credential, "", updateCredential, "admin:UpdateCredential", true)
+		abac.GET(credential, "", getCredential, "admin:GetCredential", true)
 	}
 }

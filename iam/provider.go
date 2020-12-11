@@ -69,5 +69,6 @@ func Close() {
 	for i := 0; i < p.count; i++ {
 		client := <-p.clients
 		client.conn.Close()
+		p = nil
 	}
 }
