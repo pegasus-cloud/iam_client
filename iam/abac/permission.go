@@ -1,4 +1,4 @@
-package iam
+package abac
 
 import (
 	"fmt"
@@ -20,6 +20,12 @@ const (
 func init() {
 	Actions = &actionEntries{
 		entries: make(map[string]*ActionEntry),
+	}
+}
+
+func clean() {
+	if Actions != nil && len(Actions.entries) != 0 {
+		Actions.entries = make(map[string]*ActionEntry)
 	}
 }
 
