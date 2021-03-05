@@ -1,6 +1,7 @@
 package iam
 
 import (
+	"fmt"
 	"sync"
 	"time"
 
@@ -8,32 +9,55 @@ import (
 	"google.golang.org/grpc"
 )
 
+const (
+	// TCPMode ...
+	TCPMode GRPCMode = iota
+	// UnixMode ...
+	UnixMode
+)
+
 type (
+	// GRPCMode ...
+	GRPCMode int
 	// PoolProvider ...
 	PoolProvider struct {
-		Hosts             []string
-		ConnPerHost       int
+		Mode              GRPCMode
+		TCPProvider       TCPProvider
+		UnixProvider      UnixProvider
 		RouteRepsonseType utility.ResponseType
 		Timeout           time.Duration
 		_                 struct{}
 	}
+	// TCPProvider ...
+	TCPProvider struct {
+		Hosts       []string
+		ConnPerHost int
+		_           struct{}
+	}
+	// UnixProvider ...
+	UnixProvider struct {
+		SocketPath string
+		ConnCount  int
+		_          struct{}
+	}
 	// ConnProvider ...
 	ConnProvider struct {
-		Host    string
-		Timeout time.Duration
-		_       struct{}
+		Mode              GRPCMode
+		Host              string
+		SocketPath        string
+		RouteRepsonseType utility.ResponseType
+		Timeout           time.Duration
+		_                 struct{}
 	}
 	// Pool ...
 	pool struct {
-		hosts   []string
 		clients chan client
-		count   int
 		mu      sync.Mutex
 		_       struct{}
 	}
 	// Client ...
 	client struct {
-		host    string
+		target  string
 		conn    *grpc.ClientConn
 		timeout time.Duration
 		_       struct{}
@@ -46,11 +70,17 @@ func (cp *ConnProvider) init() (c client) {
 	if cp.Timeout != 0 {
 		timeout = cp.Timeout
 	}
-	c.conn, err = grpc.Dial(cp.Host, grpc.WithInsecure(), grpc.WithBlock(), grpc.WithTimeout(timeout*time.Millisecond))
+	utility.RouteResponseType = cp.RouteRepsonseType
+	switch cp.Mode {
+	case UnixMode:
+		c.conn, err = grpc.Dial(fmt.Sprintf("unix://%s", cp.SocketPath), grpc.WithInsecure(), grpc.WithTimeout(timeout*time.Millisecond))
+	case TCPMode:
+		fallthrough
+	default:
+		c.conn, err = grpc.Dial(cp.Host, grpc.WithInsecure(), grpc.WithTimeout(timeout*time.Millisecond))
+	}
 	if err != nil {
 		panic(err)
 	}
-	p.mu.Lock()
-	defer p.mu.Unlock()
 	return c
 }

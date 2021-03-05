@@ -1,7 +1,7 @@
 package iam
 
 import (
-	"net"
+	"fmt"
 	"time"
 
 	"github.com/pegasus-cloud/iam_client/utility"
@@ -12,27 +12,52 @@ var p *pool
 
 // Init ...
 func Init(provider PoolProvider) {
-	p = &pool{
-		hosts:   provider.Hosts,
-		count:   len(provider.Hosts) * provider.ConnPerHost,
-		clients: make(chan client, len(provider.Hosts)*provider.ConnPerHost),
-	}
+	p = &pool{}
 	var timeout time.Duration = 5000
 	if provider.Timeout != 0 {
 		timeout = provider.Timeout
 	}
 	utility.RouteResponseType = provider.RouteRepsonseType
-	for i := 0; i < p.count; i++ {
-		c, err := grpc.Dial(provider.Hosts[i%len(provider.Hosts)], grpc.WithInsecure(), grpc.WithBlock(), grpc.WithTimeout(timeout*time.Millisecond))
-		if err != nil {
+	targets := []string{}
+
+	switch provider.Mode {
+	case UnixMode:
+		count := provider.UnixProvider.ConnCount
+		p.clients = make(chan client, count)
+		connTerm := fmt.Sprintf("unix://%s", provider.UnixProvider.SocketPath)
+		for i := 0; i < count; i++ {
+			targets = append(targets, connTerm)
+		}
+		if err := dial(UnixMode, targets, timeout); err != nil {
 			panic(err)
 		}
+	case TCPMode:
+		fallthrough
+	default:
+		count := len(provider.TCPProvider.Hosts) * provider.TCPProvider.ConnPerHost
+		p.clients = make(chan client, count)
+		for i := 0; i < count; i++ {
+			targets = append(targets, provider.TCPProvider.Hosts[i%len(provider.TCPProvider.Hosts)])
+		}
+		if err := dial(TCPMode, targets, timeout); err != nil {
+			panic(err)
+		}
+	}
+}
+
+func dial(mode GRPCMode, targets []string, timeout time.Duration) (err error) {
+	for _, target := range targets {
+		c, err := grpc.Dial(target, grpc.WithInsecure(), grpc.WithTimeout(timeout*time.Millisecond))
+		if err != nil {
+			return err
+		}
 		p.clients <- client{
-			host:    provider.Hosts[i%len(provider.Hosts)],
-			timeout: provider.Timeout,
+			target:  target,
+			timeout: timeout,
 			conn:    c,
 		}
 	}
+	return nil
 }
 
 // Use ...
@@ -56,7 +81,7 @@ func get() (c client) {
 }
 
 func check(c client) (err error) {
-	_, err = net.DialTimeout("tcp", c.host, c.timeout*time.Millisecond)
+	_, err = grpc.Dial(c.target, grpc.WithInsecure(), grpc.WithTimeout(c.timeout*time.Millisecond))
 	return
 }
 
@@ -66,7 +91,7 @@ func recycle(c client) {
 
 // Close ...
 func Close() {
-	for i := 0; i < p.count; i++ {
+	for i := 0; i < len(p.clients); i++ {
 		client := <-p.clients
 		client.conn.Close()
 		p = nil
